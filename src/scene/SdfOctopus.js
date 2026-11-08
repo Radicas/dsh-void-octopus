@@ -80,6 +80,11 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
   let jetTimer = 6 + Math.random() * 5
   let kick = 0
   let jetImpulse = 0
+  let jetSurge = 0
+  let yaw = 0
+  let pitch = 0
+  let roll = 0
+  let lastYaw = 0
   const armCurl = new Float32Array(8)
   const armCurlTarget = new Float32Array(8)
   let stretch = 0
@@ -154,6 +159,7 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
       pulse = 1
       kick = 1
       jetImpulse = 1
+      jetSurge = 1
     } else {
       action = 'blink'
       actionDuration = 0.5
@@ -163,6 +169,15 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
   }
 
   const buildArms = (t) => {
+    // Blend between the display pose and a streamlined swimming pose. The body
+    // turns toward travel; the arms trail behind it and keep a little whip.
+    const swimPose = clamp(swimAmount * (0.55 + 0.45 * jetSurge), 0, 1)
+    const cosYaw = Math.cos(yaw)
+    const sinYaw = Math.sin(yaw)
+    const trailX = -swim.x * cosYaw
+    const trailY = swim.y
+    const trailZ = -swim.x * sinYaw
+
     for (let k = 0; k < 8; k++) {
       const angle = (k / 8) * TAU + 0.22
       const c = Math.cos(angle)
@@ -174,11 +189,15 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
       const pose = Math.sin(k * 1.7 + 0.4)
       const lift = pose > 0.35 ? 0.22 : 0.0
       const curl = armCurl[k]
-      const flare = pulse * 0.03
+      const flare = pulse * 0.03 * (1 - swimPose * 0.75)
       const stretchK = 1 + stretch * 0.13
       const base = k * 8
-      const stream = 1 - swimAmount * 0.2
-      const jetStream = 1 - jetImpulse * 0.12
+      const stream = 1 - swimAmount * 0.38
+      const jetStream = 1 - jetSurge * 0.18
+      const liftK = 1 - swimPose * 0.85
+      const curlK = 1 - swimPose * 0.75
+      const tipDrop = swimPose * (0.5 + jetSurge * 0.25)
+      const trailBias = 0.85 + 0.15 * Math.sin(k * 1.7 + 0.4)
 
       const p0 = [c * 0.28, 0.2, s * 0.28]
       const p1 = [
@@ -188,18 +207,19 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
       ]
       const p2 = [
         c * (1.65 + sway * 0.4 + flare) * stretchK * stream * jetStream,
-        (-0.75 + lift * 0.5 + curl * 0.4) * length,
+        (-0.75 + lift * 0.5 * liftK + curl * 0.4 * curlK - tipDrop * 0.15) * length,
         s * (1.65 + sway * 0.4 + flare) * stretchK * stream * jetStream,
       ]
       const tangentX = -s
       const tangentZ = c
       const p3 = [
-        c * (1.8 + sway2 * 0.3 + flare * 1.2) * stretchK * stream * jetStream + tangentX * (0.16 + curl * 0.12),
-        (-0.08 + lift * 1.2 + curl * 0.85) * length,
-        s * (1.8 + sway2 * 0.3 + flare * 1.2) * stretchK * stream * jetStream + tangentZ * (0.16 + curl * 0.12),
+        c * (1.8 + sway2 * 0.3 + flare * 1.2) * stretchK * stream * jetStream +
+          tangentX * (0.16 + curl * 0.12) * (1 - swimPose * 0.6),
+        (-0.08 + lift * 1.2 * liftK + curl * 0.85 * curlK - tipDrop) * length,
+        s * (1.8 + sway2 * 0.3 + flare * 1.2) * stretchK * stream * jetStream +
+          tangentZ * (0.16 + curl * 0.12) * (1 - swimPose * 0.6),
       ]
 
-      const swimK = swimAmount
       for (let i = 0; i < 8; i++) {
         const u = i / 7
         const v = 1 - u
@@ -211,19 +231,22 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
         let y = b0 * p0[1] + b1 * p1[1] + b2 * p2[1] + b3 * p3[1]
         let z = b0 * p0[2] + b1 * p1[2] + b2 * p2[2] + b3 * p3[2]
 
-        // real octopuses swim by jetting; the arms mostly trail and undulate,
-        // so the stroke is stronger than before but the tips are dragged back hard.
-        const stroke = Math.sin(t * (1.9 + swimK * 1.1) + phase - i * 0.5)
-          * (0.012 + i * 0.007)
-          * (0.7 + swimK * 2.0)
+        // A travelling stroke runs from root to tip. At speed it gets faster and
+        // larger, but the tip is always behind the root so the arm reads as a whip.
+        const stroke =
+          Math.sin(t * (1.7 + swimPose * 2.4 + jetSurge * 0.7) + phase - i * 0.55) *
+          (0.008 + i * 0.009) *
+          (0.55 + swimPose * 2.2)
         x += tangentX * stroke
         y += stroke * 0.4
         z += tangentZ * stroke
 
-        const drag = (i / 7) * (i / 7) * (0.35 + jetImpulse * 0.55) * swimK
-        x -= swim.x * drag
-        y += swim.y * drag
-        z -= swim.x * drag * 0.3
+        // Trail opposite the actual travel direction, in body space, with a
+        // softer falloff than before. The per-point smoothing below adds lag.
+        const drag = Math.pow(i / 7, 1.8) * (0.42 + jetSurge * 0.5) * swimPose * trailBias
+        x += trailX * drag
+        y += trailY * drag
+        z += trailZ * drag
 
         armTargets[base + i].set(x, y, z)
       }
@@ -307,11 +330,56 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
     stretch = damp(stretch, stretchTarget, 3.2, dt)
     for (let i = 0; i < 8; i++) armCurl[i] = damp(armCurl[i], armCurlTarget[i], 3.6, dt)
     kick = Math.max(0, kick - dt * 2.4)
-    jetImpulse = Math.max(0, jetImpulse - dt * 1.3)
+    jetImpulse = Math.max(0, jetImpulse - dt * 1.1)
+    jetSurge = Math.max(0, jetSurge - dt * 0.6)
+
+    jetTimer -= dt
+    if (jetTimer <= 0) {
+      pulse = 1
+      kick = Math.max(kick, 0.55)
+      jetImpulse = 1
+      jetSurge = 1
+      jetTimer = (6 + Math.random() * 6) * (1 - swimAmount * 0.35)
+    }
+
+    swim.lerp(swimTarget, 1 - Math.exp(-2.5 * dt))
+    swimAmount = damp(swimAmount, swimAmountTarget, 2.2, dt)
+
+    // The body follows travel with a little inertia; banking comes from the
+    // turn rate, not directly from velocity, so straight glides stay level.
+    const targetYaw = clamp(
+      Math.sin(time * 0.11) * 0.02 +
+        pointer.x * 0.05 +
+        look.x * 0.18 +
+        swim.x * (0.5 + jetSurge * 0.1) * swimAmount,
+      -0.8,
+      0.8,
+    )
+    const targetPitch = clamp(
+      -0.02 - pointer.y * 0.04 + look.y * 0.1 + swim.y * (0.24 + jetSurge * 0.08) * swimAmount,
+      -0.5,
+      0.5,
+    )
+    yaw = damp(yaw, targetYaw, 2.6, dt)
+    pitch = damp(pitch, targetPitch, 2.6, dt)
+    const yawRate = (yaw - lastYaw) / Math.max(dt, 1e-3)
+    lastYaw = yaw
+    roll = damp(
+      roll,
+      Math.sin(time * 0.17) * 0.015 +
+        clamp(-yawRate * 0.35, -0.12, 0.12) +
+        swim.x * 0.03 * swimAmount,
+      3.2,
+      dt,
+    )
 
     buildArms(time)
     for (let i = 0; i < armPoints.length; i++) {
-      armPoints[i].lerp(armTargets[i], 1 - Math.exp(-14 * dt))
+      // The root follows the body tightly; the tip lags behind and settles with
+      // weight, which turns the whole chain into a trailing whip instead of a
+      // rigid curve that is translated with the body.
+      const point = i & 7
+      armPoints[i].lerp(armTargets[i], 1 - Math.exp(-(30 - point * 3.6) * dt))
     }
 
     uniforms.uTime.value = time
@@ -321,19 +389,12 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
     uniforms.uBlink.value = blink
     uniforms.uPupil.value = 0.86 + mood.energy * 0.34 + Math.sin(time * 0.8) * 0.05
     uniforms.uGaze.value.copy(gaze)
-    jetTimer -= dt
-    if (jetTimer <= 0) {
-      pulse = 1
-      jetTimer = 7 + Math.random() * 7
-    }
-    swim.lerp(swimTarget, 1 - Math.exp(-2.5 * dt))
-    swimAmount = damp(swimAmount, swimAmountTarget, 2.2, dt)
     uniforms.uSwim.value.copy(swim)
     uniforms.uSwimAmount.value = swimAmount
 
-    uniforms.uYaw.value = Math.sin(time * 0.11) * 0.02 + pointer.x * 0.05 + look.x * 0.18 + swim.x * 0.32 * swimAmount
-    uniforms.uPitch.value = -0.02 - pointer.y * 0.04 + look.y * 0.1 - swim.y * 0.18 * swimAmount
-    uniforms.uRoll.value = Math.sin(time * 0.17) * 0.015 + swim.x * 0.1 * swimAmount
+    uniforms.uYaw.value = yaw
+    uniforms.uPitch.value = pitch
+    uniforms.uRoll.value = roll
     const breathLift = Math.sin(time * 0.55) * 0.045 + kick * 0.12 - swim.y * 0.035 * swimAmount
     uniforms.uOffset.value.set(0, breathLift, 0)
     pulse = Math.max(0, pulse - dt * 1.8)
@@ -361,13 +422,14 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
       swimAmountTarget = clamp(amount, 0, 1)
     },
     getJet() {
-      return Math.min(1, pulse * 0.7 + jetImpulse * 0.6)
+      return Math.min(1, pulse * 0.6 + jetImpulse * 0.5 + jetSurge * 0.55)
     },
     getActivity() {
       return activityName
     },
     pulse() {
       pulse = 1
+      jetSurge = 1
     },
     dispose() {
       disposed = true

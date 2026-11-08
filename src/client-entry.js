@@ -216,7 +216,7 @@ function VoidOctopusAmbient(props) {
         if (moveDt > 0.008) {
           const vx = (x - lastX) / moveDt
           const vy = (y - lastY) / moveDt
-          const speed = Math.min(1, Math.max(0.25, Math.hypot(vx, vy) / 34 + 0.35))
+          const speed = Math.min(1, Math.max(0.15, Math.hypot(vx, vy) / 55))
           const engine = engineRef.current
           if (engine && typeof engine.setSwim === 'function') engine.setSwim(vx, vy, speed)
         }
