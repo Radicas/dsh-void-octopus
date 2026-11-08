@@ -1,0 +1,46 @@
+{
+  "name": "dsh-void-octopus",
+  "version": "0.9.9",
+  "private": true,
+  "type": "module",
+  "description": "A one-piece SDF/raymarched void octopus for DSH Web — continuous mantle, arms, webbing and eyes, no assembled seams.",
+  "license": "MIT",
+  "repository": "github:Radicas/dsh-void-octopus",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "esbuild": "0.21.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.160.1"
+  },
+  "scripts": {
+    "build:demo": "esbuild demo/main.js --bundle --format=esm --target=es2022 --outfile=demo/bundle.js --sourcemap",
+    "watch:demo": "esbuild demo/main.js --bundle --format=esm --target=es2022 --outfile=demo/bundle.js --sourcemap --watch",
+    "build:client": "node scripts/build-client.mjs",
+    "selfcheck": "node selfcheck.mjs",
+    "serve:demo": "python3 -m http.server 4173 --directory demo"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "icon": "./icon.svg"
+}

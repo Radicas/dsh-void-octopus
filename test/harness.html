@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Void Octopus — plugin harness</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #0b0e14;
+        font-family: ui-sans-serif, "Helvetica Neue", Arial, sans-serif;
+        color: #8ea6b8;
+      }
+      #fake-app {
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(1200px 600px at 30% 10%, rgba(35, 60, 90, 0.25), transparent 60%),
+          #0b0e14;
+      }
+      .fake-sidebar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 248px;
+        padding: 24px 16px;
+        border-right: 1px solid rgba(120, 160, 200, 0.08);
+        background: rgba(8, 11, 17, 0.7);
+      }
+      .fake-brand {
+        font-size: 10px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(150, 200, 220, 0.45);
+        margin-bottom: 18px;
+      }
+      .fake-session {
+        height: 30px;
+        margin-bottom: 7px;
+        border-radius: 8px;
+        background: rgba(120, 160, 200, 0.06);
+      }
+      .fake-session.is-active {
+        background: rgba(90, 150, 220, 0.14);
+        box-shadow: inset 2px 0 0 rgba(110, 244, 255, 0.5);
+      }
+      .fake-chat {
+        position: absolute;
+        left: 248px;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding: 36px 44px 96px;
+      }
+      .fake-eyebrow {
+        font-size: 9px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(130, 180, 205, 0.35);
+        margin-bottom: 22px;
+      }
+      .fake-bubble {
+        max-width: 620px;
+        padding: 16px 18px;
+        border-radius: 14px;
+        background: rgba(120, 160, 200, 0.055);
+        border: 1px solid rgba(120, 160, 200, 0.08);
+        margin-bottom: 14px;
+        color: rgba(170, 200, 220, 0.55);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+      .fake-bubble.user {
+        margin-left: auto;
+        background: rgba(40, 80, 120, 0.18);
+        border-color: rgba(90, 160, 220, 0.12);
+        color: rgba(190, 225, 240, 0.68);
+      }
+      .fake-composer {
+        position: absolute;
+        left: 248px;
+        right: 0;
+        bottom: 0;
+        height: 72px;
+        border-top: 1px solid rgba(120, 160, 200, 0.08);
+        background: rgba(8, 11, 17, 0.85);
+        display: flex;
+        align-items: center;
+        padding: 0 44px;
+        color: rgba(120, 160, 190, 0.3);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fake-app">
+      <aside class="fake-sidebar">
+        <div class="fake-brand">Sessions</div>
+        <div class="fake-session is-active"></div>
+        <div class="fake-session"></div>
+        <div class="fake-session"></div>
+        <div class="fake-session"></div>
+        <div class="fake-session"></div>
+      </aside>
+      <main class="fake-chat">
+        <div class="fake-eyebrow">dsh / web</div>
+        <div class="fake-bubble user">帮我把这个插件做成一只漂浮的虚空八爪鱼。</div>
+        <div class="fake-bubble">收到。场景会保持独立：three.js 只在自己的 canvas 里跑，不读对话内容，只跟随运行节奏。</div>
+        <div class="fake-bubble user">别挡住输入框，给个能收起来的角落就好。</div>
+      </main>
+      <div class="fake-composer">Ask anything…</div>
+    </div>
+    <div id="void-root"></div>
+    <script src="./harness.bundle.js"></script>
+    <script src="/client.js"></script>
+    <script>
+      // The harness bundle polls for the plugin registered by client.js.
+      window.__VOID_TEST__.afterClient()
+    </script>
+  </body>
+</html>

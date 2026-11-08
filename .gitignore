@@ -1,0 +1,9 @@
+node_modules/
+.npm-cache/
+demo/bundle.js
+demo/bundle.js.map
+test/harness.bundle.js
+study/sdf-bundle.js
+shots/
+*.tgz
+.DS_Store
