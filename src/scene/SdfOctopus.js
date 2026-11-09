@@ -89,6 +89,17 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
   const armCurlTarget = new Float32Array(8)
   let stretch = 0
   let stretchTarget = 0
+  // Stroke phase is INTEGRATED, never recomputed as `t * f(t)`. Multiplying a
+  // running clock by a changing frequency gives an instantaneous rate of
+  // `f + t·f'`, and that second term grows without bound: at t = 5 min it
+  // amplified the arm wave ~290x and the whole body visibly vibrated. Only the
+  // phase accumulates; the frequency itself stays near-constant, as a real
+  // animal's does — changing effort changes amplitude, not cadence.
+  let strokePhase = 0
+  // One jet is an EVENT with an asymmetric envelope (quick contraction, slow
+  // relaxation). A linearly-decayed flag reads as a machine, not an animal.
+  let jetPhase = 1
+  let jetDuration = 0.9
   let look = new THREE.Vector2(0, 0)
   let lookTarget = new THREE.Vector2(0, 0)
   let autonomyTimer = 2.5 + Math.random() * 3
@@ -112,15 +123,47 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
   const pointerTarget = new THREE.Vector2()
   const armTargets = makeArmPoints()
   const armPoints = uniforms.uArmPts.value
+  // Velocity state for the per-point spring below. A one-pole lerp carries no
+  // velocity, which is why it can only ever "stick" to its target: it is an
+  // over-damped spring, so the arms never swung past a pose and settled back.
+  const armVel = makeArmPoints()
+  // Per-point spring constants are fixed, so solve them once. Stiffness and
+  // damping ratio both fall from root to tip: the root stays with the body
+  // (zeta 0.95, no overshoot), while the tip is under-damped (zeta 0.39) and
+  // overshoots ~25% before ringing back — the towed-through-water feel.
+  const armStiff = new Float32Array(armPoints.length)
+  const armDamp = new Float32Array(armPoints.length)
+  for (let i = 0; i < armPoints.length; i++) {
+    const point = i & 7
+    const k = 800 - point * 100
+    armStiff[i] = k
+    armDamp[i] = 2 * Math.sqrt(k) * (0.95 - point * 0.08)
+  }
 
-  const minFrame = mode === 'ambient' ? 1000 / 24 : 0
-  const renderScale = mode === 'ambient' ? 0.7 : 0.9
+  // No artificial fps cap any more. The 24 fps ceiling was a deliberate power
+  // trade-off, but it is also the single biggest reason the creature read as
+  // janky: 24 fps against a 60 Hz display is a visible cadence mismatch on every
+  // pan. The loop now runs at the display rate and the frame BUDGET is held by
+  // adaptive resolution instead — drop pixels, never frames.
+  const minScale = 0.45
+  const maxScale = mode === 'ambient' ? 0.85 : 0.95
+  let renderScale = mode === 'ambient' ? 0.7 : 0.9
+  // Recovery is capped to just above the last affordable scale, so the loop
+  // settles instead of oscillating between a quality it cannot pay for and one
+  // it can.
+  let scaleCeiling = maxScale
+  let frameAvgMs = 16.7
+  let lastScaleChange = 0
 
   const resize = () => {
     const rect = container.getBoundingClientRect()
     const w = Math.max(1, Math.floor(rect.width || window.innerWidth))
     const h = Math.max(1, Math.floor(rect.height || window.innerHeight))
-    renderer.setSize(Math.max(1, Math.floor(w * renderScale)), Math.max(1, Math.floor(h * renderScale)), false)
+    renderer.setSize(
+      Math.max(1, Math.floor(w * renderScale)),
+      Math.max(1, Math.floor(h * renderScale)),
+      false,
+    )
     const target = renderer.getDrawingBufferSize(new THREE.Vector2())
     uniforms.uResolution.value.copy(target)
     composer.setSize(target.x, target.y)
@@ -159,7 +202,8 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
       pulse = 1
       kick = 1
       jetImpulse = 1
-      jetSurge = 1
+      jetPhase = 0
+      jetDuration = 0.85 + Math.random() * 0.3
     } else {
       action = 'blink'
       actionDuration = 0.5
@@ -234,7 +278,7 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
         // A travelling stroke runs from root to tip. At speed it gets faster and
         // larger, but the tip is always behind the root so the arm reads as a whip.
         const stroke =
-          Math.sin(t * (1.7 + swimPose * 2.4 + jetSurge * 0.7) + phase - i * 0.55) *
+          Math.sin(strokePhase + phase - i * 0.55) *
           (0.008 + i * 0.009) *
           (0.55 + swimPose * 2.2)
         x += tangentX * stroke
@@ -263,12 +307,24 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
       raf = requestAnimationFrame(frame)
       return
     }
-    if (minFrame > 0 && now - last < minFrame) {
-      raf = requestAnimationFrame(frame)
-      return
-    }
-    const dt = Math.min(0.05, Math.max(0.001, (now - last) / 1000))
+    const rawMs = Math.max(0.001, now - last)
+    const dt = Math.min(0.05, Math.max(0.001, rawMs / 1000))
     last = now
+
+    // Adaptive resolution: dropping is immediate, recovery is slow and capped,
+    // so the loop converges on an affordable scale instead of hunting.
+    frameAvgMs += (Math.min(rawMs, 60) - frameAvgMs) * 0.06
+    if (frameAvgMs > 20 && renderScale > minScale && now - lastScaleChange > 700) {
+      renderScale = Math.max(minScale, renderScale * 0.88)
+      scaleCeiling = Math.min(maxScale, renderScale * 1.12)
+      resize()
+      lastScaleChange = now
+    } else if (frameAvgMs < 17.3 && renderScale < scaleCeiling && now - lastScaleChange > 3000) {
+      renderScale = Math.min(scaleCeiling, renderScale * 1.05)
+      resize()
+      lastScaleChange = now
+    }
+
     time += dt * (0.7 + mood.speed)
 
     for (const key of Object.keys(mood)) {
@@ -331,19 +387,39 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
     for (let i = 0; i < 8; i++) armCurl[i] = damp(armCurl[i], armCurlTarget[i], 3.6, dt)
     kick = Math.max(0, kick - dt * 2.4)
     jetImpulse = Math.max(0, jetImpulse - dt * 1.1)
-    jetSurge = Math.max(0, jetSurge - dt * 0.6)
+
+    // Jet envelope: a quick contraction over the first 22% of the event, then a
+    // slow relaxation whose exponent lets the tail trail off instead of
+    // snapping to zero. This asymmetry is what separates "an animal pushed
+    // itself" from "a value oscillated".
+    if (jetPhase < 1) {
+      jetPhase = Math.min(1, jetPhase + dt / jetDuration)
+      jetSurge =
+        jetPhase < 0.22
+          ? Math.sin((jetPhase / 0.22) * (Math.PI / 2))
+          : Math.pow(Math.cos(((jetPhase - 0.22) / 0.78) * (Math.PI / 2)), 1.6)
+    } else {
+      jetSurge = 0
+    }
 
     jetTimer -= dt
     if (jetTimer <= 0) {
       pulse = 1
       kick = Math.max(kick, 0.55)
       jetImpulse = 1
-      jetSurge = 1
+      jetPhase = 0
+      jetDuration = 0.85 + Math.random() * 0.3
       jetTimer = (6 + Math.random() * 6) * (1 - swimAmount * 0.35)
     }
 
     swim.lerp(swimTarget, 1 - Math.exp(-2.5 * dt))
     swimAmount = damp(swimAmount, swimAmountTarget, 2.2, dt)
+
+    // Advance the stroke phase by the CURRENT cadence. Effort may drift the
+    // cadence slightly, but because we integrate, the instantaneous rate always
+    // equals the frequency — no time-dependent runaway, no vibration.
+    const swimPoseNow = clamp(swimAmount * (0.55 + 0.45 * jetSurge), 0, 1)
+    strokePhase += dt * (2.0 + swimPoseNow * 1.5 + jetSurge * 0.5)
 
     // The body follows travel with a little inertia; banking comes from the
     // turn rate, not directly from velocity, so straight glides stay level.
@@ -374,12 +450,25 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
     )
 
     buildArms(time)
-    for (let i = 0; i < armPoints.length; i++) {
-      // The root follows the body tightly; the tip lags behind and settles with
-      // weight, which turns the whole chain into a trailing whip instead of a
-      // rigid curve that is translated with the body.
-      const point = i & 7
-      armPoints[i].lerp(armTargets[i], 1 - Math.exp(-(30 - point * 3.6) * dt))
+    // Secondary motion: every control point is a damped spring chasing its
+    // animated target, integrated semi-implicitly (velocity first, then
+    // position) in two substeps so the stiff root stays stable at a 24 fps
+    // frame step. The root tracks the body; the tip overshoots and rings back,
+    // which is what turns a posed curve into a towed one.
+    const SUBSTEPS = 2
+    const sub = dt / SUBSTEPS
+    for (let s = 0; s < SUBSTEPS; s++) {
+      for (let i = 0; i < armPoints.length; i++) {
+        const p = armPoints[i]
+        const v = armVel[i]
+        const target = armTargets[i]
+        const k = armStiff[i]
+        const c = armDamp[i]
+        v.x += ((target.x - p.x) * k - v.x * c) * sub
+        v.y += ((target.y - p.y) * k - v.y * c) * sub
+        v.z += ((target.z - p.z) * k - v.z * c) * sub
+        p.addScaledVector(v, sub)
+      }
     }
 
     uniforms.uTime.value = time
@@ -403,10 +492,17 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
     raf = requestAnimationFrame(frame)
   }
 
+  // A viewport change is a different cost regime, so let the adaptive scale try
+  // the full range again instead of staying capped by the old layout.
+  const onWindowResize = () => {
+    scaleCeiling = maxScale
+    resize()
+  }
+
   resize()
   window.addEventListener('pointermove', onPointerMove, { passive: true })
   document.addEventListener('visibilitychange', onVisibility)
-  window.addEventListener('resize', resize)
+  window.addEventListener('resize', onWindowResize)
   raf = requestAnimationFrame(frame)
 
   return {
@@ -429,14 +525,15 @@ export function createSdfOctopus({ container = document.body, mode = 'demo', act
     },
     pulse() {
       pulse = 1
-      jetSurge = 1
+      jetPhase = 0
+      jetDuration = 0.85
     },
     dispose() {
       disposed = true
       cancelAnimationFrame(raf)
       window.removeEventListener('pointermove', onPointerMove)
       document.removeEventListener('visibilitychange', onVisibility)
-      window.removeEventListener('resize', resize)
+      window.removeEventListener('resize', onWindowResize)
       quad.geometry.dispose()
       material.dispose()
       composer.dispose()
