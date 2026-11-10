@@ -199,6 +199,55 @@ function pickBand(st, bands) {
  */
 
 /**
+ * Bounds that make the BODY collide with the viewport edge, not the layer box.
+ *
+ * 0.9.28 and earlier clamped the whole 500 px layer box inside the viewport, so
+ * the creature's centre could never come closer than half a box (250 px) to any
+ * edge — the body itself kept an 86-105 px gap from the wall at all times, and
+ * the visible activity area was a fixed rectangle in the middle of the screen.
+ * The body is not the box: it is ~0.66 of the box wide when facing you and
+ * ~0.90 when in profile, and it gets smaller as it recedes into the frustum.
+ *
+ * So the caller measures the CURRENT projected body half-extents (the engine
+ * hands them over in NDC: 1.0 = half a box) and this turns them into the
+ * top-left bounds the wander expects. The result is "the whole screen is its
+ * territory": at the wall the tentacle tips touch the edge, and because the
+ * extents shrink with depth, a far creature may sit closer to the edge than a
+ * near one — exactly what a frustum does.
+ *
+ * @param {{viewportW:number, viewportH:number, boxW:number, boxH:number,
+ *          left:number, right:number, up:number, down:number}} p
+ *   boxW/boxH are the UNSCALED layer size; left/right/up/down are the projected
+ *   body half-extents already multiplied by the current depth scale, in px.
+ * @returns {Bounds} bounds for the layer's top-left corner
+ */
+export function bodyBounds(p) {
+  const halfW = p.boxW / 2
+  const halfH = p.boxH / 2
+  const left = Math.max(0, Number.isFinite(p.left) ? p.left : 0)
+  const right = Math.max(0, Number.isFinite(p.right) ? p.right : 0)
+  const up = Math.max(0, Number.isFinite(p.up) ? p.up : 0)
+  const down = Math.max(0, Number.isFinite(p.down) ? p.down : 0)
+  const minX = left - halfW
+  const maxX = p.viewportW - right - halfW
+  // minY governs the TOP wall, so it is the UP extent that has to fit above the
+  // box centre; maxY governs the bottom wall and uses the DOWN extent.
+  const minY = up - halfH
+  const maxY = p.viewportH - down - halfH
+  // A viewport smaller than the body cannot satisfy both walls. Centre the
+  // creature on that axis instead of handing back an inverted interval, which
+  // clampToBounds would silently "fix" into the wrong side of the screen.
+  const cx = (minX + maxX) / 2
+  const cy = (minY + maxY) / 2
+  return {
+    minX: minX <= maxX ? minX : cx,
+    maxX: minX <= maxX ? maxX : cx,
+    minY: minY <= maxY ? minY : cy,
+    maxY: minY <= maxY ? maxY : cy,
+  }
+}
+
+/**
  * @typedef {object} BehaviorState
  * @property {number} rng       mulberry32 state (uint32), serialised
  * @property {number} seed      original seed, kept for debugging

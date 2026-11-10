@@ -10,6 +10,19 @@ export const sdfVertex = /* glsl */ `
 
 const ARM_POINT_RADIUS = [0.2, 0.175, 0.15, 0.12, 0.09, 0.06, 0.035, 0.02]
 
+/**
+ * Widening factor for the virtual lens (0.9.29).
+ *
+ * The body is wider than the render target at its widest pose: the arm tips
+ * project to |ndc| ~1.15-1.20 (measured from the engine's own projection probe),
+ * so with a 1:1 box the tips were sliced by the canvas edge — a straight cut,
+ * present ever since the box existed and only softened by the CSS mask. The
+ * lens is widened by FOV_SCALE so the whole silhouette fits with room (max
+ * ~0.96), and the CSS base box grows by the same factor so the creature's
+ * APPARENT size is unchanged: the extra pixels exist only to hold the arms.
+ */
+export const FOV_SCALE = 1.25
+
 function armCode() {
   let out = ''
   // One conservative bounding sphere per arm, refreshed on the CPU every frame
@@ -365,12 +378,13 @@ ${armInfoCode()}
   void main() {
     vec2 p = (vUv * 2.0 - 1.0) * vec2(uResolution.x / uResolution.y, 1.0);
     vec3 ro = vec3(0.0, 0.35, 4.3);
-    vec3 rd = normalize(vec3(p * 1.9, -4.0));
+    // FOV_SCALE widens the lens so the widest arm pose stays inside the canvas.
+    vec3 rd = normalize(vec3(p * ${(1.9 * FOV_SCALE).toFixed(4)}, -4.0));
 
-    // Hit tolerance in world units. The visible height is ~4.1 world units, so
-    // a fixed 0.0015 was 0.15 px at display resolution — accurate but wasteful:
-    // it forced extra march steps to prove what was already sub-pixel.
-    float worldPerPixel = 4.1 / max(uResolution.y, 1.0);
+    // Hit tolerance in world units. The visible height is ~4.1 * FOV_SCALE world
+    // units, so a fixed 0.0015 was 0.15 px at display resolution — accurate but
+    // wasteful: it forced extra march steps to prove what was already sub-pixel.
+    float worldPerPixel = ${(4.1 * FOV_SCALE).toFixed(4)} / max(uResolution.y, 1.0);
     float hitEps = clamp(worldPerPixel * 0.32, 0.0016, 0.005);
 
     vec3 oc = ro - vec3(0.0, 0.35, 0.0);

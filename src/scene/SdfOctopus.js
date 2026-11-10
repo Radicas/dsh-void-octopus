@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
-import { sdfVertex, sdfFragment, ARM_POINT_RADIUS } from './sdfShader.js'
+import { sdfVertex, sdfFragment, ARM_POINT_RADIUS, FOV_SCALE } from './sdfShader.js'
 import { computeArmTargets, advanceStrokePhase, advanceWaveOffset, createTurnLag, stepTurnLag } from './armPose.js'
 
 export const ACTIVITIES = {
@@ -297,6 +297,7 @@ export function createSdfOctopus({
   const viewX = new THREE.Matrix4()
   const viewY = new THREE.Matrix4()
   const viewInv = new THREE.Matrix4()
+  const bodyToView = new THREE.Matrix4()
   const updateView = () => {
     viewZ.makeRotationZ(-roll)
     viewX.makeRotationX(-pitch)
@@ -304,6 +305,8 @@ export function createSdfOctopus({
     // Same order as the old in-shader chain: rotZ(-roll)·rotX(-pitch)·rotY(-yaw)
     viewInv.copy(viewZ).multiply(viewX).multiply(viewY)
     uniforms.uInvRot.value.setFromMatrix4(viewInv)
+    // Body space -> what the camera sees, for the projected-extent probe below.
+    bodyToView.copy(viewInv).invert()
   }
   // Conservative per-arm bounding spheres, recomputed from the control points
   // that were actually uploaded this frame. A stale or too-small bound would
@@ -334,6 +337,101 @@ export function createSdfOctopus({
       // +0.05 covers the largest smooth-union bulge (k/4 = 0.02) with margin.
       armBounds[k].set(cx, cy, cz, r + 0.05)
     }
+  }
+
+  // ---- projected body extent: the collision proxy for the screen edge -------
+  // The overlay is a flat box, and the creature is drawn through the shader's
+  // own perspective camera:
+  //   ro = (0, 0.35, 4.3), rd = normalize(vec3(uv * 1.9 * FOV_SCALE, -4.0))
+  // so a body point projects to ndc = (2.1053 / FOV_SCALE) * p / (4.3 - p.z) —
+  // and 1.0 in ndc is exactly HALF the layer box. Since 0.9.29 the overlay clamps
+  // the BODY against the viewport edge (not the box), and it can only do that if
+  // it knows how big the body currently is: the arms splay, streamline, turn and
+  // lag, so "the body" is ~0.98 of the half box facing you and up to ~1.2 in
+  // profile. (That 1.2 is also why the lens was widened: the arms used to run
+  // off the canvas and get sliced. See FOV_SCALE.)
+  const FOCUS_Y = 0.35
+  const CAM_Z = 4.3
+  const PROJ = 4 / 1.9 / FOV_SCALE
+  // Extents GROW fast and SHRINK slowly. Growing late would let a splaying arm
+  // poke through the wall before the collision knew about it; shrinking late
+  // only holds the creature a few px further out for a moment, which is
+  // invisible. (Same asymmetry as the adaptive resolution above.)
+  const EXTENT_UP = 14 // 1/s
+  const EXTENT_DOWN = 2.5 // 1/s
+  // NDC half-extents of a front-on pose, in the widened lens' units.
+  const FRONT_EXTENT = { left: 0.528, right: 0.528, up: 0.48, down: 0.448 }
+  const extent = { ...FRONT_EXTENT }
+  const extentTarget = { ...FRONT_EXTENT }
+  const probeBody = []
+  const addProbe = (x, y, z, r = 0) => probeBody.push({ x, y, z, r })
+  // mantle ellipsoid: centre (0, 0.98, 0), radii (0.52, 0.6, 0.46)
+  addProbe(0.52, 0.98, 0)
+  addProbe(-0.52, 0.98, 0)
+  addProbe(0, 1.58, 0)
+  addProbe(0, 0.38, 0)
+  addProbe(0, 0.98, 0.46)
+  addProbe(0, 0.98, -0.46)
+  // head ellipsoid: centre (0, 0.5, 0.06), radii (0.56, 0.4, 0.5)
+  addProbe(0.56, 0.5, 0.06)
+  addProbe(-0.56, 0.5, 0.06)
+  addProbe(0, 0.9, 0.06)
+  addProbe(0, 0.1, 0.06)
+  addProbe(0, 0.5, 0.56)
+  addProbe(0, 0.5, -0.44)
+  // eye sockets
+  addProbe(0.43, 0.52, 0.42, 0.16)
+  addProbe(-0.43, 0.52, 0.42, 0.16)
+  // webbing ring, both of its heights
+  for (let k = 0; k < 8; k++) {
+    const a = (k / 8) * Math.PI * 2
+    const c = Math.cos(a)
+    const s = Math.sin(a)
+    addProbe(c * 0.78, 0.02, s * 0.78, 0.016)
+    addProbe(c * 0.5, -0.3, s * 0.5, 0.016)
+  }
+  // siphon
+  addProbe(0, 0.36, 0.32, 0.06)
+  addProbe(0, 0.3, 0.69, 0.09)
+
+  const probe = new THREE.Vector3()
+  const updateExtent = (dt) => {
+    extentTarget.left = 0
+    extentTarget.right = 0
+    extentTarget.up = 0
+    extentTarget.down = 0
+    const off = uniforms.uOffset.value
+    const project = (x, y, z, r) => {
+      // Body space -> view space, then the world-space drift the shader adds.
+      probe.set(x, y, z).applyMatrix4(bodyToView)
+      probe.x += off.x
+      probe.y += off.y
+      probe.z += off.z
+      // Guard the plane behind the camera: the SDF never draws there, but a
+      // division by <= 0 would hand the overlay an infinite collision radius.
+      const den = Math.max(0.6, CAM_Z - probe.z)
+      const k = PROJ / den
+      const nx = probe.x * k
+      const ny = (probe.y - FOCUS_Y) * k
+      const nr = r * k
+      if (-nx + nr > extentTarget.left) extentTarget.left = -nx + nr
+      if (nx + nr > extentTarget.right) extentTarget.right = nx + nr
+      if (ny + nr > extentTarget.up) extentTarget.up = ny + nr
+      if (-ny + nr > extentTarget.down) extentTarget.down = -ny + nr
+    }
+    for (let i = 0; i < probeBody.length; i++) {
+      const b = probeBody[i]
+      project(b.x, b.y, b.z, b.r)
+    }
+    for (let i = 0; i < armPoints.length; i++) {
+      const pt = armPoints[i]
+      project(pt.x, pt.y, pt.z, ARM_POINT_RADIUS[i & 7])
+    }
+    const follow = (cur, next) => cur + (next - cur) * (1 - Math.exp(-dt * (next > cur ? EXTENT_UP : EXTENT_DOWN)))
+    extent.left = follow(extent.left, extentTarget.left)
+    extent.right = follow(extent.right, extentTarget.right)
+    extent.up = follow(extent.up, extentTarget.up)
+    extent.down = follow(extent.down, extentTarget.down)
   }
 
   // No artificial fps cap any more. The 24 fps ceiling was a deliberate power
@@ -712,6 +810,7 @@ export function createSdfOctopus({
 
     updateView()
     updateArmBounds()
+    updateExtent(dt)
     uniforms.uTime.value = time
     uniforms.uGlow.value = mood.glow + pulse * 0.2
     uniforms.uEnergy.value = mood.energy
@@ -913,6 +1012,26 @@ export function createSdfOctopus({
     /** 0..1 brace envelope that goes with getTurnLag(). @returns {number} */
     getTurnBrace() {
       return turnBraceNow
+    },
+    /**
+     * The CURRENT silhouette half-extents, in NDC where 1.0 is half the layer
+     * box. The ambient overlay clamps the body against the viewport edge with
+     * these, so the creature's whole body — not the transparent box — is what
+     * collides. Already padded for the soft edge; values are smoothed, so they
+     * cannot jitter the collision on a splayed arm.
+     * @returns {{left:number, right:number, up:number, down:number}}
+     */
+    getExtent() {
+      // Geometry only: the smooth-union bulge and the bloom halo add a few px on
+      // top of this, and the overlay adds a fixed EDGE_PAD_PX on its side. A pad
+      // here in NDC would scale with depth and vanish exactly when the creature
+      // is far — which is how a 16 px straight cut appeared at depth 0.95.
+      return {
+        left: extent.left,
+        right: extent.right,
+        up: extent.up,
+        down: extent.down,
+      }
     },
     getJet() {
       return Math.min(1, pulse * 0.6 + jetImpulse * 0.5 + jetSurge * 0.55)

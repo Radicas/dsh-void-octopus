@@ -24,6 +24,7 @@ import {
   depthScale,
   serializeBehavior,
   restoreBehavior,
+  bodyBounds,
 } from '../src/scene/behavior.js'
 import { computeArmTargets, ARM_COUNT, POINTS_PER_ARM } from '../src/scene/armPose.js'
 import { DEFAULTS as DEPART_DEFAULTS } from '../src/scene/departure.js'
@@ -431,6 +432,132 @@ console.log('10) no phase is built as clock * state in the motion sources')
     }
   }
   check('no sin(clock * identifier) anywhere', offenders.length === 0, offenders.join(' | ') || 'clean')
+}
+
+// ------------------------------------------------- body vs the screen edge
+console.log('')
+console.log('11) the BODY collides with the viewport edge, not the layer box')
+{
+  const VW = 1440
+  const VH = 900
+  // 0.9.29: the lens was widened by FOV_SCALE=1.25 and the base box grew with it
+  // (500 -> 625), so the apparent size is unchanged while the widest arm pose
+  // (|ndc| ~1.2 before the widening) now fits inside the canvas.
+  const BOX_PX = 625
+  const half = BOX_PX / 2
+  // Front-on silhouette in the widened lens' NDC units (1.0 = half the box).
+  const front = { left: 0.528, right: 0.528, up: 0.48, down: 0.448 }
+  const boundsAt = (scale) =>
+    bodyBounds({
+      viewportW: VW,
+      viewportH: VH,
+      boxW: BOX_PX,
+      boxH: BOX_PX,
+      left: front.left * half * scale,
+      right: front.right * half * scale,
+      up: front.up * half * scale,
+      down: front.down * half * scale,
+    })
+
+  const near = boundsAt(1)
+  const bodyLeftEdge = (x) => x + half - front.left * half
+  const bodyRightEdge = (x) => x + half + front.right * half
+  const bodyTopEdge = (y) => y + half - front.up * half
+  const bodyBottomEdge = (y) => y + half + front.down * half
+
+  check(
+    'at the left wall the body touches the edge (0 px gap)',
+    Math.abs(bodyLeftEdge(near.minX)) < 1e-9,
+    `${bodyLeftEdge(near.minX).toFixed(3)} px`,
+  )
+  check(
+    'at the right wall the body touches the edge',
+    Math.abs(bodyRightEdge(near.maxX) - VW) < 1e-9,
+    `${(VW - bodyRightEdge(near.maxX)).toFixed(3)} px gap`,
+  )
+  check(
+    'at the top wall the body touches the edge',
+    Math.abs(bodyTopEdge(near.minY)) < 1e-9,
+    `${bodyTopEdge(near.minY).toFixed(3)} px`,
+  )
+  check(
+    'at the bottom wall the body touches the edge',
+    Math.abs(bodyBottomEdge(near.maxY) - VH) < 1e-9,
+    `${(VH - bodyBottomEdge(near.maxY)).toFixed(3)} px gap`,
+  )
+
+  // What the change buys: the 0.9.28 box bounds allowed a 916x376 centre rect on
+  // this viewport (a 500 px box inset by 12 px on every side); body bounds allow
+  // the full screen minus the body's own half-width.
+  const oldTravelX = VW - 2 * (250 + 12)
+  const newTravelX = near.maxX - near.minX
+  check(
+    'the centre travel is the whole screen, not a box inset',
+    newTravelX > oldTravelX + 150,
+    `${newTravelX.toFixed(0)} px vs ${oldTravelX} px before`,
+  )
+
+  // Depth is INSIDE the frustum: a farther creature is smaller on screen, so the
+  // same wall can be approached closer. This is the frustum narrowing, on screen.
+  const far = boundsAt(DEFAULTS.depthFar)
+  check(
+    'a farther body may hug the wall closer',
+    far.minX < near.minX - 20 && far.maxX > near.maxX + 20,
+    `near wall gap ${(front.left * half).toFixed(0)} px, far wall gap ${(front.left * half * DEFAULTS.depthFar).toFixed(0)} px`,
+  )
+  check('body never crosses either wall across the allowed range', (() => {
+    for (let x = near.minX; x <= near.maxX; x += 7) {
+      if (bodyLeftEdge(x) < -1e-9 || bodyRightEdge(x) > VW + 1e-9) return false
+    }
+    for (let y = near.minY; y <= near.maxY; y += 7) {
+      if (bodyTopEdge(y) < -1e-9 || bodyBottomEdge(y) > VH + 1e-9) return false
+    }
+    return true
+  })())
+
+  // A viewport smaller than the body is a real case (narrow window): the helper
+  // must not hand back an inverted interval that clampToBounds would "fix" into
+  // the wrong side of the screen.
+  const tiny = bodyBounds({
+    viewportW: 280,
+    viewportH: 280,
+    boxW: BOX_PX,
+    boxH: BOX_PX,
+    left: 165,
+    right: 165,
+    up: 150,
+    down: 140,
+  })
+  check(
+    'a viewport smaller than the body stays well-ordered',
+    tiny.minX <= tiny.maxX && tiny.minY <= tiny.maxY,
+    `x ${tiny.minX}..${tiny.maxX}`,
+  )
+
+  // And the wander, driven by these bounds, really does use the space. Three
+  // seeds: one run is a random walk, so "it reaches every wall" is a property of
+  // the system over time, not of a single lucky walk.
+  let outOfBounds = 0
+  const reach = { minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity }
+  for (const seed of [7, 11, 23]) {
+    const roam = simulate({ seed, seconds: 600, box: near, cfg: NO_DEPART })
+    outOfBounds += roam.outOfBox
+    reach.minX = Math.min(reach.minX, roam.extent.minX)
+    reach.maxX = Math.max(reach.maxX, roam.extent.maxX)
+    reach.minY = Math.min(reach.minY, roam.extent.minY)
+    reach.maxY = Math.max(reach.maxY, roam.extent.maxY)
+  }
+  check('never steps outside the body bounds', outOfBounds === 0, `${outOfBounds} out-of-bounds samples`)
+  const gapL = bodyLeftEdge(reach.minX)
+  const gapR = VW - bodyRightEdge(reach.maxX)
+  const gapT = bodyTopEdge(reach.minY)
+  const gapB = VH - bodyBottomEdge(reach.maxY)
+  const worstGap = Math.max(gapL, gapR, gapT, gapB)
+  check(
+    'it actually reaches every wall (body edge within 40 px)',
+    worstGap <= 40,
+    `gaps L${gapL.toFixed(0)} R${gapR.toFixed(0)} T${gapT.toFixed(0)} B${gapB.toFixed(0)} px`,
+  )
 }
 
 console.log('')

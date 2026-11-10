@@ -12,6 +12,7 @@ import {
   serializeBehavior,
   restoreBehavior,
   clampBehavior,
+  bodyBounds,
 } from './scene/behavior.js'
 
 const CSS = `
@@ -19,11 +20,14 @@ const CSS = `
   position: fixed;
   right: 10px;
   bottom: 8px;
-  /* The box is sized for the CLOSEST appearance (scale 1). Depth retreats by
-     scaling DOWN from here, so the canvas is only ever downsampled — resizing a
-     400 px buffer up to 500 px would be blurry exactly when detail matters. */
-  width: min(42vw, 500px);
-  height: min(42vw, 500px);
+  /* The box is the render target, sized for the CLOSEST appearance (scale 1) and
+     for the WIDEST arm pose: 0.9.29 widened the shader lens by FOV_SCALE (1.25)
+     because the arm tips projected to |ndc| ~1.2 and were being sliced by the
+     canvas edge. The box grew by the same factor, so the creature's apparent
+     size is unchanged — the extra pixels only hold the arms. Depth retreats by
+     scaling DOWN from here, so the canvas is only ever downsampled. */
+  width: min(52.5vw, 625px);
+  height: min(52.5vw, 625px);
   z-index: 50;
   pointer-events: none;
   mix-blend-mode: screen;
@@ -35,8 +39,11 @@ const CSS = `
   transition: opacity 460ms ease;
   will-change: transform;
   transform-origin: 50% 50%;
-  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 56%, rgba(0, 0, 0, 0.72) 72%, transparent 88%);
-  mask-image: radial-gradient(ellipse at 50% 50%, #000 56%, rgba(0, 0, 0, 0.72) 72%, transparent 88%);
+  /* The fade radii are in box fractions, and the box grew by FOV_SCALE, so the
+     stops are divided by it too: the soft edge keeps landing at the same number
+     of pixels relative to the CREATURE, not to the (now larger) canvas. */
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 44.8%, rgba(0, 0, 0, 0.72) 57.6%, transparent 70.4%);
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 44.8%, rgba(0, 0, 0, 0.72) 57.6%, transparent 70.4%);
 }
 .dsh-void-ambient.is-quiet {
   opacity: calc(0.2 * var(--void-alpha, 1));
@@ -51,8 +58,8 @@ const CSS = `
   .dsh-void-ambient {
     right: -18px;
     bottom: -14px;
-    width: min(65vw, 400px);
-    height: min(65vw, 400px);
+    width: min(81vw, 500px);
+    height: min(81vw, 500px);
   }
 }
 .dsh-void-ambient.is-wandering {
@@ -353,18 +360,64 @@ function VoidOctopusAmbient(props) {
 
     let w = host.offsetWidth || 400
     let h = host.offsetHeight || 400
-    let bounds = { minX: margin, minY: margin, maxX: margin, maxY: margin }
+    // Conservative front-on silhouette (NDC half-extents, 1.0 = half a box):
+    // used until the engine has drawn a frame and can report the real one, and
+    // as the fallback if the engine is unavailable.
+    const BODY_EXTENT_FALLBACK = { left: 0.78, right: 0.78, up: 0.52, down: 0.5 }
+    const bodyExtent = () => {
+      const engine = engineRef.current
+      if (engine && typeof engine.getExtent === 'function') {
+        const ext = engine.getExtent()
+        if (ext != null && Number.isFinite(ext.left)) return ext
+      }
+      return BODY_EXTENT_FALLBACK
+    }
+    // The layer box is only the carrier. Since 0.9.29 the BODY collides with the
+    // viewport edge: the engine reports how much of the box the silhouette
+    // currently covers (it splay/streamline/turn, and shrink with depth), and the
+    // box is allowed to hang off-screen by exactly that much. That is what makes
+    // "the whole screen" reachable instead of a 625 px box inset from every edge.
+    //
+    // EDGE_PAD_PX is a fixed pixel margin, not an NDC one: the engine's probe is
+    // geometric, while the visible silhouette includes the smooth-union bulge and
+    // the bloom halo, which together run ~3-6 px outside it. A fixed pad keeps the
+    // residual gap the same at every depth; an NDC pad shrank with the layer scale
+    // and let the glow touch (then cross) the viewport edge when far.
+    const EDGE_PAD_PX = 8
+    const boundsFor = (scale) => {
+      const ext = bodyExtent()
+      const halfW = (w / 2) * scale
+      const halfH = (h / 2) * scale
+      return bodyBounds({
+        viewportW: window.innerWidth,
+        viewportH: window.innerHeight,
+        boxW: w,
+        boxH: h,
+        left: ext.left * halfW + EDGE_PAD_PX,
+        right: ext.right * halfW + EDGE_PAD_PX,
+        up: ext.up * halfH + EDGE_PAD_PX,
+        down: ext.down * halfH + EDGE_PAD_PX,
+      })
+    }
     const measure = () => {
       w = host.offsetWidth || 400
       h = host.offsetHeight || 400
-      bounds = {
-        minX: margin,
-        minY: margin,
-        maxX: Math.max(margin, window.innerWidth - w - margin),
-        maxY: Math.max(margin, window.innerHeight - h - margin),
-      }
     }
     measure()
+    // The departure and the distance lift move the layer on its own (apply()
+    // adds them to the transform), so the collision has to reserve those pixels
+    // at the top — otherwise a body already against the ceiling would be cut
+    // when it rises or recedes.
+    const boundsForMotion = (m, scale) => {
+      const b = boundsFor(scale)
+      const lift = getView(m, cfg).lift
+      b.minY -= lift
+      b.maxY -= lift
+      return b
+    }
+    // Before the first frame there is no measured silhouette, so the initial
+    // bounds use the fallback at the startup distance.
+    let bounds = boundsFor(depthScale({ depthView: cfg.depthStart }, cfg))
 
     // Resume the wander instead of restarting it. The old code stored a single
     // number (`elapsed`) because the patrol path was a pure function of it; the
@@ -453,6 +506,10 @@ function VoidOctopusAmbient(props) {
         const step = Math.min(0.1, (now - lastStep) / 1000)
         lastStep = now
         if (step > 0) {
+          // Bounds follow the CURRENT silhouette and distance: closer/larger
+          // means it must stop further from the wall, far/smaller means it may
+          // hug it — the frustum narrowing with depth, expressed on screen.
+          bounds = boundsForMotion(motion, depthScale(motion, cfg))
           stepBehavior(motion, step, bounds, cfg)
           if (motion.jet) {
             const engine = engineRef.current
@@ -496,10 +553,58 @@ function VoidOctopusAmbient(props) {
         state() {
           return { ...getDeparture(motion), view: getView(motion, cfg) }
         },
+        /**
+         * Current placement, for verification: layer top-left, the drawn scale,
+         * the body half-extents the collision is using (NDC, 1.0 = half a box)
+         * and the resulting top-left bounds.
+         */
+        pos() {
+          return {
+            x: motion.x,
+            y: motion.y,
+            scale: depthScale(motion, cfg),
+            depth: motion.depthView,
+            extent: bodyExtent(),
+            bounds: { ...bounds },
+          }
+        },
         /** Arms-vs-body yaw lag (radians). 0 when not turning. */
         turnLag() {
           const engine = engineRef.current
           return engine && typeof engine.getTurnLag === 'function' ? engine.getTurnLag() : 0
+        },
+        /**
+         * Put the BODY centre at viewport (cx, cy) and optionally pin the
+         * distance. Verification only — it is how "can the body really reach
+         * this corner without being cut off?" gets answered.
+         */
+        place(cx = window.innerWidth / 2, cy = window.innerHeight / 2, d = null) {
+          if (Number.isFinite(d)) {
+            // Pin the distance outright: the normal walk would take ~2 s to get
+            // there and a verification shot does not have that long.
+            const target = Math.max(0, Math.min(1, d))
+            motion.depth = target
+            motion.depthView = target
+            motion.depthTarget = target
+            motion.depthTimer = 30
+          }
+          bounds = boundsForMotion(motion, depthScale(motion, cfg))
+          const lift = getView(motion, cfg).lift
+          motion.mode = 'rest'
+          motion.speed = 0
+          motion.targetSpeed = 0
+          motion.timer = 60
+          motion.driftX = 0
+          motion.driftY = 0
+          motion.driftVX = 0
+          motion.driftVY = 0
+          motion.x = (Number.isFinite(cx) ? cx : window.innerWidth / 2) - w / 2
+          motion.y = (Number.isFinite(cy) ? cy : window.innerHeight / 2) - h / 2 - lift
+          motion.restX = motion.x
+          motion.restY = motion.y
+          clampBehavior(motion, bounds)
+          apply()
+          return { x: motion.x, y: motion.y, facing: getView(motion, cfg).facing }
         },
       }
     } catch (err) {
@@ -508,6 +613,9 @@ function VoidOctopusAmbient(props) {
 
     const onResize = () => {
       measure()
+      // Size changed => the frustum cross-section changed: re-derive the
+      // collision bounds before clamping the stored position into them.
+      bounds = boundsForMotion(motion, depthScale(motion, cfg))
       clampBehavior(motion, bounds)
       lastStep = performance.now()
       apply()
