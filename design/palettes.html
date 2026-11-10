@@ -1,0 +1,123 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>octopus palettes</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 28px 32px;
+    background: #050912;
+    font-family: "Cascadia Code", Consolas, monospace;
+    color: #cdd9e5;
+  }
+  h1 { font-size: 15px; font-weight: 600; margin: 0 0 4px; color: #e6f4ff; letter-spacing: .04em; }
+  .sub { font-size: 11px; color: #6b8299; margin: 0 0 22px; }
+  .row { display: flex; align-items: center; gap: 18px; padding: 14px 0; border-top: 1px solid #12253a; }
+  .meta { width: 210px; flex: none; }
+  .name { font-size: 13px; color: #e6f4ff; letter-spacing: .05em; }
+  .desc { font-size: 10.5px; color: #6b8299; margin-top: 4px; line-height: 1.45; }
+  .swatches { display: flex; gap: 6px; flex: none; }
+  .sw { width: 46px; height: 46px; border-radius: 3px; position: relative; }
+  .sw span { position: absolute; left: 3px; bottom: 2px; font-size: 8px; color: #000000aa; letter-spacing: .02em; }
+  .sw.dark span { color: #ffffff88; }
+  .sim { flex: 1; height: 76px; border-radius: 4px; position: relative; overflow: hidden; }
+  .sim::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 90% at 50% 50%, transparent 30%, #00000055 100%);
+  }
+  .sim .eye { position: absolute; width: 12px; height: 12px; border-radius: 50%; top: 42%; }
+  .sim .eye.l { left: 42%; } .sim .eye.r { left: 54%; }
+  .legend { font-size: 9px; color: #4d6478; margin-top: 6px; letter-spacing: .04em; }
+</style></head>
+<body>
+<h1>VOID OCTOPUS — palette candidates</h1>
+<p class="sub">deep = body base · A = rim / highlight · B = depth / back · irisA+irisB = eye</p>
+
+<!-- 1 -->
+<div class="row">
+  <div class="meta">
+    <div class="name">1 · DEEP VOID</div>
+    <div class="desc">当前方案。青→紫冷色，琥珀眼。<br>与 DSH 界面最协调，但辨识度低。</div>
+  </div>
+  <div class="swatches">
+    <div class="sw dark" style="background:#02060e"><span>deep</span></div>
+    <div class="sw" style="background:#19d9ff"><span>A</span></div>
+    <div class="sw" style="background:#7b33e6"><span>B</span></div>
+    <div class="sw" style="background:#ffd761"><span>iris</span></div>
+    <div class="sw" style="background:#b86a10"><span>iris2</span></div>
+  </div>
+  <div class="sim" style="background:
+      radial-gradient(ellipse 50% 60% at 50% 40%, #19d9ff22 0%, transparent 70%),
+      radial-gradient(ellipse 80% 70% at 50% 100%, #7b33e644 0%, transparent 65%),
+      #02060e">
+    <div class="eye l" style="background:#ffd761; box-shadow:0 0 10px 3px #ffd76188"></div>
+    <div class="eye r" style="background:#ffd761; box-shadow:0 0 10px 3px #ffd76188"></div>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="row">
+  <div class="meta">
+    <div class="name">2 · ABYSS</div>
+    <div class="desc">青绿↔品红，跨度 170°，高饱和。<br>最像深海生物，发光感最强。</div>
+  </div>
+  <div class="swatches">
+    <div class="sw dark" style="background:#04121a"><span>deep</span></div>
+    <div class="sw" style="background:#2ef2c8"><span>A</span></div>
+    <div class="sw" style="background:#f22e9e"><span>B</span></div>
+    <div class="sw" style="background:#ffb347"><span>iris</span></div>
+    <div class="sw" style="background:#d4600c"><span>iris2</span></div>
+  </div>
+  <div class="sim" style="background:
+      radial-gradient(ellipse 50% 60% at 50% 40%, #2ef2c822 0%, transparent 70%),
+      radial-gradient(ellipse 80% 70% at 50% 100%, #f22e9e44 0%, transparent 65%),
+      #04121a">
+    <div class="eye l" style="background:#ffb347; box-shadow:0 0 10px 3px #ffb34788"></div>
+    <div class="eye r" style="background:#ffb347; box-shadow:0 0 10px 3px #ffb34788"></div>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="row">
+  <div class="meta">
+    <div class="name">3 · PALE GHOST</div>
+    <div class="desc">几乎无色相，冰白↔灰蓝，冰蓝眼。<br>干扰最低，最"虚空"，但可能太淡。</div>
+  </div>
+  <div class="swatches">
+    <div class="sw dark" style="background:#070a10"><span>deep</span></div>
+    <div class="sw" style="background:#e8f6ff"><span>A</span></div>
+    <div class="sw" style="background:#7fa8c8"><span>B</span></div>
+    <div class="sw" style="background:#bfe9ff"><span>iris</span></div>
+    <div class="sw" style="background:#4e7d9e"><span>iris2</span></div>
+  </div>
+  <div class="sim" style="background:
+      radial-gradient(ellipse 50% 60% at 50% 40%, #e8f6ff1e 0%, transparent 70%),
+      radial-gradient(ellipse 80% 70% at 50% 100%, #7fa8c833 0%, transparent 65%),
+      #070a10">
+    <div class="eye l" style="background:#bfe9ff; box-shadow:0 0 10px 3px #bfe9ff66"></div>
+    <div class="eye r" style="background:#bfe9ff; box-shadow:0 0 10px 3px #bfe9ff66"></div>
+  </div>
+</div>
+
+<!-- 4 -->
+<div class="row">
+  <div class="meta">
+    <div class="name">4 · EMBER</div>
+    <div class="desc">暖身体（橙↔玫红）+ 冷眼（青）。<br>异类感强，但装饰性会抢注意力。</div>
+  </div>
+  <div class="swatches">
+    <div class="sw dark" style="background:#120608"><span>deep</span></div>
+    <div class="sw" style="background:#ff7a3d"><span>A</span></div>
+    <div class="sw" style="background:#8e2a5e"><span>B</span></div>
+    <div class="sw" style="background:#4dfff0"><span>iris</span></div>
+    <div class="sw" style="background:#1a8fa0"><span>iris2</span></div>
+  </div>
+  <div class="sim" style="background:
+      radial-gradient(ellipse 50% 60% at 50% 40%, #ff7a3d22 0%, transparent 70%),
+      radial-gradient(ellipse 80% 70% at 50% 100%, #8e2a5e44 0%, transparent 65%),
+      #120608">
+    <div class="eye l" style="background:#4dfff0; box-shadow:0 0 10px 3px #4dfff088"></div>
+    <div class="eye r" style="background:#4dfff0; box-shadow:0 0 10px 3px #4dfff088"></div>
+  </div>
+</div>
+
+<p class="legend">simulated under DSH dark background #050912 · rim glow is approximate</p>
+</body></html>

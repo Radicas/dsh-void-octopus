@@ -1,6 +1,6 @@
 {
   "name": "dsh-void-octopus",
-  "version": "0.9.14",
+  "version": "0.9.24",
   "private": true,
   "type": "module",
   "description": "A one-piece SDF/raymarched void octopus for DSH Web — continuous mantle, arms, webbing and eyes, no assembled seams.",
@@ -31,6 +31,7 @@
     "watch:demo": "esbuild demo/main.js --bundle --format=esm --target=es2022 --outfile=demo/bundle.js --sourcemap --watch",
     "build:client": "node scripts/build-client.mjs",
     "selfcheck": "node selfcheck.mjs",
+    "test": "node test/armPose.test.mjs && node test/behavior.test.mjs",
     "serve:demo": "python3 -m http.server 4173 --directory demo"
   },
   "dsh": {

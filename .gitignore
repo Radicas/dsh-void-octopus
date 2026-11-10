@@ -7,3 +7,4 @@ study/sdf-bundle.js
 shots/
 *.tgz
 .DS_Store
+test/perf.bundle.js

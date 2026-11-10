@@ -8,47 +8,80 @@ export const sdfVertex = /* glsl */ `
   }
 `;
 
+const ARM_POINT_RADIUS = [0.2, 0.175, 0.15, 0.12, 0.09, 0.06, 0.035, 0.02]
+
 function armCode() {
   let out = ''
-  const ra = [0.2, 0.175, 0.15, 0.12, 0.09, 0.06, 0.035]
-  const rb = [0.175, 0.15, 0.12, 0.09, 0.06, 0.035, 0.02]
-  for (let k = 0; k < 8; k++) {
-    for (let i = 0; i < 7; i++) {
-      const a = k * 8 + i
-      const b = a + 1
-      out += `  res = opSmooth(res, vec2(sdCapsule(p, uArmPts[${a}], uArmPts[${b}], ${ra[i].toFixed(3)}, ${rb[i].toFixed(3)}), 2.0), 0.08);\n`
-    }
+  // One conservative bounding sphere per arm, refreshed on the CPU every frame
+  // (centroid of the eight control points, radius to the farthest one plus its
+  // tube radius), inflated by k/4 (the largest smin bulge) plus a margin. Two
+  // exact uses:
+  //   1. every bound is far -> the min bound is a valid LOWER bound, so a
+  //      sample far from the creature costs nine distance tests instead of 56
+  //      capsule evaluations;
+  //   2. an arm whose bound is farther than the current exact distance cannot
+  //      lower it, so its capsules are skipped.
+  // A lower bound that is too small only costs steps; a bound that is too large
+  // makes the march overshoot and eats geometry — that is the 0.9.13 failure.
+  //
+  // Written as loops rather than eight unrolled copies on purpose: the unrolled
+  // form made ANGLE/D3D's shader compiler take minutes on first use, freezing
+  // the whole page while the GPU process translated it.
+  out += `    float boundMin = bBody;\n`
+  out += `    for (int k = 0; k < 8; k++) {\n`
+  out += `      boundMin = min(boundMin, length(q - uArmBound[k].xyz) - uArmBound[k].w);\n`
+  out += `    }\n`
+  out += `    if (uCull > 0.5 && boundMin > ${CULL_DIST.toFixed(2)}) return vec2(boundMin, 0.0);\n\n`
+  out += `    vec2 res = vec2(bodyDistance(q), 1.0);\n`
+  out += `    for (int k = 0; k < 8; k++) {\n`
+  out += `      float boundD = length(q - uArmBound[k].xyz) - uArmBound[k].w;\n`
+  out += `      if (uCull > 0.5 && boundD >= res.x + ${BLEND_PAD.toFixed(2)}) continue;\n`
+  for (let i = 0; i < 7; i++) {
+    // The root segment keeps the wide blend so the arm grows out of the body
+    // with no seam. Segments past the root use a much tighter blend: at 0.08
+    // the eight arms fused into one continuous sheet whenever swimming drew
+    // them close together, which read as a skirt rather than eight arms.
+    const blend = i === 0 ? '0.080' : '0.045'
+    out += `      res = opSmooth(res, vec2(sdCapsule(q, uArmPts[k * 8 + ${i}], uArmPts[k * 8 + ${i + 1}], uRadii[${i}], uRadii[${i + 1}]), 2.0), ${blend});\n`
   }
+  out += `    }\n`
   return out
 }
 
+const CULL_DIST = 0.3
+// A skip is only taken when the bound is 0.05 beyond the current exact
+// distance, well past the largest smooth-union bulge (k/2 = 0.04), so the
+// blend that stitches arm to body is never lost.
+const BLEND_PAD = 0.05
+
 function armInfoCode() {
   let out = ''
-  for (let k = 0; k < 8; k++) {
-    for (let i = 0; i < 7; i++) {
-      const a = k * 8 + i
-      const b = a + 1
-      out += `
-    {
-      vec3 a = uArmPts[${a}];
-      vec3 b = uArmPts[${b}];
-      vec3 ba = b - a;
-      vec3 pa = p - a;
-      float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
-      vec3 closest = a + ba * h;
-      vec3 diff = p - closest;
-      float d = length(diff);
-      if (d < bestD) {
-        bestD = d;
-        bestT = (${i}.0 + h) / 7.0;
-        bestRadial = diff;
-        bestTangent = normalize(ba);
-      }
-    }`
-    }
+  out += `    for (int k = 0; k < 8; k++) {\n`
+  out += `      float boundD = length(p - uArmBound[k].xyz) - uArmBound[k].w;\n`
+  out += `      if (uCull > 0.5 && boundD >= bestD) continue;\n`
+  for (let i = 0; i < 7; i++) {
+    out += `      {\n`
+    out += `        vec3 a = uArmPts[k * 8 + ${i}];\n`
+    out += `        vec3 pb = uArmPts[k * 8 + ${i + 1}];\n`
+    out += `        vec3 ba = pb - a;\n`
+    out += `        vec3 pa = p - a;\n`
+    out += `        float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);\n`
+    out += `        vec3 closest = a + ba * h;\n`
+    out += `        vec3 diff = p - closest;\n`
+    out += `        float d = length(diff);\n`
+    out += `        if (d < bestD) {\n`
+    out += `          bestD = d;\n`
+    out += `          bestT = (${i}.0 + h) / 7.0;\n`
+    out += `          bestRadial = diff;\n`
+    out += `          bestTangent = normalize(ba);\n`
+    out += `        }\n`
+    out += `      }\n`
   }
+  out += `    }\n`
   return out
 }
+
+export { ARM_POINT_RADIUS }
 
 export const sdfFragment = /* glsl */ `
   precision highp float;
@@ -68,6 +101,18 @@ export const sdfFragment = /* glsl */ `
   uniform vec2 uSwim;
   uniform float uSwimAmount;
   uniform vec3 uArmPts[64];
+  uniform float uRadii[8];
+  uniform mat3 uInvRot;
+  uniform vec4 uArmBound[8];
+  uniform vec4 uBodyBound;
+  uniform float uCull;
+  // Palette slots. Every previously hard-coded hue now comes from the host so
+  // one shader serves all presets.
+  uniform vec3 uColDeep;
+  uniform vec3 uColA;
+  uniform vec3 uColB;
+  uniform vec3 uIrisA;
+  uniform vec3 uIrisB;
 
   varying vec2 vUv;
 
@@ -133,12 +178,13 @@ export const sdfFragment = /* glsl */ `
   vec2 opSmooth(vec2 a, vec2 b, float k) {
     float h = clamp(0.5 + 0.5 * (b.x - a.x) / k, 0.0, 1.0);
     float d = mix(b.x, a.x, h) - k * h * (1.0 - h);
+    // Material 0 means "this is a bounding volume, not a surface". The main
+    // loop only accepts hits with material > 0, so an early-out distance can
+    // never be mistaken for geometry (the 0.9.13 phantom-face failure).
     return vec2(d, a.x < b.x ? a.y : b.y);
   }
 
-  vec2 map(vec3 p) {
-    vec3 q = rotZ(-uRoll) * rotX(-uPitch) * rotY(-uYaw) * (p - uOffset);
-
+  float bodyDistance(vec3 q) {
     float breath = 1.0 + 0.012 * sin(uTime * 1.1) - 0.03 * uPulse;
 
     // two-lobe head: a rounded mantle sac above, a narrower eye-bearing head below
@@ -153,7 +199,10 @@ export const sdfFragment = /* glsl */ `
 
     // a short scalloped web where the head meets the arm crown
     float webT = clamp(-q.y / 0.3, 0.0, 1.0);
-    float webR = mix(0.5, 0.78, webT);
+    // This skirt only reads as part of the crown while the arms are splayed to
+    // cover it. Swimming draws the arms inward, which used to leave the ring
+    // standing exposed on its own — so it contracts together with them.
+    float webR = mix(0.5, 0.78, webT) * (1.0 - uSwimAmount * 0.42);
     webR += sin(atan(q.z, q.x) * 8.0 + uTime * 0.25) * 0.02;
     float web = abs(length(q.xz) - webR) - 0.016;
     web = max(web, max(q.y - 0.02, -0.3 - q.y));
@@ -164,10 +213,14 @@ export const sdfFragment = /* glsl */ `
     float siphonHole = sdCapsule(q, vec3(0.0, 0.35, 0.36), vec3(0.0, 0.31, 0.69), 0.025, 0.055);
     siphon = max(siphon, -siphonHole);
     body = sminf(body, siphon, 0.05);
-    vec2 res = vec2(body, 1.0);
+    return body;
+  }
 
+  vec2 map(vec3 p) {
+    vec3 q = uInvRot * (p - uOffset);
+
+    float bBody = length(q - uBodyBound.xyz) - uBodyBound.w;
 ${armCode()}
-
     vec3 e1 = q - vec3(-0.43, 0.52, 0.42);
     vec3 e2 = q - vec3(0.43, 0.52, 0.42);
     float eye = min(length(e1) - 0.2, length(e2) - 0.2);
@@ -199,11 +252,11 @@ ${armCode()}
     vec2 p = hp - uGaze * vec2(0.03, 0.03);
 
     float r = length(p * vec2(1.0, 1.08));
-    vec3 iris = mix(vec3(1.0, 0.86, 0.38), vec3(0.72, 0.38, 0.06), smoothstep(0.03, 0.28, r));
-    iris = mix(iris, vec3(0.08, 0.03, 0.006), smoothstep(0.38, 0.47, r));
+    vec3 iris = mix(uIrisA, uIrisB, smoothstep(0.03, 0.28, r));
+    iris = mix(iris, uIrisB * 0.12, smoothstep(0.38, 0.47, r));
     float angle = atan(p.y, p.x);
     iris *= 0.82 + 0.18 * (0.5 + 0.5 * sin(angle * 26.0 + r * 34.0 + uTime * 0.5));
-    iris += vec3(0.05, 0.32, 0.5) * pow(1.0 - smoothstep(0.04, 0.18, r), 2.0) * 0.4;
+    iris += uIrisA * 0.35 * pow(1.0 - smoothstep(0.04, 0.18, r), 2.0);
 
     float pupilH = 0.012 + 0.005 * uPupil;
     float pupil = 1.0 - smoothstep(pupilH, pupilH + 0.012, abs(p.y));
@@ -254,13 +307,13 @@ ${armInfoCode()}
     float star = smoothstep(0.988, 1.0, starHash);
     star *= 0.4 + 0.6 * sin(uTime * 1.7 + starHash * 30.0);
 
-    vec3 cyan = vec3(0.06, 0.8, 1.0);
-    vec3 violet = vec3(0.55, 0.2, 0.95);
-    vec3 deep = vec3(0.008, 0.025, 0.075);
+    vec3 cyan = uColA;
+    vec3 violet = uColB;
+    vec3 deep = uColDeep;
 
     if (mat > 3.5) return eyeColor(p) * 2.3;
 
-    vec3 base = mix(deep, vec3(0.03, 0.09, 0.2), smoothstep(-0.9, 1.1, p.y));
+    vec3 base = mix(deep, mix(deep, cyan, 0.22), smoothstep(-0.9, 1.1, p.y));
     base += mix(vec3(0.0, 0.025, 0.06), vec3(0.06, 0.012, 0.1), mott) * 0.55;
 
     // chromatophore patches and papillae, like a real octopus skin
@@ -285,7 +338,10 @@ ${armInfoCode()}
       float t = info.x;
       float angle = info.y;
       float under = info.z;
-      float dots = smoothstep(0.76, 1.0, sin(t * 72.0 + sin(angle * 2.0) * 1.2));
+      // Suckers. The old stripe ran at 72 cycles per arm — under two pixels per
+      // stripe at display size, so it aliased into grain instead of reading as
+      // suckers. 26 cycles keeps every stripe ≥ 5 px wide.
+      float dots = smoothstep(0.72, 0.98, sin(t * 26.0 + sin(angle * 2.0) * 1.2));
       float underMask = smoothstep(-0.05, 0.55, under);
       col += mix(cyan, vec3(0.8, 0.95, 1.0), 0.5) * dots * underMask * 0.55;
       col += mix(cyan, violet, t) * smoothstep(0.78, 1.0, t) * 0.55;
@@ -300,7 +356,7 @@ ${armInfoCode()}
     col *= 0.86 + uPulse * 0.8;
 
     // a soft bioluminescent halo around the eyes, even on the body shading
-    vec3 qq = rotZ(-uRoll) * rotX(-uPitch) * rotY(-uYaw) * (p - uOffset);
+    vec3 qq = uInvRot * (p - uOffset);
     float eyeD = min(length(qq - vec3(-0.43, 0.52, 0.42)), length(qq - vec3(0.43, 0.52, 0.42)));
     col *= 0.72 + 0.28 * smoothstep(0.16, 0.3, eyeD);
     return col;
@@ -310,6 +366,12 @@ ${armInfoCode()}
     vec2 p = (vUv * 2.0 - 1.0) * vec2(uResolution.x / uResolution.y, 1.0);
     vec3 ro = vec3(0.0, 0.35, 4.3);
     vec3 rd = normalize(vec3(p * 1.9, -4.0));
+
+    // Hit tolerance in world units. The visible height is ~4.1 world units, so
+    // a fixed 0.0015 was 0.15 px at display resolution — accurate but wasteful:
+    // it forced extra march steps to prove what was already sub-pixel.
+    float worldPerPixel = 4.1 / max(uResolution.y, 1.0);
+    float hitEps = clamp(worldPerPixel * 0.32, 0.0016, 0.005);
 
     vec3 oc = ro - vec3(0.0, 0.35, 0.0);
     float b = dot(oc, rd);
@@ -323,7 +385,7 @@ ${armInfoCode()}
       for (int i = 0; i < MAX_STEPS; i++) {
         vec3 pos = ro + rd * t;
         vec2 hit = map(pos);
-        if (hit.x < 0.0015) {
+        if (hit.x < hitEps && hit.y > 0.0) {
           vec3 n = calcNormal(pos);
           col = shade(pos, n, rd, hit.y);
           break;
