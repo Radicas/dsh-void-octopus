@@ -1,9 +1,10 @@
 import { build } from 'esbuild'
-import { writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const pkg = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'))
 
 const result = await build({
   entryPoints: [resolve(root, 'src/client-entry.js')],
@@ -16,6 +17,10 @@ const result = await build({
   legalComments: 'none',
   external: ['react', 'react-dom', 'react-dom/client', 'react/jsx-runtime'],
   loader: { '.js': 'jsx' },
+  // Inlined so the running page can answer "which build am I actually looking
+  // at?" with `__dshVoidOctopus.version` — a re-loaded plugin bundle is the
+  // first thing to rule out when a visual bug is reported.
+  define: { __PLUGIN_VERSION__: JSON.stringify(pkg.version) },
 })
 
 const body = result.outputFiles[0].text

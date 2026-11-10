@@ -145,6 +145,11 @@ export function createSdfOctopus({
     // Sample points outside a sphere skip that shape's distance evaluation.
     uArmBound: { value: Array.from({ length: 8 }, () => new THREE.Vector4(0, 0, 0, 1)) },
     uBodyBound: { value: new THREE.Vector4(0, 0.45, 0, 1.22) },
+    // Whole-creature bounding sphere for the empty-ray early-out. Derived from
+    // the uploaded control points every frame (see updateArmBounds): the old
+    // hardcoded 2.1 was smaller than the 2.17 the tips reach at full splay, so
+    // the outermost arm pixels were never marched.
+    uCullR: { value: 2.4 },
     // 1 = use the bounds, 0 = evaluate everything (A/B regression test only).
     uCull: { value: 1 },
     uColDeep: { value: new THREE.Color() },
@@ -400,6 +405,12 @@ export function createSdfOctopus({
     extentTarget.right = 0
     extentTarget.up = 0
     extentTarget.down = 0
+    // The whole-creature cull sphere must contain every surface point, or the
+    // shader never marches the rays that hit them. Deriving it from the uploaded
+    // points (which already include the spring overshoot) makes it impossible
+    // for the bound to fall behind the pose — the 0.9.28-era hardcoded 2.1 was
+    // smaller than the 2.17 the tips actually reach when they splay.
+    let cullR = 1.7 // the body's own mantle is ~1.6 from the focus
     const off = uniforms.uOffset.value
     const project = (x, y, z, r) => {
       // Body space -> view space, then the world-space drift the shader adds.
@@ -407,6 +418,8 @@ export function createSdfOctopus({
       probe.x += off.x
       probe.y += off.y
       probe.z += off.z
+      const fromFocus = Math.hypot(probe.x, probe.y - FOCUS_Y, probe.z) + r
+      if (fromFocus > cullR) cullR = fromFocus
       // Guard the plane behind the camera: the SDF never draws there, but a
       // division by <= 0 would hand the overlay an infinite collision radius.
       const den = Math.max(0.6, CAM_Z - probe.z)
@@ -427,6 +440,10 @@ export function createSdfOctopus({
       const pt = armPoints[i]
       project(pt.x, pt.y, pt.z, ARM_POINT_RADIUS[i & 7])
     }
+    // +0.05 covers the smooth-union bulge; the bound only ever grows, which is
+    // the safe direction (a too-large sphere costs a little march time, a too
+    // small one deletes geometry).
+    uniforms.uCullR.value = cullR + 0.05
     const follow = (cur, next) => cur + (next - cur) * (1 - Math.exp(-dt * (next > cur ? EXTENT_UP : EXTENT_DOWN)))
     extent.left = follow(extent.left, extentTarget.left)
     extent.right = follow(extent.right, extentTarget.right)

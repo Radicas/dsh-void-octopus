@@ -11,17 +11,17 @@ export const sdfVertex = /* glsl */ `
 const ARM_POINT_RADIUS = [0.2, 0.175, 0.15, 0.12, 0.09, 0.06, 0.035, 0.02]
 
 /**
- * Widening factor for the virtual lens (0.9.29).
+ * Widening factor for the virtual lens.
  *
- * The body is wider than the render target at its widest pose: the arm tips
- * project to |ndc| ~1.15-1.20 (measured from the engine's own projection probe),
- * so with a 1:1 box the tips were sliced by the canvas edge — a straight cut,
- * present ever since the box existed and only softened by the CSS mask. The
- * lens is widened by FOV_SCALE so the whole silhouette fits with room (max
- * ~0.96), and the CSS base box grows by the same factor so the creature's
- * APPARENT size is unchanged: the extra pixels exist only to hold the arms.
+ * The body is wider than the render target at its widest pose: once the tip
+ * spring overshoots (which is the whole point of an under-damped arm), the arm
+ * points reach a projected |ndc| of ~0.96 with a 1.25 lens — only 12 px of
+ * canvas headroom on a 625 px box, and that is before the bloom halo. 0.9.30
+ * opens it to 1.30 (box 650 px) for ~25 px of headroom, and the CSS base box
+ * grows by the same factor so the creature's APPARENT size is unchanged: the
+ * extra pixels exist only to hold the arms.
  */
-export const FOV_SCALE = 1.25
+export const FOV_SCALE = 1.3
 
 function armCode() {
   let out = ''
@@ -116,6 +116,13 @@ export const sdfFragment = /* glsl */ `
   uniform vec3 uArmPts[64];
   uniform float uRadii[8];
   uniform mat3 uInvRot;
+  // Radius of the whole-creature bounding sphere used to skip empty rays.
+  // It used to be a hardcoded 2.1, but the arm points reach 2.17 world units
+  // from the focus once the tip spring overshoots (0.9.30): anything outside the
+  // sphere is never marched, so those tip pixels vanished — a hard cut that only
+  // showed up "sometimes, when the arms splayed". The CPU now derives this from
+  // the control points that were actually uploaded, so it cannot fall behind.
+  uniform float uCullR;
   uniform vec4 uArmBound[8];
   uniform vec4 uBodyBound;
   uniform float uCull;
@@ -389,7 +396,7 @@ ${armInfoCode()}
 
     vec3 oc = ro - vec3(0.0, 0.35, 0.0);
     float b = dot(oc, rd);
-    float c = dot(oc, oc) - 2.1 * 2.1;
+    float c = dot(oc, oc) - uCullR * uCullR;
     float h = b * b - c;
 
     vec3 col = vec3(0.0);

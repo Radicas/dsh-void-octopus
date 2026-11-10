@@ -26,8 +26,8 @@ const CSS = `
      canvas edge. The box grew by the same factor, so the creature's apparent
      size is unchanged — the extra pixels only hold the arms. Depth retreats by
      scaling DOWN from here, so the canvas is only ever downsampled. */
-  width: min(52.5vw, 625px);
-  height: min(52.5vw, 625px);
+  width: min(54.6vw, 650px);
+  height: min(54.6vw, 650px);
   z-index: 50;
   pointer-events: none;
   mix-blend-mode: screen;
@@ -39,11 +39,14 @@ const CSS = `
   transition: opacity 460ms ease;
   will-change: transform;
   transform-origin: 50% 50%;
-  /* The fade radii are in box fractions, and the box grew by FOV_SCALE, so the
-     stops are divided by it too: the soft edge keeps landing at the same number
-     of pixels relative to the CREATURE, not to the (now larger) canvas. */
-  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 44.8%, rgba(0, 0, 0, 0.72) 57.6%, transparent 70.4%);
-  mask-image: radial-gradient(ellipse at 50% 50%, #000 44.8%, rgba(0, 0, 0, 0.72) 57.6%, transparent 70.4%);
+  /* Edge-only fade. The mask used to start fading at 0.63 of a half box, which
+     cut the splayed arms down to ~20% opacity exactly when they reached furthest
+     — it read as the tentacles being cropped by a boundary. Now it is opaque up
+     to 0.954 of the half box (past the 0.953 worst-case silhouette) and reaches
+     full transparency AT the canvas edge, so it can only ever hide the canvas
+     border, never dim the creature. */
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 67.5%, rgba(0, 0, 0, 0.72) 69.1%, transparent 70.7%);
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 67.5%, rgba(0, 0, 0, 0.72) 69.1%, transparent 70.7%);
 }
 .dsh-void-ambient.is-quiet {
   opacity: calc(0.2 * var(--void-alpha, 1));
@@ -58,8 +61,8 @@ const CSS = `
   .dsh-void-ambient {
     right: -18px;
     bottom: -14px;
-    width: min(81vw, 500px);
-    height: min(81vw, 500px);
+    width: min(84.5vw, 520px);
+    height: min(84.5vw, 520px);
   }
 }
 .dsh-void-ambient.is-wandering {
@@ -531,6 +534,9 @@ function VoidOctopusAmbient(props) {
     // pin a facing angle for a screenshot. Nothing in the plugin calls these.
     try {
       window.__dshVoidOctopus = {
+        /** Which bundle is actually running. A stale plugin bundle is the first
+         *  thing to rule out when a rendering bug is reported. */
+        version: typeof __PLUGIN_VERSION__ === 'string' ? __PLUGIN_VERSION__ : 'dev',
         depart() {
           startDeparture(motion, cfg.depart, Math.random)
           apply()
