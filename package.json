@@ -1,6 +1,6 @@
 {
   "name": "dsh-void-octopus",
-  "version": "0.9.25",
+  "version": "0.9.26",
   "private": true,
   "type": "module",
   "description": "A one-piece SDF/raymarched void octopus for DSH Web — continuous mantle, arms, webbing and eyes, no assembled seams.",

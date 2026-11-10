@@ -65,9 +65,12 @@ export const DEFAULTS = {
   returnMin: 2.2,
   returnMax: 3.4,
   // Where it settles when it comes back. The normal depth wander takes over
-  // immediately afterwards, so this is only "the near half".
+  // afterwards, but only after this hold — otherwise a far band could be drawn
+  // on the very next frame and the body would immediately swing away again.
   nearDepthMin: 0.18,
   nearDepthMax: 0.42,
+  homeHoldMin: 4,
+  homeHoldMax: 9,
   // --- how it looks at distance ----------------------------------------
   // Opacity and a screen-space lift, on top of the depth scale. The lift is what
   // stops the retreat reading as "someone shrank the picture": the visual
@@ -107,11 +110,15 @@ function beginPrep(st, cfg, rand) {
   // Freeze the current distance: without this, the depth re-roll could fire
   // during the turn and make the body both turn and shrink at once.
   st.depthTarget = st.depth
-  st.dpFacing = 0
+  // Continue from wherever the distance-driven facing already is: a departure
+  // can start while the body is already turned away, and snapping to 0 first
+  // would be a 180 deg jump.
+  st.dpFacing = isNum(st.facing) ? st.facing : 0
 }
 
 function beginTurn(st, cfg, rand) {
   enter(st, PHASE.TURN, randRange(rand, cfg.turnMin, cfg.turnMax))
+  st.dpFacingFrom = st.dpFacing
 }
 
 function beginRetreat(st, cfg, rand) {
@@ -135,9 +142,11 @@ function finish(st, cfg, rand) {
   st.dpLift = 0
   st.dpAlpha = 1
   st.dpCooldown = randRange(rand, cfg.gapMin, cfg.gapMax)
-  // Let the normal depth wander re-roll on the next frame instead of keeping
-  // the hand-picked near target until its own timer expires.
-  st.depthTimer = 0
+  // Come home to the near half and HOLD it for a few seconds. Re-rolling the
+  // depth band immediately meant a far band could be drawn on the next frame,
+  // so the creature would arrive and instantly start turning away again.
+  st.depthTarget = randRange(rand, cfg.nearDepthMin, cfg.nearDepthMax)
+  st.depthTimer = randRange(rand, cfg.homeHoldMin, cfg.homeHoldMax)
 }
 
 /**
@@ -152,6 +161,7 @@ export function initDeparture(st, rand = Math.random, cfg = DEFAULTS) {
   st.dpDur = 0
   st.dpCooldown = randRange(rand, cfg.firstDelayMin, cfg.firstDelayMax)
   st.dpFacing = 0
+  st.dpFacingFrom = 0
   st.dpAlpha = 1
   st.dpLift = 0
   st.dpFarDepth = cfg.farDepthMin
@@ -173,6 +183,7 @@ export function restoreDeparture(st, raw, cfg = DEFAULTS) {
   st.dpDur = isNum(src.dur) ? Math.max(0, src.dur) : 0
   st.dpCooldown = isNum(src.cooldown) ? Math.max(0, src.cooldown) : cfg.firstDelayMin
   st.dpFacing = isNum(src.facing) ? clamp(src.facing, -Math.PI, Math.PI) : 0
+  st.dpFacingFrom = isNum(src.facingFrom) ? clamp(src.facingFrom, -Math.PI, Math.PI) : st.dpFacing
   st.dpAlpha = isNum(src.alpha) ? clamp01(src.alpha) : 1
   st.dpLift = isNum(src.lift) ? clamp(src.lift, 0, cfg.liftMax) : 0
   st.dpFarDepth = isNum(src.farDepth) ? clamp01(src.farDepth) : cfg.farDepthMin
@@ -220,11 +231,12 @@ export function stepDeparture(st, dt, cfg = DEFAULTS, rand = Math.random) {
 
   switch (st.dpPhase) {
     case PHASE.PREP:
-      st.dpFacing = approach(st.dpFacing, 0, 1.8 * dt)
+      // Facing is held, not eased: it continues from wherever the distance left
+      // the body, and the TURN phase takes over from that exact value.
       if (st.dpTimer <= 0) beginTurn(st, cfg, rand)
       break
     case PHASE.TURN:
-      st.dpFacing = cfg.facingTarget * smootherstep(progress)
+      st.dpFacing = lerp(isNum(st.dpFacingFrom) ? st.dpFacingFrom : 0, cfg.facingTarget, smootherstep(progress))
       if (st.dpTimer <= 0) {
         st.dpFacing = cfg.facingTarget
         beginRetreat(st, cfg, rand)
@@ -270,7 +282,10 @@ export function getDeparture(st) {
   return {
     active: st.dpPhase !== PHASE.IDLE,
     phase: st.dpPhase,
-    facing: isNum(st.dpFacing) ? st.dpFacing : 0,
+    // `facing` is the behaviour's single facing value (distance-driven while
+    // idle, choreographed during a departure); dpFacing is the choreography's
+    // own curve and only exists for the phases that own it.
+    facing: isNum(st.facing) ? st.facing : isNum(st.dpFacing) ? st.dpFacing : 0,
     alpha: isNum(st.dpAlpha) ? clamp01(st.dpAlpha) : 1,
     lift: isNum(st.dpLift) ? st.dpLift : 0,
   }

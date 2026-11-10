@@ -5,6 +5,7 @@ import {
   createBehaviorState,
   stepBehavior,
   getSwim,
+  getView,
   getDeparture,
   startDeparture,
   depthScale,
@@ -422,7 +423,7 @@ function VoidOctopusAmbient(props) {
       // (box * scale, centred) is always inside the base box, so the existing
       // bounds stay correct.
       const scale = depthScale(motion, cfg)
-      const view = getDeparture(motion)
+      const view = getView(motion, cfg)
       // The lift rides on the translate rather than the scale, so "moving away"
       // also travels on screen instead of reading as someone resizing a picture.
       const y = motion.y + view.lift
@@ -442,21 +443,26 @@ function VoidOctopusAmbient(props) {
       if (disposed) return
       if (document.hidden) {
         lastStep = now
-      } else if (now - lastStep >= 33) {
-        // Advance by the REAL interval since the last placement: the loop runs
-        // at display rate but only steps ~30x/s, so a per-frame dt would stretch
-        // every leg duration and halve every speed.
+      } else {
+        // Step EVERY frame, not every ~33 ms. The behaviour is dt-based, so the
+        // wander itself is unchanged — but the layer's transform used to be
+        // written every other frame, so every depth change arrived as a 30 Hz
+        // step while the canvas animated at display rate. That reads as judder
+        // ("缩放的时候有点抖"). The transform now updates at the same rate as
+        // the render, which is what the eye expects from one moving object.
         const step = Math.min(0.1, (now - lastStep) / 1000)
         lastStep = now
-        stepBehavior(motion, step, bounds, cfg)
-        if (motion.jet) {
-          const engine = engineRef.current
-          if (engine && typeof engine.pulse === 'function') engine.pulse()
-        }
-        apply()
-        if (now - lastSaveAt > 2000) {
-          lastSaveAt = now
-          save()
+        if (step > 0) {
+          stepBehavior(motion, step, bounds, cfg)
+          if (motion.jet) {
+            const engine = engineRef.current
+            if (engine && typeof engine.pulse === 'function') engine.pulse()
+          }
+          apply()
+          if (now - lastSaveAt > 2000) {
+            lastSaveAt = now
+            save()
+          }
         }
       }
       raf = requestAnimationFrame(tick)
@@ -480,8 +486,15 @@ function VoidOctopusAmbient(props) {
           facingOverride = null
           apply()
         },
+        /** Pin the distance (0 near, 1 far) for a few seconds, e.g. to check
+         *  that far really is "back turned, lifted, dimmer". */
+        depth(d = 0) {
+          motion.depthTarget = Math.max(0, Math.min(1, Number(d) || 0))
+          motion.depthTimer = 30
+          apply()
+        },
         state() {
-          return getDeparture(motion)
+          return { ...getDeparture(motion), view: getView(motion, cfg) }
         },
       }
     } catch (err) {

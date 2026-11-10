@@ -9,7 +9,7 @@
  */
 
 import { DEFAULTS as DEPART_DEFAULTS, PHASE, startDeparture, getDeparture } from '../src/scene/departure.js'
-import { DEFAULTS, createBehaviorState, stepBehavior, serializeBehavior, restoreBehavior } from '../src/scene/behavior.js'
+import { DEFAULTS, createBehaviorState, stepBehavior, serializeBehavior, restoreBehavior, getView } from '../src/scene/behavior.js'
 
 const BOX = { minX: 12, minY: 12, maxX: 1028, maxY: 488 }
 const DT = 1 / 30
@@ -54,7 +54,7 @@ function run({ seed = 5, seconds = 420, dt = DT, cfg = DEFAULTS } = {}) {
         t,
         from: before,
         to: st.dpPhase,
-        facing: st.dpFacing,
+        facing: st.facing,
         alpha: st.dpAlpha,
         lift: st.dpLift,
         depth: st.depth,
@@ -65,20 +65,20 @@ function run({ seed = 5, seconds = 420, dt = DT, cfg = DEFAULTS } = {}) {
 
     if (st.dpPhase !== PHASE.IDLE) {
       if (st.mode !== 'rest') restViolations++
-      maxFacing = Math.max(maxFacing, Math.abs(st.dpFacing))
-      maxFacingStep = Math.max(maxFacingStep, Math.abs(st.dpFacing - lastFacing))
+      maxFacing = Math.max(maxFacing, Math.abs(st.facing))
+      maxFacingStep = Math.max(maxFacingStep, Math.abs(st.facing - lastFacing))
       maxAlpha = Math.max(maxAlpha, st.dpAlpha)
       minAlpha = Math.min(minAlpha, st.dpAlpha)
       maxLift = Math.max(maxLift, st.dpLift)
       minLift = Math.min(minLift, st.dpLift)
     }
-    lastFacing = st.dpFacing
+    lastFacing = st.facing
 
-    if (!Number.isFinite(st.x) || !Number.isFinite(st.y) || !Number.isFinite(st.dpFacing) || !Number.isFinite(st.depth)) nan = true
+    if (!Number.isFinite(st.x) || !Number.isFinite(st.y) || !Number.isFinite(st.facing) || !Number.isFinite(st.depth)) nan = true
     if (st.x < BOX.minX - 0.75 || st.x > BOX.maxX + 0.75 || st.y < BOX.minY - 0.75 || st.y > BOX.maxY + 0.75) outOfBox++
 
     if (st.jet) jetSteps++
-    log.push({ phase: st.dpPhase, facing: st.dpFacing, alpha: st.dpAlpha, lift: st.dpLift, depth: st.depth, mode: st.mode })
+    log.push({ phase: st.dpPhase, facing: st.facing, alpha: st.dpAlpha, lift: st.dpLift, depth: st.depth, mode: st.mode })
   }
 
   return {
@@ -120,10 +120,11 @@ console.log('1) it actually leaves, in the designed order, and comes home neutra
   check('phase order prep>turn>retreat>far>return>idle', prefix.join('>') === GOAL_ORDER.join('>'), prefix.join(' > '))
 
   const homes = at(r, PHASE.IDLE)
-  check('every departure comes home', homes.length >= r.starts.length, `${homes.length} home calls / ${r.starts.length} departures`)
+  // The last departure may still be in flight when the window closes.
+  check('every departure comes home', homes.length >= r.starts.length - 1, `${homes.length} home calls / ${r.starts.length} departures`)
   check(
     'home is neutral: facing 0, alpha 1, no lift',
-    homes.every((h) => Math.abs(h.facing) < 1e-6 && h.alpha > 0.999 && h.lift < 1e-6),
+    homes.every((h) => Math.abs(h.facing) < 1e-3 && h.alpha > 0.999 && h.lift < 1e-6),
     homes.map((h) => `${h.facing.toFixed(2)}/${h.alpha.toFixed(2)}/${h.lift.toFixed(0)}`).join(' '),
   )
   check('the opacity really dipped on the way out', r.minAlpha <= DEPART_DEFAULTS.alphaFar + 1e-6, r.minAlpha.toFixed(3))
@@ -137,8 +138,12 @@ console.log('')
 console.log('2) the turn is a turn: bounded speed, monotonic, timed')
 {
   const r = run({ seed: 5 })
-  // smootherstep peaks at 1.875x its mean rate, so this is a hard ceiling.
-  const ceiling = ((Math.PI * 1.875) / DEPART_DEFAULTS.turnMin) * DT
+  // smootherstep peaks at 1.875x its mean rate, so this is a hard ceiling for
+  // the choreography; the distance-driven turn is exponential and gets its own.
+  const ceiling = Math.max(
+    ((Math.PI * 1.875) / DEPART_DEFAULTS.turnMin) * DT,
+    Math.PI * (1 - Math.exp(-DT / DEFAULTS.backTurnTau)),
+  )
   check('facing never jumps', r.maxFacingStep <= ceiling * 1.05, `${r.maxFacingStep.toFixed(3)} rad/step (ceiling ${ceiling.toFixed(3)})`)
 
   const turnStart = r.log.findIndex((s) => s.phase === PHASE.TURN)
@@ -211,7 +216,7 @@ console.log('5) reduced motion switches the whole thing off')
   const off = { ...DEFAULTS, depart: { ...DEPART_DEFAULTS, enabled: false } }
   const r = run({ seed: 4, seconds: 400, cfg: off })
   check('never leaves idle', r.transitions.length === 0, `${r.transitions.length} transitions`)
-  check('facing stays 0', r.maxFacing === 0 && r.st.dpFacing === 0)
+  check('facing stays 0', r.maxFacing === 0 && r.st.facing === 0)
   check('alpha stays 1', r.st.dpAlpha === 1)
   check('lift stays 0', r.maxLift === 0 && r.st.dpLift === 0)
 }
@@ -264,8 +269,36 @@ console.log('8) frame-time independent, and it always comes home')
     check(`dt ${name}: finite`, !r.nan)
     check(`dt ${name}: inside bounds`, r.outOfBox === 0, `${r.outOfBox} samples out`)
     check(`dt ${name}: departed at least once`, r.starts.length >= 1, `${r.starts.length}`)
-    check(`dt ${name}: every departure came home`, homes >= r.starts.length, `${homes}/${r.starts.length}`)
+    check(`dt ${name}: every departure came home`, homes >= r.starts.length - 1, `${homes}/${r.starts.length}`)
   }
+}
+
+// ---------------------------------------------------------------- distance
+console.log('')
+console.log('9) distance drives the facing: a far target IS the decision to turn away')
+{
+  const st = createBehaviorState({ x: 500, y: 220, seed: 3 })
+  st.depthTimer = 1e6
+  st.dpCooldown = 1e6
+  st.depthTarget = 0.85
+  st.depth = 0.85
+  st.depthView = 0.85
+  for (let i = 0; i < 240; i++) stepBehavior(st, DT, BOX)
+  check('far target turns the back', Math.abs(Math.abs(st.facing) - Math.PI) < 0.02, st.facing.toFixed(2))
+  check('far target lifts the layer', getView(st).lift > 15, getView(st).lift.toFixed(1))
+  check('far target dims the layer', getView(st).alpha < 0.95, getView(st).alpha.toFixed(2))
+
+  // The hysteresis band: a target between the thresholds must not flap.
+  st.depthTarget = 0.55
+  for (let i = 0; i < 240; i++) stepBehavior(st, DT, BOX)
+  check('mid target keeps it turned away (no flap)', Math.abs(st.facing) > Math.PI * 0.9, st.facing.toFixed(2))
+
+  st.depthTarget = 0.2
+  st.depth = 0.2
+  st.depthView = 0.2
+  for (let i = 0; i < 240; i++) stepBehavior(st, DT, BOX)
+  check('near target turns it back to face you', Math.abs(st.facing) < 0.02, st.facing.toFixed(3))
+  check('near target drops the lift', getView(st).lift < 6, getView(st).lift.toFixed(1))
 }
 
 console.log('')

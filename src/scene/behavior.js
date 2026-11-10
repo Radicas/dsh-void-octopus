@@ -26,6 +26,7 @@
 import {
   DEFAULTS as DEPART_DEFAULTS,
   PHASE as DEPART_PHASE,
+  getDeparture,
   initDeparture,
   restoreDeparture,
   stepDeparture,
@@ -99,7 +100,25 @@ export const DEFAULTS = {
   depthRetargetMin: 3,
   depthRetargetMax: 12,
   depthTau: 2.2,
-  depthWander: 0.02,
+  // Was 0.02: that much white noise on the distance produced a visible size
+  // wobble at display rate ("有点抖动"). The band re-rolls already make the
+  // distance organic; the noise only needs to break the perfect exponential.
+  depthWander: 0.005,
+  // One-pole low-pass between the simulated distance and the rendered one.
+  depthViewTau: 0.35,
+  // --- distance drives the direction the body faces --------------------
+  // A far TARGET is the decision; the turn follows it. Two thresholds so a
+  // target sitting on the boundary cannot flap the body back and forth.
+  backDepth: 0.6,
+  faceDepth: 0.5,
+  // Exponential turn, ~1 s time constant: 63% in 1 s, 95% in 3 s, initial rate
+  // ~150 deg/s. The departure choreography uses its own S-curve; this one only
+  // has to be smooth enough not to snap when the distance decides to turn.
+  backTurnTau: 1.0,
+  // Depth also lifts and dims a little. A pure resize reads as "someone shrank
+  // the picture"; a small rise + falloff reads as "it went away".
+  depthLift: 22,
+  depthAlpha: 0.82,
   // Most of the time it stays in the near half; a minority of the time it
   // drifts well away, which is what makes an occasional long retreat read as
   // deliberate rather than as a random size wobble.
@@ -199,6 +218,9 @@ function pickBand(st, bands) {
  * @property {number} depth     0 = closest (scale depthNear), 1 = farthest
  * @property {number} depthTarget
  * @property {number} depthTimer seconds until the depth target is re-rolled
+ * @property {number} depthView  low-passed depth: what the layer is drawn at
+ * @property {number} facing     body facing rad, distance/departure driven
+ * @property {boolean} back      hysteresis flag: a far target keeps it turned
  * @property {number} jet       1 for the step that starts a cruise (event flag)
  * @property {string} dpPhase    departure phase, 'idle' when it is not leaving
  * @property {number} dpTimer    seconds left in the current departure phase
@@ -235,6 +257,9 @@ export function createBehaviorState({ x = 0, y = 0, seed = 1, cfg = DEFAULTS } =
     depth: cfg.depthStart,
     depthTarget: cfg.depthStart,
     depthTimer: 0,
+    depthView: cfg.depthStart,
+    facing: 0,
+    back: false,
     jet: 0,
   }
   st.heading = randAngle(st)
@@ -403,6 +428,40 @@ function stepDepth(st, dt, cfg) {
   st.depth += (st.depthTarget - st.depth) * (1 - Math.exp(-dt / cfg.depthTau))
   st.depth += gauss(st) * cfg.depthWander * Math.sqrt(dt)
   st.depth = clamp01(st.depth)
+  // The rendered distance gets its own low-pass: white noise in the state is
+  // fine for statistics, but each pixel of it is a size change on screen.
+  const viewTau = cfg.depthViewTau
+  if (viewTau > 0) st.depthView += (st.depth - st.depthView) * (1 - Math.exp(-dt / viewTau))
+  else st.depthView = st.depth
+  st.depthView = clamp01(st.depthView)
+}
+
+/**
+ * Which way the body faces. Two drivers, in priority order:
+ *
+ *  1. a departure owns the turn (it turns at close range, then withdraws);
+ *  2. otherwise DISTANCE owns it — a far target turns the back, a near one
+ *     turns it back toward the viewer. That is the whole answer to "为什么它
+ *     缩小的时候不背对我": going away and facing away are the same decision.
+ *
+ * Thresholds are hysteretic so a target sitting on the boundary cannot flap.
+ */
+function stepFacing(st, dt, cfg) {
+  const depCfg = cfg.depart || DEPART_DEFAULTS
+  if (st.dpPhase !== DEPART_PHASE.IDLE) {
+    st.facing = st.dpFacing
+    st.back = st.dpPhase !== DEPART_PHASE.RETURN
+    return
+  }
+  if (depCfg.enabled === false) {
+    st.back = false
+    st.facing += (0 - st.facing) * (1 - Math.exp(-dt / cfg.backTurnTau))
+    return
+  }
+  if (st.depthTarget >= cfg.backDepth) st.back = true
+  else if (st.depthTarget <= cfg.faceDepth) st.back = false
+  const target = st.back ? Math.PI : 0
+  st.facing += (target - st.facing) * (1 - Math.exp(-dt / (cfg.backTurnTau > 0 ? cfg.backTurnTau : 0.55)))
 }
 
 /**
@@ -428,6 +487,7 @@ export function stepBehavior(st, dt, bounds, cfg = DEFAULTS) {
   if (st.dpPhase !== DEPART_PHASE.IDLE && st.mode === 'rest') st.timer = Math.max(st.timer, 0.25)
 
   stepDepth(st, step, cfg)
+  stepFacing(st, step, cfg)
 
   if (st.mode === 'cruise') {
     stepCruise(st, step, bounds, cfg)
@@ -452,6 +512,9 @@ export function stepBehavior(st, dt, bounds, cfg = DEFAULTS) {
 export function clampBehavior(st, bounds) {
   clampToBounds(st, bounds)
   st.depth = clamp01(Number.isFinite(st.depth) ? st.depth : DEFAULTS.depthStart)
+  st.depthView = clamp01(Number.isFinite(st.depthView) ? st.depthView : st.depth)
+  st.facing = clamp(Number.isFinite(st.facing) ? st.facing : 0, -Math.PI, Math.PI)
+  st.back = st.back === true
   st.dpFacing = clamp(Number.isFinite(st.dpFacing) ? st.dpFacing : 0, -Math.PI, Math.PI)
   st.dpAlpha = clamp01(Number.isFinite(st.dpAlpha) ? st.dpAlpha : 1)
   st.dpLift = clamp(Number.isFinite(st.dpLift) ? st.dpLift : 0, 0, DEPART_DEFAULTS.liftMax)
@@ -491,13 +554,38 @@ export function getSwim(st, cfg = DEFAULTS) {
  * Map depth (0 = closest, 1 = farthest) onto the layer's CSS scale.
  * Linear on purpose: a curved mapping made small depth changes near the far end
  * invisible, and the creature spends most of its time in the near half.
+ * Uses the low-passed depth, so the size the eye sees never carries the state's
+ * frame-to-frame noise.
  * @param {BehaviorState} st
  * @param {object} [cfg]
  * @returns {number} scale in [depthFar, depthNear]
  */
 export function depthScale(st, cfg = DEFAULTS) {
-  const d = clamp01(Number.isFinite(st.depth) ? st.depth : 0)
+  const raw = Number.isFinite(st.depthView) ? st.depthView : st.depth
+  const d = clamp01(Number.isFinite(raw) ? raw : 0)
   return cfg.depthNear + (cfg.depthFar - cfg.depthNear) * d
+}
+
+/**
+ * Everything the overlay layer needs for one frame. The departure's numbers are
+ * the more extreme of the two while it is active, so a departure is always at
+ * least as turned / lifted / dimmed as the distance would have made it.
+ * @param {BehaviorState} st
+ * @param {object} [cfg]
+ * @returns {{active:boolean, phase:string, facing:number, lift:number, alpha:number}}
+ */
+export function getView(st, cfg = DEFAULTS) {
+  const dep = getDeparture(st)
+  const depth = clamp01(Number.isFinite(st.depthView) ? st.depthView : st.depth)
+  const liftFromDepth = depth * (cfg.depthLift || 0)
+  const alphaFromDepth = 1 - depth * (1 - (cfg.depthAlpha == null ? 1 : cfg.depthAlpha))
+  return {
+    active: dep.active,
+    phase: dep.phase,
+    facing: Number.isFinite(st.facing) ? st.facing : dep.facing,
+    lift: Math.max(dep.lift, liftFromDepth),
+    alpha: Math.min(dep.alpha, clamp01(alphaFromDepth)),
+  }
 }
 
 /**
@@ -533,6 +621,9 @@ export function serializeBehavior(st) {
     depth: r2(st.depth),
     depthTarget: r2(st.depthTarget),
     depthTimer: rTimer(st.depthTimer),
+    depthView: r2(st.depthView == null ? st.depth : st.depthView),
+    facing: r2(st.facing || 0),
+    back: st.back === true,
     // Departure state is nested so a payload from before this feature simply
     // lacks the key and restores as idle (see restoreDeparture).
     dp: {
@@ -541,6 +632,7 @@ export function serializeBehavior(st) {
       dur: r2(st.dpDur || 0),
       cooldown: r2(Math.max(0, st.dpCooldown || 0)),
       facing: r2(st.dpFacing || 0),
+      facingFrom: r2(st.dpFacingFrom || 0),
       alpha: r2(st.dpAlpha == null ? 1 : st.dpAlpha),
       lift: r2(st.dpLift || 0),
       farDepth: r2(st.dpFarDepth || 0),
@@ -607,6 +699,11 @@ export function restoreBehavior(raw, bounds, cfg = DEFAULTS) {
     depth: hasDepth ? clamp01(src.depth) : cfg.depthStart,
     depthTarget: hasDepth ? clamp01(src.depthTarget) : cfg.depthStart,
     depthTimer: hasDepth ? Math.max(0.05, src.depthTimer) : cfg.depthRetargetMin,
+    // Rendered distance and facing arrived in 0.9.26: payloads from before are
+    // still v1, so they restore to the (unfiltered) depth and to facing forward.
+    depthView: isNum(src.depthView) ? clamp01(src.depthView) : hasDepth ? clamp01(src.depth) : cfg.depthStart,
+    facing: isNum(src.facing) ? clamp(src.facing, -Math.PI, Math.PI) : 0,
+    back: src.back === true,
     jet: 0,
   }
   restoreDeparture(st, src.dp, cfg.depart || DEPART_DEFAULTS)
