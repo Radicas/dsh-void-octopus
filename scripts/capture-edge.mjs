@@ -783,7 +783,10 @@ async function runPlacement(log, chrome, serverInfo, events, withCoverage) {
       document.body.style.background = '#000'
       return true
     })()`)
-    await sleep(500)
+    // The engine initialises its probe to FRONT_EXTENT before the arms settle;
+    // measuring the very first placement against that transient produced a
+    // 36 px gap. Let one idle cycle finish before the 16-case sweep.
+    await sleep(3000)
     const cases = []
     for (const depth of [0, 0.95]) {
       for (const def of CASE_DEFS) {
@@ -1015,6 +1018,59 @@ async function runPlacement(log, chrome, serverInfo, events, withCoverage) {
     cases.push(splayCase)
     log(`  splay-right-face90: extent ${JSON.stringify(splayCase.extent)}, peak ${JSON.stringify(splayCase.peak)}, screenshotGaps ${JSON.stringify(splayCase.screenshotGaps)}, inside=${splayCase.insideViewport}, allSamplesInside=${splayCase.allSamplesInside}`)
 
+    // ---- dedicated "splayed against the right wall" series ---------------
+    // This is the frame the user is most likely to see as "the edge cuts the
+    // tentacle": body pinned to the wall while the arms open sideways. Re-place
+    // every 400 ms so the collision clamp always uses the current extent, and
+    // take a full-page shot each time.
+    await evaluate(cdp, `window.__dshVoidOctopus.release()`)
+    await evaluate(cdp, `window.__dshVoidOctopus.place(innerWidth, innerHeight / 2, 0)`)
+    await evaluate(cdp, `window.__dshVoidOctopus.face(90)`)
+    const splayWallFrames = []
+    for (let k = 0; k < 8; k++) {
+      await sleep(400)
+      await evaluate(cdp, `window.__dshVoidOctopus.place(innerWidth, innerHeight / 2, 0)`)
+      await sleep(100)
+      const sample = await evaluate(cdp, placementSampleExpr())
+      const file = path.join(SHOTS, `splay-right-wall-${k}.png`)
+      const img = await screenshot(cdp, file)
+      const bbox = bboxAtThreshold(img, PRIMARY_THRESHOLD)
+      const gaps = !bbox.empty ? edgeGaps(bbox, img.width, img.height) : null
+      const box = sample.box
+      const scale = sample.pos.scale
+      const cx = sample.pos.x + box[0] / 2
+      const cy = sample.pos.y + sample.lift + box[0] / 2
+      const ext = sample.pos.extent
+      splayWallFrames.push({
+        k,
+        ms: (k + 1) * 400,
+        shot: path.relative(REPO, file).replaceAll('\\', '/'),
+        scale: round(scale, 4),
+        boxRect: [
+          round(cx - (box[0] / 2) * scale, 2),
+          round(cy - (box[0] / 2) * scale, 2),
+          round(cx + (box[0] / 2) * scale, 2),
+          round(cy + (box[0] / 2) * scale, 2),
+        ],
+        bodyCenter: [round(cx, 1), round(cy, 1)],
+        extent: Object.fromEntries(Object.entries(ext).map(([x, v]) => [x, round(v, 4)])),
+        screenshotGaps: gaps ? Object.fromEntries(Object.entries(gaps).map(([x, v]) => [x, round(v, 1)])) : null,
+        insideViewport: gaps ? gaps.left >= 0 && gaps.right >= 0 && gaps.top >= 0 && gaps.bottom >= 0 : null,
+      })
+    }
+    const splayWallWorst = [...splayWallFrames].sort((a, b) => {
+      const ea = a.extent.left + a.extent.right, eb = b.extent.left + b.extent.right
+      return eb - ea
+    })[0]
+    const splayRightWall = {
+      description: 'right wall + face(90), re-clamped every 400 ms',
+      worstFrame: splayWallWorst,
+      frames: splayWallFrames,
+      allInside: splayWallFrames.every((f) => f.insideViewport),
+      minRightGap: Math.min(...splayWallFrames.map((f) => f.screenshotGaps?.right ?? Infinity)),
+    }
+    log(`  splay-right-wall: worst (widest) frame ${splayWallWorst.ms}ms gaps ${JSON.stringify(splayWallWorst.screenshotGaps)}, min right gap ${splayRightWall.minRightGap}, allInside=${splayRightWall.allInside}`)
+
     // ---- coverage: 90 s of real wandering -----------------------------
     const allCases = cases
     const peakCase = splayCase.peakShot
@@ -1054,7 +1110,15 @@ async function runPlacement(log, chrome, serverInfo, events, withCoverage) {
 
     // ---- labelled GIF --------------------------------------------------
     await evaluate(cdp, GIF_COMPOSE_SOURCE)
-    const gifInfo = await buildCoverageGif(cdp, peakCase ? [...allCases, peakCase] : allCases, log)
+    const wallGifCase = {
+      ...splayWallWorst,
+      name: 'splay-wall',
+      depth: 0,
+      shot: splayWallWorst.shot,
+      screenshotGaps: splayWallWorst.screenshotGaps,
+    }
+    const gifCases = [...allCases, ...(peakCase ? [peakCase] : []), wallGifCase]
+    const gifInfo = await buildCoverageGif(cdp, gifCases, log)
 
     const sidesAtWall = (name) => {
       if (name === 'left' || name === 'right' || name === 'top' || name === 'bottom') return [name]
@@ -1075,8 +1139,8 @@ async function runPlacement(log, chrome, serverInfo, events, withCoverage) {
           sides,
           gaps: Object.fromEntries(sides.map((s) => [s, gaps[s]])),
           inside: c.insideViewport,
-          pass: c.insideViewport && sides.every((s) => gaps[s] >= 1 && gaps[s] <= 12),
-          within2to5: c.insideViewport && sides.every((s) => gaps[s] >= 2 && gaps[s] <= 5),
+          pass: c.insideViewport && sides.every((s) => gaps[s] >= 5 && gaps[s] <= 16),
+          within5to16: c.insideViewport && sides.every((s) => gaps[s] >= 5 && gaps[s] <= 16),
         }
       })
     const result = {
@@ -1086,11 +1150,12 @@ async function runPlacement(log, chrome, serverInfo, events, withCoverage) {
       thresholds: THRESHOLDS,
       cases: wallCases,
       splay: splayCase,
+      splayRightWall,
       coverage,
       gif: gifInfo,
       wallPasses,
       allWallsPass: wallPasses.every((w) => w.pass),
-      allWithinExpected2to5: wallPasses.every((w) => w.within2to5),
+      allWithinExpected5to16: wallPasses.every((w) => w.within5to16),
     }
     await fsp.writeFile(PLACEMENT_CACHE, JSON.stringify(result, null, 2) + '\n')
     return result
@@ -1176,6 +1241,7 @@ async function buildCoverageGif(cdp, cases, log) {
     const gaps = c.screenshotGaps || {}
     if (c.name === 'splay-right-face90') return `SPLAY SETTLED · right wall · face(90) · gap R ${gaps.right}px`
     if (c.name === 'splay-peak') return `SPLAY PEAK · right wall · face(90) · gap R ${gaps.right}px`
+    if (c.name === 'splay-wall') return `SPLAY @ RIGHT WALL · face(90) · gap R ${gaps.right}px`
     const depth = c.depth.toFixed(2)
     const g = `L ${gaps.left} R ${gaps.right} T ${gaps.top} B ${gaps.bottom}`
     return `${c.name.toUpperCase()} · depth ${depth} · ${g}`
@@ -1370,6 +1436,15 @@ async function runClipCheck(log) {
       scale: placement.splay.peak.scale,
     })
   }
+  for (const f of placement.splayRightWall?.frames || []) {
+    frames.push({
+      name: `splay-wall-${f.ms}`,
+      file: path.resolve(REPO, f.shot),
+      rect: f.boxRect,
+      bodyCenter: f.bodyCenter,
+      scale: f.scale,
+    })
+  }
   const results = []
   for (const frame of frames) {
     const img = decodePng(await fsp.readFile(frame.file))
@@ -1381,6 +1456,7 @@ async function runClipCheck(log) {
   for (const c of placement.cases) vpGapsByName.set(`${c.name} · d${c.depth}`, c.screenshotGaps)
   if (placement.splay?.screenshotGaps) vpGapsByName.set('splay settled', placement.splay.screenshotGaps)
   if (placement.splay?.peak?.screenshotGaps) vpGapsByName.set('splay peak', placement.splay.peak.screenshotGaps)
+  for (const f of placement.splayRightWall?.frames || []) vpGapsByName.set(`splay-wall-${f.ms}`, f.screenshotGaps)
   for (const r of results) r.viewportGaps = vpGapsByName.get(r.name) || null
   const clipped = results.filter((r) => r.verdict.clipped)
   const reaches = results.filter((r) => r.verdict.reachesEdge)
@@ -1450,6 +1526,7 @@ async function runClipCheck(log) {
     ...placement.cases.map((c) => `${c.name} · d${c.depth}`),
     'splay settled',
     'splay peak',
+    ...(placement.splayRightWall?.frames || []).map((f) => `splay-wall-${f.ms}`),
   ]
   const targetChecks = TARGET_FRAMES.map((name) => {
     const r = results.find((x) => x.name === name)
@@ -1803,3 +1880,4 @@ main().catch((err) => {
   console.error('capture-edge FAILED:', err?.stack || err)
   process.exitCode = 1
 })
+

@@ -1,0 +1,4145 @@
+{
+  "meta": {
+    "old": {
+      "version": "0.9.29",
+      "commit": "20e3830",
+      "clientSha": "4ed1fabdfdc669ada19991df4060d309d87d1fe26efa25d7638eaa4e5fefb25e",
+      "demoBundleSha": "e03c16a001b291ffefddfaa2d8b6cc0c416ba8affb7c6d6110b0612725c11332"
+    },
+    "new": {
+      "version": "0.9.30",
+      "commit": "2531387f4bbe68e29aa78c95f8e35560ef117378",
+      "clientSha": "f9234f909c2a2b41f11e723d3058e80822c7400dc31fc30fde10dfbe6a35c2bf",
+      "demoBundleSha": "f0802c4527b5c57f7d9fd8a3bba6dc741a773b3080212a66b7d642921da775e3"
+    },
+    "viewport": {
+      "demo": [
+        1000,
+        1000
+      ],
+      "harness": [
+        1440,
+        900
+      ]
+    },
+    "protocol": "seeded Math.random + seeded crypto.getRandomValues + deterministic 16.667 ms rAF stepping; demo frames every 100 ms over 60 s",
+    "generatedAt": "2026-11-10T08:46:10.274Z"
+  },
+  "task1": {
+    "framesPerVersion": 600,
+    "old": {
+      "minRatio": 0.622,
+      "minRatioFrame": {
+        "i": 31,
+        "t": 3.2,
+        "extent": {
+          "left": 0.6709,
+          "right": 0.6472,
+          "up": 0.4906,
+          "down": 0.4765
+        },
+        "measured": {
+          "left": 0.6,
+          "right": 0.4026,
+          "up": 0.4868,
+          "down": 0.5053
+        },
+        "ratios": {
+          "left": 0.894,
+          "right": 0.622,
+          "up": 0.992,
+          "down": 1.06
+        },
+        "minRatio": 0.622
+      },
+      "below090": [
+        {
+          "t": 3.2,
+          "minRatio": 0.622,
+          "ratios": {
+            "left": 0.894,
+            "right": 0.622,
+            "up": 0.992,
+            "down": 1.06
+          }
+        },
+        {
+          "t": 3.3,
+          "minRatio": 0.664,
+          "ratios": {
+            "left": 0.932,
+            "right": 0.664,
+            "up": 0.995,
+            "down": 1.01
+          }
+        },
+        {
+          "t": 3.4,
+          "minRatio": 0.736,
+          "ratios": {
+            "left": 0.996,
+            "right": 0.736,
+            "up": 0.993,
+            "down": 0.944
+          }
+        },
+        {
+          "t": 18.2,
+          "minRatio": 0.736,
+          "ratios": {
+            "left": 1.054,
+            "right": 0.736,
+            "up": 0.99,
+            "down": 1.048
+          }
+        },
+        {
+          "t": 23.2,
+          "minRatio": 0.752,
+          "ratios": {
+            "left": 1.073,
+            "right": 0.752,
+            "up": 0.996,
+            "down": 1.051
+          }
+        },
+        {
+          "t": 43.2,
+          "minRatio": 0.764,
+          "ratios": {
+            "left": 1.065,
+            "right": 0.764,
+            "up": 0.993,
+            "down": 1.057
+          }
+        },
+        {
+          "t": 34.5,
+          "minRatio": 0.771,
+          "ratios": {
+            "left": 1.038,
+            "right": 0.771,
+            "up": 1.009,
+            "down": 1.109
+          }
+        },
+        {
+          "t": 28.2,
+          "minRatio": 0.772,
+          "ratios": {
+            "left": 1.058,
+            "right": 0.772,
+            "up": 0.996,
+            "down": 1.044
+          }
+        },
+        {
+          "t": 38.2,
+          "minRatio": 0.772,
+          "ratios": {
+            "left": 1.053,
+            "right": 0.772,
+            "up": 0.997,
+            "down": 1.04
+          }
+        },
+        {
+          "t": 3.5,
+          "minRatio": 0.783,
+          "ratios": {
+            "left": 1.014,
+            "right": 0.783,
+            "up": 0.997,
+            "down": 0.951
+          }
+        },
+        {
+          "t": 18.3,
+          "minRatio": 0.783,
+          "ratios": {
+            "left": 1.047,
+            "right": 0.783,
+            "up": 0.994,
+            "down": 1.027
+          }
+        },
+        {
+          "t": 13.2,
+          "minRatio": 0.788,
+          "ratios": {
+            "left": 1.063,
+            "right": 0.788,
+            "up": 0.997,
+            "down": 1.054
+          }
+        },
+        {
+          "t": 8.2,
+          "minRatio": 0.789,
+          "ratios": {
+            "left": 1.047,
+            "right": 0.789,
+            "up": 1.009,
+            "down": 1.054
+          }
+        },
+        {
+          "t": 23.3,
+          "minRatio": 0.8,
+          "ratios": {
+            "left": 0.987,
+            "right": 0.8,
+            "up": 0.995,
+            "down": 1.029
+          }
+        },
+        {
+          "t": 43.3,
+          "minRatio": 0.803,
+          "ratios": {
+            "left": 0.987,
+            "right": 0.803,
+            "up": 0.99,
+            "down": 1.033
+          }
+        },
+        {
+          "t": 39.3,
+          "minRatio": 0.805,
+          "ratios": {
+            "left": 0.805,
+            "right": 0.858,
+            "up": 1.009,
+            "down": 0.979
+          }
+        },
+        {
+          "t": 28.3,
+          "minRatio": 0.809,
+          "ratios": {
+            "left": 1.001,
+            "right": 0.809,
+            "up": 1.004,
+            "down": 1.023
+          }
+        },
+        {
+          "t": 13.3,
+          "minRatio": 0.812,
+          "ratios": {
+            "left": 0.967,
+            "right": 0.812,
+            "up": 0.998,
+            "down": 1.029
+          }
+        },
+        {
+          "t": 39.4,
+          "minRatio": 0.812,
+          "ratios": {
+            "left": 0.812,
+            "right": 0.843,
+            "up": 1.003,
+            "down": 0.986
+          }
+        },
+        {
+          "t": 38.3,
+          "minRatio": 0.816,
+          "ratios": {
+            "left": 1.045,
+            "right": 0.816,
+            "up": 1.005,
+            "down": 1.015
+          }
+        },
+        {
+          "t": 39.6,
+          "minRatio": 0.818,
+          "ratios": {
+            "left": 0.818,
+            "right": 0.861,
+            "up": 1.001,
+            "down": 0.987
+          }
+        },
+        {
+          "t": 33.2,
+          "minRatio": 0.821,
+          "ratios": {
+            "left": 1.064,
+            "right": 0.821,
+            "up": 1.012,
+            "down": 1.048
+          }
+        },
+        {
+          "t": 39.5,
+          "minRatio": 0.821,
+          "ratios": {
+            "left": 0.821,
+            "right": 0.826,
+            "up": 1.004,
+            "down": 0.987
+          }
+        },
+        {
+          "t": 8.3,
+          "minRatio": 0.825,
+          "ratios": {
+            "left": 1.048,
+            "right": 0.825,
+            "up": 1.012,
+            "down": 1.028
+          }
+        },
+        {
+          "t": 39.2,
+          "minRatio": 0.826,
+          "ratios": {
+            "left": 0.826,
+            "right": 0.868,
+            "up": 1.011,
+            "down": 0.965
+          }
+        },
+        {
+          "t": 28.1,
+          "minRatio": 0.834,
+          "ratios": {
+            "left": 1.012,
+            "right": 0.834,
+            "up": 0.991,
+            "down": 1.032
+          }
+        },
+        {
+          "t": 39.7,
+          "minRatio": 0.835,
+          "ratios": {
+            "left": 0.835,
+            "right": 0.888,
+            "up": 1,
+            "down": 0.998
+          }
+        },
+        {
+          "t": 33.8,
+          "minRatio": 0.836,
+          "ratios": {
+            "left": 0.836,
+            "right": 1.057,
+            "up": 1.027,
+            "down": 0.918
+          }
+        },
+        {
+          "t": 3.6,
+          "minRatio": 0.838,
+          "ratios": {
+            "left": 1.005,
+            "right": 0.838,
+            "up": 1.001,
+            "down": 0.969
+          }
+        },
+        {
+          "t": 23.1,
+          "minRatio": 0.841,
+          "ratios": {
+            "left": 1.031,
+            "right": 0.841,
+            "up": 0.992,
+            "down": 1.034
+          }
+        },
+        {
+          "t": 34.3,
+          "minRatio": 0.841,
+          "ratios": {
+            "left": 0.979,
+            "right": 1.02,
+            "up": 1.114,
+            "down": 0.841
+          }
+        },
+        {
+          "t": 43.1,
+          "minRatio": 0.841,
+          "ratios": {
+            "left": 1.026,
+            "right": 0.841,
+            "up": 0.991,
+            "down": 1.042
+          }
+        },
+        {
+          "t": 33.9,
+          "minRatio": 0.844,
+          "ratios": {
+            "left": 0.844,
+            "right": 1.024,
+            "up": 1.028,
+            "down": 0.948
+          }
+        },
+        {
+          "t": 43.4,
+          "minRatio": 0.847,
+          "ratios": {
+            "left": 0.954,
+            "right": 0.847,
+            "up": 0.993,
+            "down": 0.994
+          }
+        },
+        {
+          "t": 38.1,
+          "minRatio": 0.848,
+          "ratios": {
+            "left": 1.022,
+            "right": 0.848,
+            "up": 0.995,
+            "down": 1.025
+          }
+        },
+        {
+          "t": 18.4,
+          "minRatio": 0.849,
+          "ratios": {
+            "left": 1.011,
+            "right": 0.849,
+            "up": 0.998,
+            "down": 0.973
+          }
+        },
+        {
+          "t": 23.4,
+          "minRatio": 0.85,
+          "ratios": {
+            "left": 0.947,
+            "right": 0.85,
+            "up": 0.999,
+            "down": 1.001
+          }
+        },
+        {
+          "t": 13.6,
+          "minRatio": 0.851,
+          "ratios": {
+            "left": 0.911,
+            "right": 1.011,
+            "up": 1.009,
+            "down": 0.851
+          }
+        },
+        {
+          "t": 35,
+          "minRatio": 0.851,
+          "ratios": {
+            "left": 0.851,
+            "right": 1.022,
+            "up": 1.012,
+            "down": 0.956
+          }
+        },
+        {
+          "t": 33.3,
+          "minRatio": 0.852,
+          "ratios": {
+            "left": 1.012,
+            "right": 0.852,
+            "up": 1.012,
+            "down": 1.034
+          }
+        },
+        {
+          "t": 33.6,
+          "minRatio": 0.852,
+          "ratios": {
+            "left": 0.895,
+            "right": 1.027,
+            "up": 1.025,
+            "down": 0.852
+          }
+        },
+        {
+          "t": 33.7,
+          "minRatio": 0.852,
+          "ratios": {
+            "left": 0.852,
+            "right": 1.054,
+            "up": 1.026,
+            "down": 0.888
+          }
+        },
+        {
+          "t": 34.6,
+          "minRatio": 0.854,
+          "ratios": {
+            "left": 1.055,
+            "right": 0.854,
+            "up": 0.997,
+            "down": 1.1
+          }
+        },
+        {
+          "t": 23.7,
+          "minRatio": 0.855,
+          "ratios": {
+            "left": 0.855,
+            "right": 1.06,
+            "up": 1.001,
+            "down": 0.942
+          }
+        },
+        {
+          "t": 3.1,
+          "minRatio": 0.856,
+          "ratios": {
+            "left": 0.938,
+            "right": 0.856,
+            "up": 0.99,
+            "down": 1.037
+          }
+        },
+        {
+          "t": 18.1,
+          "minRatio": 0.858,
+          "ratios": {
+            "left": 1.026,
+            "right": 0.858,
+            "up": 0.986,
+            "down": 1.025
+          }
+        },
+        {
+          "t": 43.7,
+          "minRatio": 0.858,
+          "ratios": {
+            "left": 0.858,
+            "right": 1.052,
+            "up": 0.996,
+            "down": 0.881
+          }
+        },
+        {
+          "t": 23.8,
+          "minRatio": 0.859,
+          "ratios": {
+            "left": 0.859,
+            "right": 1.068,
+            "up": 1.005,
+            "down": 0.931
+          }
+        },
+        {
+          "t": 34.9,
+          "minRatio": 0.859,
+          "ratios": {
+            "left": 0.859,
+            "right": 1.021,
+            "up": 1.01,
+            "down": 0.951
+          }
+        },
+        {
+          "t": 43.8,
+          "minRatio": 0.859,
+          "ratios": {
+            "left": 0.859,
+            "right": 1.075,
+            "up": 0.997,
+            "down": 0.89
+          }
+        },
+        {
+          "t": 39.9,
+          "minRatio": 0.86,
+          "ratios": {
+            "left": 0.879,
+            "right": 0.86,
+            "up": 1.001,
+            "down": 1.007
+          }
+        },
+        {
+          "t": 40,
+          "minRatio": 0.86,
+          "ratios": {
+            "left": 0.883,
+            "right": 0.86,
+            "up": 0.996,
+            "down": 1.009
+          }
+        },
+        {
+          "t": 39.8,
+          "minRatio": 0.862,
+          "ratios": {
+            "left": 0.862,
+            "right": 0.886,
+            "up": 1,
+            "down": 1.006
+          }
+        },
+        {
+          "t": 35.1,
+          "minRatio": 0.863,
+          "ratios": {
+            "left": 0.863,
+            "right": 1.015,
+            "up": 1.012,
+            "down": 0.952
+          }
+        },
+        {
+          "t": 13.5,
+          "minRatio": 0.866,
+          "ratios": {
+            "left": 0.966,
+            "right": 0.94,
+            "up": 1.007,
+            "down": 0.866
+          }
+        },
+        {
+          "t": 8.1,
+          "minRatio": 0.868,
+          "ratios": {
+            "left": 1.008,
+            "right": 0.868,
+            "up": 1.001,
+            "down": 1.042
+          }
+        },
+        {
+          "t": 13.8,
+          "minRatio": 0.868,
+          "ratios": {
+            "left": 0.868,
+            "right": 1.073,
+            "up": 1.012,
+            "down": 0.913
+          }
+        },
+        {
+          "t": 33.5,
+          "minRatio": 0.868,
+          "ratios": {
+            "left": 0.961,
+            "right": 0.964,
+            "up": 1.018,
+            "down": 0.868
+          }
+        },
+        {
+          "t": 34,
+          "minRatio": 0.869,
+          "ratios": {
+            "left": 0.869,
+            "right": 0.974,
+            "up": 1.029,
+            "down": 0.966
+          }
+        },
+        {
+          "t": 13.1,
+          "minRatio": 0.872,
+          "ratios": {
+            "left": 1.027,
+            "right": 0.872,
+            "up": 0.996,
+            "down": 1.025
+          }
+        },
+        {
+          "t": 28.4,
+          "minRatio": 0.872,
+          "ratios": {
+            "left": 0.99,
+            "right": 0.872,
+            "up": 1.007,
+            "down": 0.987
+          }
+        },
+        {
+          "t": 13.7,
+          "minRatio": 0.873,
+          "ratios": {
+            "left": 0.873,
+            "right": 1.059,
+            "up": 1.011,
+            "down": 0.882
+          }
+        },
+        {
+          "t": 13.4,
+          "minRatio": 0.874,
+          "ratios": {
+            "left": 0.939,
+            "right": 0.874,
+            "up": 1,
+            "down": 0.973
+          }
+        },
+        {
+          "t": 38.4,
+          "minRatio": 0.875,
+          "ratios": {
+            "left": 1.009,
+            "right": 0.875,
+            "up": 1.002,
+            "down": 0.977
+          }
+        },
+        {
+          "t": 8.4,
+          "minRatio": 0.877,
+          "ratios": {
+            "left": 1,
+            "right": 0.877,
+            "up": 1.016,
+            "down": 1
+          }
+        },
+        {
+          "t": 18.7,
+          "minRatio": 0.879,
+          "ratios": {
+            "left": 0.879,
+            "right": 1.043,
+            "up": 1.002,
+            "down": 0.912
+          }
+        },
+        {
+          "t": 39.1,
+          "minRatio": 0.88,
+          "ratios": {
+            "left": 0.891,
+            "right": 0.88,
+            "up": 1.012,
+            "down": 0.948
+          }
+        },
+        {
+          "t": 13.9,
+          "minRatio": 0.882,
+          "ratios": {
+            "left": 0.882,
+            "right": 1.022,
+            "up": 1.014,
+            "down": 0.938
+          }
+        },
+        {
+          "t": 28.8,
+          "minRatio": 0.883,
+          "ratios": {
+            "left": 0.921,
+            "right": 1.058,
+            "up": 1.023,
+            "down": 0.883
+          }
+        },
+        {
+          "t": 23.9,
+          "minRatio": 0.884,
+          "ratios": {
+            "left": 0.884,
+            "right": 1.037,
+            "up": 1.009,
+            "down": 0.94
+          }
+        },
+        {
+          "t": 34.4,
+          "minRatio": 0.884,
+          "ratios": {
+            "left": 0.981,
+            "right": 0.884,
+            "up": 1.033,
+            "down": 0.966
+          }
+        },
+        {
+          "t": 43.9,
+          "minRatio": 0.884,
+          "ratios": {
+            "left": 0.884,
+            "right": 1.029,
+            "up": 0.997,
+            "down": 0.911
+          }
+        },
+        {
+          "t": 18.5,
+          "minRatio": 0.885,
+          "ratios": {
+            "left": 0.96,
+            "right": 0.924,
+            "up": 1.002,
+            "down": 0.885
+          }
+        },
+        {
+          "t": 18.8,
+          "minRatio": 0.885,
+          "ratios": {
+            "left": 0.885,
+            "right": 1.067,
+            "up": 1.004,
+            "down": 0.928
+          }
+        },
+        {
+          "t": 33.1,
+          "minRatio": 0.885,
+          "ratios": {
+            "left": 1.021,
+            "right": 0.885,
+            "up": 1.007,
+            "down": 1.003
+          }
+        },
+        {
+          "t": 38.7,
+          "minRatio": 0.885,
+          "ratios": {
+            "left": 0.885,
+            "right": 1.044,
+            "up": 1.008,
+            "down": 0.981
+          }
+        },
+        {
+          "t": 35.2,
+          "minRatio": 0.89,
+          "ratios": {
+            "left": 0.89,
+            "right": 1.026,
+            "up": 1.016,
+            "down": 0.948
+          }
+        },
+        {
+          "t": 43.6,
+          "minRatio": 0.89,
+          "ratios": {
+            "left": 0.892,
+            "right": 0.996,
+            "up": 0.997,
+            "down": 0.89
+          }
+        },
+        {
+          "t": 18.6,
+          "minRatio": 0.892,
+          "ratios": {
+            "left": 0.906,
+            "right": 0.992,
+            "up": 1,
+            "down": 0.892
+          }
+        },
+        {
+          "t": 14,
+          "minRatio": 0.893,
+          "ratios": {
+            "left": 0.893,
+            "right": 0.971,
+            "up": 1.021,
+            "down": 0.963
+          }
+        },
+        {
+          "t": 23.6,
+          "minRatio": 0.893,
+          "ratios": {
+            "left": 0.893,
+            "right": 1.03,
+            "up": 1.003,
+            "down": 0.959
+          }
+        },
+        {
+          "t": 28.7,
+          "minRatio": 0.896,
+          "ratios": {
+            "left": 0.912,
+            "right": 1.043,
+            "up": 1.021,
+            "down": 0.896
+          }
+        },
+        {
+          "t": 28.9,
+          "minRatio": 0.897,
+          "ratios": {
+            "left": 0.935,
+            "right": 1.01,
+            "up": 1.024,
+            "down": 0.897
+          }
+        },
+        {
+          "t": 38.8,
+          "minRatio": 0.899,
+          "ratios": {
+            "left": 0.899,
+            "right": 1.061,
+            "up": 1.014,
+            "down": 0.98
+          }
+        }
+      ],
+      "below095": 153,
+      "worstFrames": [
+        {
+          "t": 3.2,
+          "minRatio": 0.622,
+          "ratios": {
+            "left": 0.894,
+            "right": 0.622,
+            "up": 0.992,
+            "down": 1.06
+          }
+        },
+        {
+          "t": 3.3,
+          "minRatio": 0.664,
+          "ratios": {
+            "left": 0.932,
+            "right": 0.664,
+            "up": 0.995,
+            "down": 1.01
+          }
+        },
+        {
+          "t": 3.4,
+          "minRatio": 0.736,
+          "ratios": {
+            "left": 0.996,
+            "right": 0.736,
+            "up": 0.993,
+            "down": 0.944
+          }
+        },
+        {
+          "t": 18.2,
+          "minRatio": 0.736,
+          "ratios": {
+            "left": 1.054,
+            "right": 0.736,
+            "up": 0.99,
+            "down": 1.048
+          }
+        },
+        {
+          "t": 23.2,
+          "minRatio": 0.752,
+          "ratios": {
+            "left": 1.073,
+            "right": 0.752,
+            "up": 0.996,
+            "down": 1.051
+          }
+        },
+        {
+          "t": 43.2,
+          "minRatio": 0.764,
+          "ratios": {
+            "left": 1.065,
+            "right": 0.764,
+            "up": 0.993,
+            "down": 1.057
+          }
+        },
+        {
+          "t": 34.5,
+          "minRatio": 0.771,
+          "ratios": {
+            "left": 1.038,
+            "right": 0.771,
+            "up": 1.009,
+            "down": 1.109
+          }
+        },
+        {
+          "t": 28.2,
+          "minRatio": 0.772,
+          "ratios": {
+            "left": 1.058,
+            "right": 0.772,
+            "up": 0.996,
+            "down": 1.044
+          }
+        }
+      ]
+    },
+    "new": {
+      "minRatio": 0.622,
+      "minRatioFrame": {
+        "i": 31,
+        "t": 3.2,
+        "extent": {
+          "left": 0.6451,
+          "right": 0.6223,
+          "up": 0.4717,
+          "down": 0.4582
+        },
+        "measured": {
+          "left": 0.5763,
+          "right": 0.3868,
+          "up": 0.4684,
+          "down": 0.4868
+        },
+        "ratios": {
+          "left": 0.893,
+          "right": 0.622,
+          "up": 0.993,
+          "down": 1.063
+        },
+        "minRatio": 0.622
+      },
+      "below090": [
+        {
+          "t": 3.2,
+          "minRatio": 0.622,
+          "ratios": {
+            "left": 0.893,
+            "right": 0.622,
+            "up": 0.993,
+            "down": 1.063
+          }
+        },
+        {
+          "t": 3.3,
+          "minRatio": 0.663,
+          "ratios": {
+            "left": 0.932,
+            "right": 0.663,
+            "up": 0.996,
+            "down": 1.012
+          }
+        },
+        {
+          "t": 18.2,
+          "minRatio": 0.734,
+          "ratios": {
+            "left": 1.052,
+            "right": 0.734,
+            "up": 0.99,
+            "down": 1.049
+          }
+        },
+        {
+          "t": 3.4,
+          "minRatio": 0.736,
+          "ratios": {
+            "left": 0.998,
+            "right": 0.736,
+            "up": 0.994,
+            "down": 0.944
+          }
+        },
+        {
+          "t": 23.2,
+          "minRatio": 0.749,
+          "ratios": {
+            "left": 1.071,
+            "right": 0.749,
+            "up": 0.995,
+            "down": 1.053
+          }
+        },
+        {
+          "t": 43.2,
+          "minRatio": 0.763,
+          "ratios": {
+            "left": 1.068,
+            "right": 0.763,
+            "up": 0.994,
+            "down": 1.055
+          }
+        },
+        {
+          "t": 28.2,
+          "minRatio": 0.769,
+          "ratios": {
+            "left": 1.06,
+            "right": 0.769,
+            "up": 1.001,
+            "down": 1.045
+          }
+        },
+        {
+          "t": 34.5,
+          "minRatio": 0.77,
+          "ratios": {
+            "left": 1.037,
+            "right": 0.77,
+            "up": 1.012,
+            "down": 1.108
+          }
+        },
+        {
+          "t": 38.2,
+          "minRatio": 0.774,
+          "ratios": {
+            "left": 1.053,
+            "right": 0.774,
+            "up": 1.002,
+            "down": 1.041
+          }
+        },
+        {
+          "t": 3.5,
+          "minRatio": 0.782,
+          "ratios": {
+            "left": 1.013,
+            "right": 0.782,
+            "up": 0.997,
+            "down": 0.95
+          }
+        },
+        {
+          "t": 8.2,
+          "minRatio": 0.784,
+          "ratios": {
+            "left": 1.05,
+            "right": 0.784,
+            "up": 1.009,
+            "down": 1.056
+          }
+        },
+        {
+          "t": 13.2,
+          "minRatio": 0.786,
+          "ratios": {
+            "left": 1.062,
+            "right": 0.786,
+            "up": 0.996,
+            "down": 1.053
+          }
+        },
+        {
+          "t": 18.3,
+          "minRatio": 0.787,
+          "ratios": {
+            "left": 1.045,
+            "right": 0.787,
+            "up": 0.994,
+            "down": 1.029
+          }
+        },
+        {
+          "t": 43.3,
+          "minRatio": 0.801,
+          "ratios": {
+            "left": 1.058,
+            "right": 0.801,
+            "up": 0.991,
+            "down": 1.032
+          }
+        },
+        {
+          "t": 39.3,
+          "minRatio": 0.804,
+          "ratios": {
+            "left": 0.804,
+            "right": 0.86,
+            "up": 1.01,
+            "down": 0.982
+          }
+        },
+        {
+          "t": 23.3,
+          "minRatio": 0.805,
+          "ratios": {
+            "left": 1.067,
+            "right": 0.805,
+            "up": 0.993,
+            "down": 1.027
+          }
+        },
+        {
+          "t": 28.3,
+          "minRatio": 0.806,
+          "ratios": {
+            "left": 1.048,
+            "right": 0.806,
+            "up": 1.004,
+            "down": 1.024
+          }
+        },
+        {
+          "t": 39.4,
+          "minRatio": 0.81,
+          "ratios": {
+            "left": 0.81,
+            "right": 0.844,
+            "up": 1.004,
+            "down": 0.988
+          }
+        },
+        {
+          "t": 13.3,
+          "minRatio": 0.816,
+          "ratios": {
+            "left": 1.056,
+            "right": 0.816,
+            "up": 1.003,
+            "down": 1.028
+          }
+        },
+        {
+          "t": 38.3,
+          "minRatio": 0.817,
+          "ratios": {
+            "left": 1.044,
+            "right": 0.817,
+            "up": 1.004,
+            "down": 1.017
+          }
+        },
+        {
+          "t": 39.6,
+          "minRatio": 0.819,
+          "ratios": {
+            "left": 0.819,
+            "right": 0.86,
+            "up": 1.002,
+            "down": 0.989
+          }
+        },
+        {
+          "t": 33.2,
+          "minRatio": 0.822,
+          "ratios": {
+            "left": 1.062,
+            "right": 0.822,
+            "up": 1.012,
+            "down": 1.046
+          }
+        },
+        {
+          "t": 39.5,
+          "minRatio": 0.823,
+          "ratios": {
+            "left": 0.823,
+            "right": 0.824,
+            "up": 1.005,
+            "down": 0.989
+          }
+        },
+        {
+          "t": 8.3,
+          "minRatio": 0.825,
+          "ratios": {
+            "left": 1.054,
+            "right": 0.825,
+            "up": 1.013,
+            "down": 1.026
+          }
+        },
+        {
+          "t": 39.2,
+          "minRatio": 0.828,
+          "ratios": {
+            "left": 0.828,
+            "right": 0.866,
+            "up": 1.011,
+            "down": 0.967
+          }
+        },
+        {
+          "t": 39.7,
+          "minRatio": 0.834,
+          "ratios": {
+            "left": 0.834,
+            "right": 0.886,
+            "up": 1.001,
+            "down": 0.995
+          }
+        },
+        {
+          "t": 28.1,
+          "minRatio": 0.835,
+          "ratios": {
+            "left": 1.01,
+            "right": 0.835,
+            "up": 0.991,
+            "down": 1.035
+          }
+        },
+        {
+          "t": 3.6,
+          "minRatio": 0.838,
+          "ratios": {
+            "left": 1.004,
+            "right": 0.838,
+            "up": 1.002,
+            "down": 0.968
+          }
+        },
+        {
+          "t": 33.8,
+          "minRatio": 0.839,
+          "ratios": {
+            "left": 0.839,
+            "right": 1.056,
+            "up": 1.028,
+            "down": 0.915
+          }
+        },
+        {
+          "t": 43.1,
+          "minRatio": 0.839,
+          "ratios": {
+            "left": 1.029,
+            "right": 0.839,
+            "up": 0.992,
+            "down": 1.046
+          }
+        },
+        {
+          "t": 23.1,
+          "minRatio": 0.844,
+          "ratios": {
+            "left": 1.032,
+            "right": 0.844,
+            "up": 0.991,
+            "down": 1.033
+          }
+        },
+        {
+          "t": 34.3,
+          "minRatio": 0.845,
+          "ratios": {
+            "left": 0.979,
+            "right": 1.019,
+            "up": 1.112,
+            "down": 0.845
+          }
+        },
+        {
+          "t": 33.9,
+          "minRatio": 0.846,
+          "ratios": {
+            "left": 0.846,
+            "right": 1.019,
+            "up": 1.029,
+            "down": 0.945
+          }
+        },
+        {
+          "t": 43.4,
+          "minRatio": 0.846,
+          "ratios": {
+            "left": 1.015,
+            "right": 0.846,
+            "up": 0.994,
+            "down": 0.996
+          }
+        },
+        {
+          "t": 18.4,
+          "minRatio": 0.847,
+          "ratios": {
+            "left": 1.013,
+            "right": 0.847,
+            "up": 0.998,
+            "down": 0.973
+          }
+        },
+        {
+          "t": 35,
+          "minRatio": 0.848,
+          "ratios": {
+            "left": 0.848,
+            "right": 1.023,
+            "up": 1.013,
+            "down": 0.953
+          }
+        },
+        {
+          "t": 38.1,
+          "minRatio": 0.848,
+          "ratios": {
+            "left": 1.023,
+            "right": 0.848,
+            "up": 0.995,
+            "down": 1.024
+          }
+        },
+        {
+          "t": 23.4,
+          "minRatio": 0.849,
+          "ratios": {
+            "left": 1.022,
+            "right": 0.849,
+            "up": 0.998,
+            "down": 1.004
+          }
+        },
+        {
+          "t": 33.7,
+          "minRatio": 0.85,
+          "ratios": {
+            "left": 0.85,
+            "right": 1.057,
+            "up": 1.026,
+            "down": 0.885
+          }
+        },
+        {
+          "t": 13.6,
+          "minRatio": 0.851,
+          "ratios": {
+            "left": 0.909,
+            "right": 1.014,
+            "up": 1.008,
+            "down": 0.851
+          }
+        },
+        {
+          "t": 23.7,
+          "minRatio": 0.853,
+          "ratios": {
+            "left": 0.853,
+            "right": 1.062,
+            "up": 1.006,
+            "down": 0.94
+          }
+        },
+        {
+          "t": 33.3,
+          "minRatio": 0.853,
+          "ratios": {
+            "left": 1.057,
+            "right": 0.853,
+            "up": 1.012,
+            "down": 1.034
+          }
+        },
+        {
+          "t": 33.6,
+          "minRatio": 0.854,
+          "ratios": {
+            "left": 0.895,
+            "right": 1.033,
+            "up": 1.025,
+            "down": 0.854
+          }
+        },
+        {
+          "t": 3.1,
+          "minRatio": 0.855,
+          "ratios": {
+            "left": 0.935,
+            "right": 0.855,
+            "up": 0.991,
+            "down": 1.035
+          }
+        },
+        {
+          "t": 34.6,
+          "minRatio": 0.855,
+          "ratios": {
+            "left": 1.053,
+            "right": 0.855,
+            "up": 0.999,
+            "down": 1.1
+          }
+        },
+        {
+          "t": 39.9,
+          "minRatio": 0.856,
+          "ratios": {
+            "left": 0.878,
+            "right": 0.856,
+            "up": 0.996,
+            "down": 1.01
+          }
+        },
+        {
+          "t": 43.7,
+          "minRatio": 0.857,
+          "ratios": {
+            "left": 0.857,
+            "right": 1.052,
+            "up": 0.997,
+            "down": 0.881
+          }
+        },
+        {
+          "t": 34.9,
+          "minRatio": 0.858,
+          "ratios": {
+            "left": 0.858,
+            "right": 1.021,
+            "up": 1.005,
+            "down": 0.953
+          }
+        },
+        {
+          "t": 23.8,
+          "minRatio": 0.86,
+          "ratios": {
+            "left": 0.86,
+            "right": 1.068,
+            "up": 1.004,
+            "down": 0.934
+          }
+        },
+        {
+          "t": 43.8,
+          "minRatio": 0.86,
+          "ratios": {
+            "left": 0.86,
+            "right": 1.075,
+            "up": 0.997,
+            "down": 0.889
+          }
+        },
+        {
+          "t": 39.8,
+          "minRatio": 0.861,
+          "ratios": {
+            "left": 0.861,
+            "right": 0.883,
+            "up": 1.001,
+            "down": 1.003
+          }
+        },
+        {
+          "t": 18.1,
+          "minRatio": 0.862,
+          "ratios": {
+            "left": 1.024,
+            "right": 0.862,
+            "up": 0.986,
+            "down": 1.027
+          }
+        },
+        {
+          "t": 40,
+          "minRatio": 0.862,
+          "ratios": {
+            "left": 0.886,
+            "right": 0.862,
+            "up": 0.997,
+            "down": 1.006
+          }
+        },
+        {
+          "t": 13.5,
+          "minRatio": 0.864,
+          "ratios": {
+            "left": 0.968,
+            "right": 0.94,
+            "up": 1.006,
+            "down": 0.864
+          }
+        },
+        {
+          "t": 35.1,
+          "minRatio": 0.864,
+          "ratios": {
+            "left": 0.864,
+            "right": 1.017,
+            "up": 1.014,
+            "down": 0.952
+          }
+        },
+        {
+          "t": 8.1,
+          "minRatio": 0.867,
+          "ratios": {
+            "left": 1.012,
+            "right": 0.867,
+            "up": 1.001,
+            "down": 1.041
+          }
+        },
+        {
+          "t": 33.5,
+          "minRatio": 0.867,
+          "ratios": {
+            "left": 0.961,
+            "right": 0.967,
+            "up": 1.019,
+            "down": 0.867
+          }
+        },
+        {
+          "t": 13.1,
+          "minRatio": 0.869,
+          "ratios": {
+            "left": 1.026,
+            "right": 0.869,
+            "up": 0.995,
+            "down": 1.025
+          }
+        },
+        {
+          "t": 13.8,
+          "minRatio": 0.87,
+          "ratios": {
+            "left": 0.87,
+            "right": 1.071,
+            "up": 1.011,
+            "down": 0.913
+          }
+        },
+        {
+          "t": 28.4,
+          "minRatio": 0.87,
+          "ratios": {
+            "left": 1.001,
+            "right": 0.87,
+            "up": 1.007,
+            "down": 0.987
+          }
+        },
+        {
+          "t": 34,
+          "minRatio": 0.871,
+          "ratios": {
+            "left": 0.871,
+            "right": 0.973,
+            "up": 1.03,
+            "down": 0.97
+          }
+        },
+        {
+          "t": 13.4,
+          "minRatio": 0.872,
+          "ratios": {
+            "left": 1.017,
+            "right": 0.872,
+            "up": 1.004,
+            "down": 0.976
+          }
+        },
+        {
+          "t": 13.7,
+          "minRatio": 0.873,
+          "ratios": {
+            "left": 0.873,
+            "right": 1.058,
+            "up": 1.01,
+            "down": 0.882
+          }
+        },
+        {
+          "t": 18.7,
+          "minRatio": 0.877,
+          "ratios": {
+            "left": 0.877,
+            "right": 1.048,
+            "up": 1.002,
+            "down": 0.911
+          }
+        },
+        {
+          "t": 38.4,
+          "minRatio": 0.877,
+          "ratios": {
+            "left": 1.009,
+            "right": 0.877,
+            "up": 1.007,
+            "down": 0.977
+          }
+        },
+        {
+          "t": 8.4,
+          "minRatio": 0.879,
+          "ratios": {
+            "left": 1.009,
+            "right": 0.879,
+            "up": 1.017,
+            "down": 1.002
+          }
+        },
+        {
+          "t": 28.8,
+          "minRatio": 0.88,
+          "ratios": {
+            "left": 0.92,
+            "right": 1.06,
+            "up": 1.019,
+            "down": 0.88
+          }
+        },
+        {
+          "t": 39.1,
+          "minRatio": 0.88,
+          "ratios": {
+            "left": 0.892,
+            "right": 0.88,
+            "up": 1.012,
+            "down": 0.95
+          }
+        },
+        {
+          "t": 43.9,
+          "minRatio": 0.881,
+          "ratios": {
+            "left": 0.881,
+            "right": 1.031,
+            "up": 0.997,
+            "down": 0.91
+          }
+        },
+        {
+          "t": 13.9,
+          "minRatio": 0.883,
+          "ratios": {
+            "left": 0.883,
+            "right": 1.022,
+            "up": 1.012,
+            "down": 0.938
+          }
+        },
+        {
+          "t": 33.1,
+          "minRatio": 0.883,
+          "ratios": {
+            "left": 1.019,
+            "right": 0.883,
+            "up": 1.007,
+            "down": 0.999
+          }
+        },
+        {
+          "t": 34.4,
+          "minRatio": 0.884,
+          "ratios": {
+            "left": 0.981,
+            "right": 0.884,
+            "up": 1.031,
+            "down": 0.968
+          }
+        },
+        {
+          "t": 23.9,
+          "minRatio": 0.885,
+          "ratios": {
+            "left": 0.885,
+            "right": 1.034,
+            "up": 1.007,
+            "down": 0.942
+          }
+        },
+        {
+          "t": 38.7,
+          "minRatio": 0.885,
+          "ratios": {
+            "left": 0.885,
+            "right": 1.039,
+            "up": 1.013,
+            "down": 0.981
+          }
+        },
+        {
+          "t": 18.5,
+          "minRatio": 0.886,
+          "ratios": {
+            "left": 0.96,
+            "right": 0.924,
+            "up": 1.002,
+            "down": 0.886
+          }
+        },
+        {
+          "t": 18.8,
+          "minRatio": 0.886,
+          "ratios": {
+            "left": 0.886,
+            "right": 1.064,
+            "up": 1.009,
+            "down": 0.927
+          }
+        },
+        {
+          "t": 43.6,
+          "minRatio": 0.886,
+          "ratios": {
+            "left": 0.89,
+            "right": 1,
+            "up": 0.998,
+            "down": 0.886
+          }
+        },
+        {
+          "t": 18.6,
+          "minRatio": 0.891,
+          "ratios": {
+            "left": 0.906,
+            "right": 0.994,
+            "up": 0.999,
+            "down": 0.891
+          }
+        },
+        {
+          "t": 35.2,
+          "minRatio": 0.891,
+          "ratios": {
+            "left": 0.891,
+            "right": 1.029,
+            "up": 1.013,
+            "down": 0.948
+          }
+        },
+        {
+          "t": 14,
+          "minRatio": 0.893,
+          "ratios": {
+            "left": 0.893,
+            "right": 0.969,
+            "up": 1.019,
+            "down": 0.958
+          }
+        },
+        {
+          "t": 23.6,
+          "minRatio": 0.894,
+          "ratios": {
+            "left": 0.894,
+            "right": 1.035,
+            "up": 1.001,
+            "down": 0.959
+          }
+        },
+        {
+          "t": 28.9,
+          "minRatio": 0.894,
+          "ratios": {
+            "left": 0.937,
+            "right": 1.012,
+            "up": 1.021,
+            "down": 0.894
+          }
+        },
+        {
+          "t": 28.7,
+          "minRatio": 0.895,
+          "ratios": {
+            "left": 0.915,
+            "right": 1.048,
+            "up": 1.016,
+            "down": 0.895
+          }
+        },
+        {
+          "t": 38.8,
+          "minRatio": 0.898,
+          "ratios": {
+            "left": 0.898,
+            "right": 1.062,
+            "up": 1.014,
+            "down": 0.979
+          }
+        }
+      ],
+      "below095": 151,
+      "worstFrames": [
+        {
+          "t": 3.2,
+          "minRatio": 0.622,
+          "ratios": {
+            "left": 0.893,
+            "right": 0.622,
+            "up": 0.993,
+            "down": 1.063
+          }
+        },
+        {
+          "t": 3.3,
+          "minRatio": 0.663,
+          "ratios": {
+            "left": 0.932,
+            "right": 0.663,
+            "up": 0.996,
+            "down": 1.012
+          }
+        },
+        {
+          "t": 18.2,
+          "minRatio": 0.734,
+          "ratios": {
+            "left": 1.052,
+            "right": 0.734,
+            "up": 0.99,
+            "down": 1.049
+          }
+        },
+        {
+          "t": 3.4,
+          "minRatio": 0.736,
+          "ratios": {
+            "left": 0.998,
+            "right": 0.736,
+            "up": 0.994,
+            "down": 0.944
+          }
+        },
+        {
+          "t": 23.2,
+          "minRatio": 0.749,
+          "ratios": {
+            "left": 1.071,
+            "right": 0.749,
+            "up": 0.995,
+            "down": 1.053
+          }
+        },
+        {
+          "t": 43.2,
+          "minRatio": 0.763,
+          "ratios": {
+            "left": 1.068,
+            "right": 0.763,
+            "up": 0.994,
+            "down": 1.055
+          }
+        },
+        {
+          "t": 28.2,
+          "minRatio": 0.769,
+          "ratios": {
+            "left": 1.06,
+            "right": 0.769,
+            "up": 1.001,
+            "down": 1.045
+          }
+        },
+        {
+          "t": 34.5,
+          "minRatio": 0.77,
+          "ratios": {
+            "left": 1.037,
+            "right": 0.77,
+            "up": 1.012,
+            "down": 1.108
+          }
+        }
+      ]
+    },
+    "frames": [
+      {
+        "i": 0,
+        "t": 0.1,
+        "oldMinRatio": 1.013,
+        "newMinRatio": 0.995
+      },
+      {
+        "i": 31,
+        "t": 3.2,
+        "oldMinRatio": 0.622,
+        "newMinRatio": 0.622
+      },
+      {
+        "i": 32,
+        "t": 3.3,
+        "oldMinRatio": 0.664,
+        "newMinRatio": 0.663
+      },
+      {
+        "i": 33,
+        "t": 3.4,
+        "oldMinRatio": 0.736,
+        "newMinRatio": 0.736
+      },
+      {
+        "i": 100,
+        "t": 10.1,
+        "oldMinRatio": 0.958,
+        "newMinRatio": 0.958
+      },
+      {
+        "i": 181,
+        "t": 18.2,
+        "oldMinRatio": 0.736,
+        "newMinRatio": 0.734
+      },
+      {
+        "i": 200,
+        "t": 20.1,
+        "oldMinRatio": 0.964,
+        "newMinRatio": 0.963
+      },
+      {
+        "i": 231,
+        "t": 23.2,
+        "oldMinRatio": 0.752,
+        "newMinRatio": 0.749
+      },
+      {
+        "i": 300,
+        "t": 30.1,
+        "oldMinRatio": 0.939,
+        "newMinRatio": 0.937
+      },
+      {
+        "i": 400,
+        "t": 40.1,
+        "oldMinRatio": 0.913,
+        "newMinRatio": 0.911
+      },
+      {
+        "i": 431,
+        "t": 43.2,
+        "oldMinRatio": 0.764,
+        "newMinRatio": 0.763
+      },
+      {
+        "i": 500,
+        "t": 50.1,
+        "oldMinRatio": 0.979,
+        "newMinRatio": 0.981
+      }
+    ],
+    "gif": "design/splay-tipfix.gif",
+    "thresholdCompare": {
+      "note": "Same 600 frames/version, only the lit-pixel threshold changed. maxRGB>4 is \"any non-black pixel\" (demo background is exactly 0,0,0).",
+      "old": {
+        "threshold60": {
+          "minRatio": 0.6221320451299819,
+          "minRatioFrame": {
+            "t": 3.2,
+            "minRatio": 0.6221320451299819,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.8943125070604179,
+              "right": 0.6221320451299819,
+              "up": 0.9924396876306577,
+              "down": 1.0604162145674467
+            }
+          },
+          "below090": [
+            {
+              "t": 3.2,
+              "minRatio": 0.6221320451299819,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.3,
+              "minRatio": 0.6644162841839963,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.2,
+              "minRatio": 0.7359796975630918,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.4,
+              "minRatio": 0.7364892814947527,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.2,
+              "minRatio": 0.7515531364696233,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.2,
+              "minRatio": 0.7639243694112499,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.5,
+              "minRatio": 0.770911493956844,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.2,
+              "minRatio": 0.7718510841678526,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.2,
+              "minRatio": 0.7724924646524112,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.5,
+              "minRatio": 0.7828229674956467,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.3,
+              "minRatio": 0.7833002733607627,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.2,
+              "minRatio": 0.7882935995873942,
+              "minAxis": "right"
+            },
+            {
+              "t": 8.2,
+              "minRatio": 0.7892872915433596,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.3,
+              "minRatio": 0.8004414933045327,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.3,
+              "minRatio": 0.8025414797819143,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.3,
+              "minRatio": 0.8046970457730375,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.3,
+              "minRatio": 0.8092291650196695,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.3,
+              "minRatio": 0.8117893936906029,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.4,
+              "minRatio": 0.8120476355496601,
+              "minAxis": "left"
+            },
+            {
+              "t": 38.3,
+              "minRatio": 0.8155062646103,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.6,
+              "minRatio": 0.8183858405858979,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.2,
+              "minRatio": 0.8205379468309653,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.5,
+              "minRatio": 0.8212369487807957,
+              "minAxis": "left"
+            },
+            {
+              "t": 8.3,
+              "minRatio": 0.8248719937368091,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.2,
+              "minRatio": 0.8259640110536323,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.1,
+              "minRatio": 0.8339893087404875,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.7,
+              "minRatio": 0.8351397412094012,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.8,
+              "minRatio": 0.8363612929651093,
+              "minAxis": "left"
+            },
+            {
+              "t": 3.6,
+              "minRatio": 0.837904088869359,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.1,
+              "minRatio": 0.8406173816093017,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.1,
+              "minRatio": 0.8408286112657193,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.3,
+              "minRatio": 0.8410670179721877,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.9,
+              "minRatio": 0.8444233806425905,
+              "minAxis": "left"
+            },
+            {
+              "t": 43.4,
+              "minRatio": 0.8466905296306652,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.1,
+              "minRatio": 0.8481997329484656,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.4,
+              "minRatio": 0.8490077425198357,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.4,
+              "minRatio": 0.8503795398222519,
+              "minAxis": "right"
+            },
+            {
+              "t": 35,
+              "minRatio": 0.8505089804720469,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.6,
+              "minRatio": 0.8506378457141218,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.6,
+              "minRatio": 0.8520082485145091,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.3,
+              "minRatio": 0.8521280633664243,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.7,
+              "minRatio": 0.8522557942870879,
+              "minAxis": "left"
+            },
+            {
+              "t": 34.6,
+              "minRatio": 0.8538136937129088,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.7,
+              "minRatio": 0.8549352770976253,
+              "minAxis": "left"
+            },
+            {
+              "t": 3.1,
+              "minRatio": 0.8563905032603606,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.1,
+              "minRatio": 0.8577217408271451,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.7,
+              "minRatio": 0.8581274864881663,
+              "minAxis": "left"
+            },
+            {
+              "t": 43.8,
+              "minRatio": 0.8586457385588154,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.8,
+              "minRatio": 0.8590196754636167,
+              "minAxis": "left"
+            },
+            {
+              "t": 34.9,
+              "minRatio": 0.8590583770898041,
+              "minAxis": "left"
+            },
+            {
+              "t": 40,
+              "minRatio": 0.8596459113247498,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.9,
+              "minRatio": 0.8604595538258164,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.8,
+              "minRatio": 0.8618201210216982,
+              "minAxis": "left"
+            },
+            {
+              "t": 35.1,
+              "minRatio": 0.8625763852337287,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.5,
+              "minRatio": 0.8661525338179481,
+              "minAxis": "down"
+            },
+            {
+              "t": 8.1,
+              "minRatio": 0.8679921928573144,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.5,
+              "minRatio": 0.8681425116024243,
+              "minAxis": "down"
+            },
+            {
+              "t": 13.8,
+              "minRatio": 0.8682685647353047,
+              "minAxis": "left"
+            },
+            {
+              "t": 34,
+              "minRatio": 0.8690758209105413,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.1,
+              "minRatio": 0.8717978204191406,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.4,
+              "minRatio": 0.8724667182725001,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.7,
+              "minRatio": 0.873382794734429,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.4,
+              "minRatio": 0.8741705414552311,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.4,
+              "minRatio": 0.8746296871984431,
+              "minAxis": "right"
+            },
+            {
+              "t": 8.4,
+              "minRatio": 0.8774790093630317,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.7,
+              "minRatio": 0.8792818894944632,
+              "minAxis": "left"
+            },
+            {
+              "t": 39.1,
+              "minRatio": 0.879571064866429,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.9,
+              "minRatio": 0.8819334072935168,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.8,
+              "minRatio": 0.8829136288919794,
+              "minAxis": "down"
+            },
+            {
+              "t": 43.9,
+              "minRatio": 0.8838872322876582,
+              "minAxis": "left"
+            },
+            {
+              "t": 34.4,
+              "minRatio": 0.8839032839829744,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.9,
+              "minRatio": 0.8841357951809325,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.1,
+              "minRatio": 0.8845782359918324,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.7,
+              "minRatio": 0.8846403178840085,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.8,
+              "minRatio": 0.8849327177575119,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.5,
+              "minRatio": 0.8853809884822538,
+              "minAxis": "down"
+            },
+            {
+              "t": 43.6,
+              "minRatio": 0.8897473448955175,
+              "minAxis": "down"
+            },
+            {
+              "t": 35.2,
+              "minRatio": 0.8903330758331751,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.6,
+              "minRatio": 0.8918638703221774,
+              "minAxis": "down"
+            },
+            {
+              "t": 14,
+              "minRatio": 0.8925117511057254,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.6,
+              "minRatio": 0.8932195003520386,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.7,
+              "minRatio": 0.8957947181484888,
+              "minAxis": "down"
+            },
+            {
+              "t": 28.9,
+              "minRatio": 0.8970338613110286,
+              "minAxis": "down"
+            },
+            {
+              "t": 38.8,
+              "minRatio": 0.8986057562418444,
+              "minAxis": "left"
+            }
+          ],
+          "frameCount": 600
+        },
+        "threshold4": {
+          "minRatio": 0.6221320451299819,
+          "minRatioFrame": {
+            "t": 3.2,
+            "minRatio": 0.6221320451299819,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.8943125070604179,
+              "right": 0.6221320451299819,
+              "up": 0.9924396876306577,
+              "down": 1.0604162145674467
+            }
+          },
+          "below090": [
+            {
+              "t": 3.2,
+              "minRatio": 0.6221320451299819,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.3,
+              "minRatio": 0.6644162841839963,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.2,
+              "minRatio": 0.7359796975630918,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.4,
+              "minRatio": 0.7364892814947527,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.2,
+              "minRatio": 0.7515531364696233,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.2,
+              "minRatio": 0.7639243694112499,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.5,
+              "minRatio": 0.770911493956844,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.2,
+              "minRatio": 0.7718510841678526,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.2,
+              "minRatio": 0.7724924646524112,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.5,
+              "minRatio": 0.7828229674956467,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.3,
+              "minRatio": 0.7833002733607627,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.2,
+              "minRatio": 0.7882935995873942,
+              "minAxis": "right"
+            },
+            {
+              "t": 8.2,
+              "minRatio": 0.7892872915433596,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.3,
+              "minRatio": 0.8004414933045327,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.3,
+              "minRatio": 0.8025414797819143,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.3,
+              "minRatio": 0.8046970457730375,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.3,
+              "minRatio": 0.8092291650196695,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.3,
+              "minRatio": 0.8117893936906029,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.4,
+              "minRatio": 0.8120476355496601,
+              "minAxis": "left"
+            },
+            {
+              "t": 38.3,
+              "minRatio": 0.8155062646103,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.6,
+              "minRatio": 0.8183858405858979,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.2,
+              "minRatio": 0.8205379468309653,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.5,
+              "minRatio": 0.8212369487807957,
+              "minAxis": "left"
+            },
+            {
+              "t": 8.3,
+              "minRatio": 0.8248719937368091,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.2,
+              "minRatio": 0.8259640110536323,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.1,
+              "minRatio": 0.8339893087404875,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.7,
+              "minRatio": 0.8351397412094012,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.8,
+              "minRatio": 0.8363612929651093,
+              "minAxis": "left"
+            },
+            {
+              "t": 3.6,
+              "minRatio": 0.837904088869359,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.1,
+              "minRatio": 0.8406173816093017,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.1,
+              "minRatio": 0.8408286112657193,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.3,
+              "minRatio": 0.8410670179721877,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.9,
+              "minRatio": 0.8444233806425905,
+              "minAxis": "left"
+            },
+            {
+              "t": 43.4,
+              "minRatio": 0.8466905296306652,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.1,
+              "minRatio": 0.8481997329484656,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.4,
+              "minRatio": 0.8490077425198357,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.4,
+              "minRatio": 0.8503795398222519,
+              "minAxis": "right"
+            },
+            {
+              "t": 35,
+              "minRatio": 0.8505089804720469,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.6,
+              "minRatio": 0.8506378457141218,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.6,
+              "minRatio": 0.8520082485145091,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.3,
+              "minRatio": 0.8521280633664243,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.7,
+              "minRatio": 0.8522557942870879,
+              "minAxis": "left"
+            },
+            {
+              "t": 34.6,
+              "minRatio": 0.8538136937129088,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.7,
+              "minRatio": 0.8549352770976253,
+              "minAxis": "left"
+            },
+            {
+              "t": 3.1,
+              "minRatio": 0.8563905032603606,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.1,
+              "minRatio": 0.8577217408271451,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.7,
+              "minRatio": 0.8581274864881663,
+              "minAxis": "left"
+            },
+            {
+              "t": 43.8,
+              "minRatio": 0.8586457385588154,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.8,
+              "minRatio": 0.8590196754636167,
+              "minAxis": "left"
+            },
+            {
+              "t": 34.9,
+              "minRatio": 0.8590583770898041,
+              "minAxis": "left"
+            },
+            {
+              "t": 40,
+              "minRatio": 0.8596459113247498,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.9,
+              "minRatio": 0.8604595538258164,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.8,
+              "minRatio": 0.8618201210216982,
+              "minAxis": "left"
+            },
+            {
+              "t": 35.1,
+              "minRatio": 0.8625763852337287,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.5,
+              "minRatio": 0.8661525338179481,
+              "minAxis": "down"
+            },
+            {
+              "t": 8.1,
+              "minRatio": 0.8679921928573144,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.5,
+              "minRatio": 0.8681425116024243,
+              "minAxis": "down"
+            },
+            {
+              "t": 13.8,
+              "minRatio": 0.8682685647353047,
+              "minAxis": "left"
+            },
+            {
+              "t": 34,
+              "minRatio": 0.8690758209105413,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.1,
+              "minRatio": 0.8717978204191406,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.4,
+              "minRatio": 0.8724667182725001,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.7,
+              "minRatio": 0.873382794734429,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.4,
+              "minRatio": 0.8741705414552311,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.4,
+              "minRatio": 0.8746296871984431,
+              "minAxis": "right"
+            },
+            {
+              "t": 8.4,
+              "minRatio": 0.8774790093630317,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.7,
+              "minRatio": 0.8792818894944632,
+              "minAxis": "left"
+            },
+            {
+              "t": 39.1,
+              "minRatio": 0.879571064866429,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.9,
+              "minRatio": 0.8819334072935168,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.8,
+              "minRatio": 0.8829136288919794,
+              "minAxis": "down"
+            },
+            {
+              "t": 43.9,
+              "minRatio": 0.8838872322876582,
+              "minAxis": "left"
+            },
+            {
+              "t": 34.4,
+              "minRatio": 0.8839032839829744,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.9,
+              "minRatio": 0.8841357951809325,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.1,
+              "minRatio": 0.8845782359918324,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.7,
+              "minRatio": 0.8846403178840085,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.8,
+              "minRatio": 0.8849327177575119,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.5,
+              "minRatio": 0.8853809884822538,
+              "minAxis": "down"
+            },
+            {
+              "t": 43.6,
+              "minRatio": 0.8897473448955175,
+              "minAxis": "down"
+            },
+            {
+              "t": 35.2,
+              "minRatio": 0.8903330758331751,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.6,
+              "minRatio": 0.8918638703221774,
+              "minAxis": "down"
+            },
+            {
+              "t": 14,
+              "minRatio": 0.8925117511057254,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.6,
+              "minRatio": 0.8932195003520386,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.7,
+              "minRatio": 0.8957947181484888,
+              "minAxis": "down"
+            },
+            {
+              "t": 28.9,
+              "minRatio": 0.8970338613110286,
+              "minAxis": "down"
+            },
+            {
+              "t": 38.8,
+              "minRatio": 0.8986057562418444,
+              "minAxis": "left"
+            }
+          ],
+          "frameCount": 600
+        },
+        "threshold4Worst5": [
+          {
+            "t": 3.2,
+            "minRatio": 0.6221320451299819,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.8943125070604179,
+              "right": 0.6221320451299819,
+              "up": 0.9924396876306577,
+              "down": 1.0604162145674467
+            }
+          },
+          {
+            "t": 3.3,
+            "minRatio": 0.6644162841839963,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.9322973389303568,
+              "right": 0.6644162841839963,
+              "up": 0.9951353789824764,
+              "down": 1.009726580511521
+            }
+          },
+          {
+            "t": 18.2,
+            "minRatio": 0.7359796975630918,
+            "minAxis": "right",
+            "ratios": {
+              "left": 1.053506281025346,
+              "right": 0.7359796975630918,
+              "up": 0.9904396444938008,
+              "down": 1.0484284196845643
+            }
+          },
+          {
+            "t": 3.4,
+            "minRatio": 0.7364892814947527,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.9959126322653956,
+              "right": 0.7364892814947527,
+              "up": 0.9930701441279443,
+              "down": 0.9443519071745518
+            }
+          },
+          {
+            "t": 23.2,
+            "minRatio": 0.7515531364696233,
+            "minAxis": "right",
+            "ratios": {
+              "left": 1.073359346233784,
+              "right": 0.7515531364696233,
+              "up": 0.9958302904784428,
+              "down": 1.0506628659946269
+            }
+          }
+        ],
+        "stablePose": {
+          "frames": 348,
+          "minRatio60": 0.9453043694406008,
+          "minRatio4": 0.9453043694406008,
+          "below090Count60": 0,
+          "below090Count4": 0
+        }
+      },
+      "new": {
+        "threshold60": {
+          "minRatio": 0.6216439881349465,
+          "minRatioFrame": {
+            "t": 3.2,
+            "minRatio": 0.6216439881349465,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.8933711247511075,
+              "right": 0.6216439881349465,
+              "up": 0.9930834322919897,
+              "down": 1.0626253982220144
+            }
+          },
+          "below090": [
+            {
+              "t": 3.2,
+              "minRatio": 0.6216439881349465,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.3,
+              "minRatio": 0.6631676161810696,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.2,
+              "minRatio": 0.7335264319045218,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.4,
+              "minRatio": 0.7359115490932419,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.2,
+              "minRatio": 0.7493171106090153,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.2,
+              "minRatio": 0.7629543067198994,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.2,
+              "minRatio": 0.768711350944101,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.5,
+              "minRatio": 0.7704296742731375,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.2,
+              "minRatio": 0.7736368979333724,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.5,
+              "minRatio": 0.7822089062099588,
+              "minAxis": "right"
+            },
+            {
+              "t": 8.2,
+              "minRatio": 0.7835470203321341,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.2,
+              "minRatio": 0.7864991100924072,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.3,
+              "minRatio": 0.7874778748186527,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.3,
+              "minRatio": 0.8012574134142312,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.3,
+              "minRatio": 0.8039737225857961,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.3,
+              "minRatio": 0.8051654103141658,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.3,
+              "minRatio": 0.8056325909529055,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.4,
+              "minRatio": 0.8099581562534826,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.3,
+              "minRatio": 0.8161189371236343,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.3,
+              "minRatio": 0.8167144220393521,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.6,
+              "minRatio": 0.8185943465325275,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.2,
+              "minRatio": 0.8215176936332006,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.5,
+              "minRatio": 0.8230287384872049,
+              "minAxis": "left"
+            },
+            {
+              "t": 8.3,
+              "minRatio": 0.8251238630478708,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.2,
+              "minRatio": 0.8276847694099635,
+              "minAxis": "left"
+            },
+            {
+              "t": 39.7,
+              "minRatio": 0.834484729647649,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.1,
+              "minRatio": 0.8352248484571078,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.6,
+              "minRatio": 0.8379040166282444,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.1,
+              "minRatio": 0.8385587267971544,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.8,
+              "minRatio": 0.8391614453115709,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.1,
+              "minRatio": 0.8440985003094876,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.3,
+              "minRatio": 0.8445472952879285,
+              "minAxis": "down"
+            },
+            {
+              "t": 43.4,
+              "minRatio": 0.8456153670533235,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.9,
+              "minRatio": 0.8462657589275923,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.4,
+              "minRatio": 0.8473645017278271,
+              "minAxis": "right"
+            },
+            {
+              "t": 35,
+              "minRatio": 0.8481788188817388,
+              "minAxis": "left"
+            },
+            {
+              "t": 38.1,
+              "minRatio": 0.8484158347912435,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.4,
+              "minRatio": 0.8487336439386959,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.7,
+              "minRatio": 0.8495681826536269,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.6,
+              "minRatio": 0.8508237774837611,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.3,
+              "minRatio": 0.8528969007168752,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.7,
+              "minRatio": 0.8529890829709215,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.6,
+              "minRatio": 0.8540612804385446,
+              "minAxis": "down"
+            },
+            {
+              "t": 34.6,
+              "minRatio": 0.8550786028887961,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.1,
+              "minRatio": 0.8551777333820718,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.9,
+              "minRatio": 0.8563056111521702,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.7,
+              "minRatio": 0.8567544825097648,
+              "minAxis": "left"
+            },
+            {
+              "t": 34.9,
+              "minRatio": 0.858460771262305,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.8,
+              "minRatio": 0.8595971676824409,
+              "minAxis": "left"
+            },
+            {
+              "t": 43.8,
+              "minRatio": 0.8596433352674958,
+              "minAxis": "left"
+            },
+            {
+              "t": 39.8,
+              "minRatio": 0.8609129419469185,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.1,
+              "minRatio": 0.8620966973575285,
+              "minAxis": "right"
+            },
+            {
+              "t": 40,
+              "minRatio": 0.8623846062634782,
+              "minAxis": "right"
+            },
+            {
+              "t": 35.1,
+              "minRatio": 0.8635437606190549,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.5,
+              "minRatio": 0.8636522996998104,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.5,
+              "minRatio": 0.86695868090467,
+              "minAxis": "down"
+            },
+            {
+              "t": 8.1,
+              "minRatio": 0.8673114146668426,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.1,
+              "minRatio": 0.8686276465267135,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.4,
+              "minRatio": 0.8698709495239219,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.8,
+              "minRatio": 0.8699627473006497,
+              "minAxis": "left"
+            },
+            {
+              "t": 34,
+              "minRatio": 0.8706704554442817,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.4,
+              "minRatio": 0.8724785984717874,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.7,
+              "minRatio": 0.8728369304877249,
+              "minAxis": "left"
+            },
+            {
+              "t": 38.4,
+              "minRatio": 0.8768949151652923,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.7,
+              "minRatio": 0.8772802721850057,
+              "minAxis": "left"
+            },
+            {
+              "t": 8.4,
+              "minRatio": 0.8785267454936084,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.1,
+              "minRatio": 0.8795710648663885,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.8,
+              "minRatio": 0.8801688196829439,
+              "minAxis": "down"
+            },
+            {
+              "t": 43.9,
+              "minRatio": 0.8809409415133477,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.9,
+              "minRatio": 0.8830996002287943,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.1,
+              "minRatio": 0.88340660918925,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.4,
+              "minRatio": 0.8836751799097071,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.9,
+              "minRatio": 0.8845834588747239,
+              "minAxis": "left"
+            },
+            {
+              "t": 38.7,
+              "minRatio": 0.8846403178839632,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.5,
+              "minRatio": 0.8855504393891531,
+              "minAxis": "down"
+            },
+            {
+              "t": 18.8,
+              "minRatio": 0.8858176504752265,
+              "minAxis": "left"
+            },
+            {
+              "t": 43.6,
+              "minRatio": 0.8863756707465045,
+              "minAxis": "down"
+            },
+            {
+              "t": 18.6,
+              "minRatio": 0.8911643692474146,
+              "minAxis": "down"
+            },
+            {
+              "t": 35.2,
+              "minRatio": 0.8913315802173009,
+              "minAxis": "left"
+            },
+            {
+              "t": 14,
+              "minRatio": 0.8931117590056491,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.9,
+              "minRatio": 0.89363457509969,
+              "minAxis": "down"
+            },
+            {
+              "t": 23.6,
+              "minRatio": 0.894025412683206,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.7,
+              "minRatio": 0.894730407592243,
+              "minAxis": "down"
+            },
+            {
+              "t": 38.8,
+              "minRatio": 0.8981389480567411,
+              "minAxis": "left"
+            }
+          ],
+          "frameCount": 600
+        },
+        "threshold4": {
+          "minRatio": 0.6216439881349465,
+          "minRatioFrame": {
+            "t": 3.2,
+            "minRatio": 0.6216439881349465,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.8933711247511075,
+              "right": 0.6216439881349465,
+              "up": 0.9930834322919897,
+              "down": 1.0626253982220144
+            }
+          },
+          "below090": [
+            {
+              "t": 3.2,
+              "minRatio": 0.6216439881349465,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.3,
+              "minRatio": 0.6631676161810696,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.2,
+              "minRatio": 0.7335264319045218,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.4,
+              "minRatio": 0.7359115490932419,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.2,
+              "minRatio": 0.7493171106090153,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.2,
+              "minRatio": 0.7629543067198994,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.2,
+              "minRatio": 0.768711350944101,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.5,
+              "minRatio": 0.7704296742731375,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.2,
+              "minRatio": 0.7736368979333724,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.5,
+              "minRatio": 0.7822089062099588,
+              "minAxis": "right"
+            },
+            {
+              "t": 8.2,
+              "minRatio": 0.7835470203321341,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.2,
+              "minRatio": 0.7864991100924072,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.3,
+              "minRatio": 0.7874778748186527,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.3,
+              "minRatio": 0.8012574134142312,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.3,
+              "minRatio": 0.8039737225857961,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.3,
+              "minRatio": 0.8051654103141658,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.3,
+              "minRatio": 0.8056325909529055,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.4,
+              "minRatio": 0.8099581562534826,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.3,
+              "minRatio": 0.8161189371236343,
+              "minAxis": "right"
+            },
+            {
+              "t": 38.3,
+              "minRatio": 0.8167144220393521,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.6,
+              "minRatio": 0.8185943465325275,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.2,
+              "minRatio": 0.8215176936332006,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.5,
+              "minRatio": 0.8230287384872049,
+              "minAxis": "left"
+            },
+            {
+              "t": 8.3,
+              "minRatio": 0.8251238630478708,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.2,
+              "minRatio": 0.8276847694099635,
+              "minAxis": "left"
+            },
+            {
+              "t": 39.7,
+              "minRatio": 0.834484729647649,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.1,
+              "minRatio": 0.8352248484571078,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.6,
+              "minRatio": 0.8379040166282444,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.1,
+              "minRatio": 0.8385587267971544,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.8,
+              "minRatio": 0.8391614453115709,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.1,
+              "minRatio": 0.8440985003094876,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.3,
+              "minRatio": 0.8445472952879285,
+              "minAxis": "down"
+            },
+            {
+              "t": 43.4,
+              "minRatio": 0.8456153670533235,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.9,
+              "minRatio": 0.8462657589275923,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.4,
+              "minRatio": 0.8473645017278271,
+              "minAxis": "right"
+            },
+            {
+              "t": 35,
+              "minRatio": 0.8481788188817388,
+              "minAxis": "left"
+            },
+            {
+              "t": 38.1,
+              "minRatio": 0.8484158347912435,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.4,
+              "minRatio": 0.8487336439386959,
+              "minAxis": "right"
+            },
+            {
+              "t": 33.7,
+              "minRatio": 0.8495681826536269,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.6,
+              "minRatio": 0.8508237774837611,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.3,
+              "minRatio": 0.8528969007168752,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.7,
+              "minRatio": 0.8529890829709215,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.6,
+              "minRatio": 0.8540612804385446,
+              "minAxis": "down"
+            },
+            {
+              "t": 34.6,
+              "minRatio": 0.8550786028887961,
+              "minAxis": "right"
+            },
+            {
+              "t": 3.1,
+              "minRatio": 0.8551777333820718,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.9,
+              "minRatio": 0.8563056111521702,
+              "minAxis": "right"
+            },
+            {
+              "t": 43.7,
+              "minRatio": 0.8567544825097648,
+              "minAxis": "left"
+            },
+            {
+              "t": 34.9,
+              "minRatio": 0.858460771262305,
+              "minAxis": "left"
+            },
+            {
+              "t": 23.8,
+              "minRatio": 0.8595971676824409,
+              "minAxis": "left"
+            },
+            {
+              "t": 43.8,
+              "minRatio": 0.8596433352674958,
+              "minAxis": "left"
+            },
+            {
+              "t": 39.8,
+              "minRatio": 0.8609129419469185,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.1,
+              "minRatio": 0.8620966973575285,
+              "minAxis": "right"
+            },
+            {
+              "t": 40,
+              "minRatio": 0.8623846062634782,
+              "minAxis": "right"
+            },
+            {
+              "t": 35.1,
+              "minRatio": 0.8635437606190549,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.5,
+              "minRatio": 0.8636522996998104,
+              "minAxis": "down"
+            },
+            {
+              "t": 33.5,
+              "minRatio": 0.86695868090467,
+              "minAxis": "down"
+            },
+            {
+              "t": 8.1,
+              "minRatio": 0.8673114146668426,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.1,
+              "minRatio": 0.8686276465267135,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.4,
+              "minRatio": 0.8698709495239219,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.8,
+              "minRatio": 0.8699627473006497,
+              "minAxis": "left"
+            },
+            {
+              "t": 34,
+              "minRatio": 0.8706704554442817,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.4,
+              "minRatio": 0.8724785984717874,
+              "minAxis": "right"
+            },
+            {
+              "t": 13.7,
+              "minRatio": 0.8728369304877249,
+              "minAxis": "left"
+            },
+            {
+              "t": 38.4,
+              "minRatio": 0.8768949151652923,
+              "minAxis": "right"
+            },
+            {
+              "t": 18.7,
+              "minRatio": 0.8772802721850057,
+              "minAxis": "left"
+            },
+            {
+              "t": 8.4,
+              "minRatio": 0.8785267454936084,
+              "minAxis": "right"
+            },
+            {
+              "t": 39.1,
+              "minRatio": 0.8795710648663885,
+              "minAxis": "right"
+            },
+            {
+              "t": 28.8,
+              "minRatio": 0.8801688196829439,
+              "minAxis": "down"
+            },
+            {
+              "t": 43.9,
+              "minRatio": 0.8809409415133477,
+              "minAxis": "left"
+            },
+            {
+              "t": 13.9,
+              "minRatio": 0.8830996002287943,
+              "minAxis": "left"
+            },
+            {
+              "t": 33.1,
+              "minRatio": 0.88340660918925,
+              "minAxis": "right"
+            },
+            {
+              "t": 34.4,
+              "minRatio": 0.8836751799097071,
+              "minAxis": "right"
+            },
+            {
+              "t": 23.9,
+              "minRatio": 0.8845834588747239,
+              "minAxis": "left"
+            },
+            {
+              "t": 38.7,
+              "minRatio": 0.8846403178839632,
+              "minAxis": "left"
+            },
+            {
+              "t": 18.5,
+              "minRatio": 0.8855504393891531,
+              "minAxis": "down"
+            },
+            {
+              "t": 18.8,
+              "minRatio": 0.8858176504752265,
+              "minAxis": "left"
+            },
+            {
+              "t": 43.6,
+              "minRatio": 0.8863756707465045,
+              "minAxis": "down"
+            },
+            {
+              "t": 18.6,
+              "minRatio": 0.8911643692474146,
+              "minAxis": "down"
+            },
+            {
+              "t": 35.2,
+              "minRatio": 0.8913315802173009,
+              "minAxis": "left"
+            },
+            {
+              "t": 14,
+              "minRatio": 0.8931117590056491,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.9,
+              "minRatio": 0.89363457509969,
+              "minAxis": "down"
+            },
+            {
+              "t": 23.6,
+              "minRatio": 0.894025412683206,
+              "minAxis": "left"
+            },
+            {
+              "t": 28.7,
+              "minRatio": 0.894730407592243,
+              "minAxis": "down"
+            },
+            {
+              "t": 38.8,
+              "minRatio": 0.8981389480567411,
+              "minAxis": "left"
+            }
+          ],
+          "frameCount": 600
+        },
+        "threshold4Worst5": [
+          {
+            "t": 3.2,
+            "minRatio": 0.6216439881349465,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.8933711247511075,
+              "right": 0.6216439881349465,
+              "up": 0.9930834322919897,
+              "down": 1.0626253982220144
+            }
+          },
+          {
+            "t": 3.3,
+            "minRatio": 0.6631676161810696,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.9319758564876067,
+              "right": 0.6631676161810696,
+              "up": 0.9957808722005617,
+              "down": 1.0116297263139207
+            }
+          },
+          {
+            "t": 18.2,
+            "minRatio": 0.7335264319045218,
+            "minAxis": "right",
+            "ratios": {
+              "left": 1.0519794603282424,
+              "right": 0.7335264319045218,
+              "up": 0.9902207628044127,
+              "down": 1.0491332455129927
+            }
+          },
+          {
+            "t": 3.4,
+            "minRatio": 0.7359115490932419,
+            "minAxis": "right",
+            "ratios": {
+              "left": 0.9978558759204098,
+              "right": 0.7359115490932419,
+              "up": 0.9935019137552719,
+              "down": 0.9435030496528923
+            }
+          },
+          {
+            "t": 23.2,
+            "minRatio": 0.7493171106090153,
+            "minAxis": "right",
+            "ratios": {
+              "left": 1.07147900869298,
+              "right": 0.7493171106090153,
+              "up": 0.9949351621274218,
+              "down": 1.0529552213387015
+            }
+          }
+        ],
+        "stablePose": {
+          "frames": 348,
+          "minRatio60": 0.9446706458408967,
+          "minRatio4": 0.9446706458408967,
+          "below090Count60": 0,
+          "below090Count4": 0
+        }
+      },
+      "interpretation": "Threshold >4 leaves the minRatio unchanged, so the sub-0.9 frames are not dark pixels being filtered. They are all within 2.5 s of a turn start (t=3,8,...): the engine grows extent fast (lambda 14) but shrinks it slowly (lambda 2.5), so during the post-turn silhouette change the probe is larger than the current body for a moment. On stable poses both versions are >=0.9. This is a measurement window, not missing geometry: culling on/off renders are identical and >4 finds no extra pixels."
+    },
+    "cullOnOff": {
+      "note": "Separate pass over the same deterministic 60 s timeline: each frame rendered twice (uCull=1 and uCull=0). 0.9.29 and 0.9.30 both reported 0 px bbox deficit and 0 lit-pixel delta on every frame, so the old hard-coded 2.1 sphere did not delete visible geometry in this timeline.",
+      "old": {
+        "maxDeficitPx": 0,
+        "framesWithDeficit": 0,
+        "framesOver2px": 0
+      },
+      "new": {
+        "maxDeficitPx": 0,
+        "framesWithDeficit": 0,
+        "framesOver2px": 0
+      }
+    }
+  },
+  "task2": {
+    "pose": "place(center, depth 0) + face(90); 8 frames at 0.5 s intervals",
+    "aggregate": {
+      "pairs": 2,
+      "oldMean": 90.66,
+      "newMean": 141.5,
+      "oldP95": 107.87,
+      "newP95": 164.87,
+      "meanOldOverNew": null,
+      "medianOldOverNew": null,
+      "note": "paired old/new ratio from the earlier full-image pass is not comparable; use the ring mean/P95 values (same fixed pixel ring)."
+    },
+    "bestPair": {
+      "k": 2,
+      "t": 1.5,
+      "oldFile": "../.scratch-verify/abi/mask-old-2.png",
+      "newFile": "../.scratch-verify/abi/mask-new-2.png",
+      "maxExtent": 0.8265,
+      "old": {
+        "tag": "old",
+        "pixels": 329,
+        "mean": 91.43,
+        "p95": 108.71,
+        "max": 113.91
+      },
+      "new": {
+        "tag": "new",
+        "pixels": 1,
+        "mean": 163.01,
+        "p95": 163.01,
+        "max": 163.01
+      },
+      "meanOldOverNew": 0.998,
+      "medianOldOverNew": 0.999,
+      "p05OldOverNew": 0.863,
+      "pairedPixels": 49868
+    },
+    "pairs": [
+      {
+        "k": 0,
+        "t": 0.5,
+        "oldFile": "../.scratch-verify/abi/mask-old-0.png",
+        "newFile": "../.scratch-verify/abi/mask-new-0.png",
+        "maxExtent": 0.7978,
+        "old": {
+          "tag": "old",
+          "pixels": 22,
+          "mean": 79.87,
+          "p95": 111.73,
+          "max": 112.48
+        },
+        "new": {
+          "tag": "new",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "meanOldOverNew": 0.97,
+        "medianOldOverNew": 0.974,
+        "p05OldOverNew": 0.827,
+        "pairedPixels": 51193
+      },
+      {
+        "k": 1,
+        "t": 1,
+        "oldFile": "../.scratch-verify/abi/mask-old-1.png",
+        "newFile": "../.scratch-verify/abi/mask-new-1.png",
+        "maxExtent": 0.8239,
+        "old": {
+          "tag": "old",
+          "pixels": 457,
+          "mean": 89.89,
+          "p95": 107.03,
+          "max": 117.75
+        },
+        "new": {
+          "tag": "new",
+          "pixels": 78,
+          "mean": 120,
+          "p95": 166.72,
+          "max": 168.3
+        },
+        "meanOldOverNew": 0.986,
+        "medianOldOverNew": 0.993,
+        "p05OldOverNew": 0.84,
+        "pairedPixels": 48794
+      },
+      {
+        "k": 2,
+        "t": 1.5,
+        "oldFile": "../.scratch-verify/abi/mask-old-2.png",
+        "newFile": "../.scratch-verify/abi/mask-new-2.png",
+        "maxExtent": 0.8265,
+        "old": {
+          "tag": "old",
+          "pixels": 329,
+          "mean": 91.43,
+          "p95": 108.71,
+          "max": 113.91
+        },
+        "new": {
+          "tag": "new",
+          "pixels": 1,
+          "mean": 163.01,
+          "p95": 163.01,
+          "max": 163.01
+        },
+        "meanOldOverNew": 0.998,
+        "medianOldOverNew": 0.999,
+        "p05OldOverNew": 0.863,
+        "pairedPixels": 49868
+      },
+      {
+        "k": 3,
+        "t": 2,
+        "oldFile": "../.scratch-verify/abi/mask-old-3.png",
+        "newFile": "../.scratch-verify/abi/mask-new-3.png",
+        "maxExtent": 0.814,
+        "old": {
+          "tag": "old",
+          "pixels": 28,
+          "mean": 77.24,
+          "p95": 124.03,
+          "max": 130.65
+        },
+        "new": {
+          "tag": "new",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "meanOldOverNew": 1,
+        "medianOldOverNew": 1,
+        "p05OldOverNew": 0.904,
+        "pairedPixels": 48066
+      },
+      {
+        "k": 4,
+        "t": 2.5,
+        "oldFile": "../.scratch-verify/abi/mask-old-4.png",
+        "newFile": "../.scratch-verify/abi/mask-new-4.png",
+        "maxExtent": 0.7288,
+        "old": {
+          "tag": "old",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "new": {
+          "tag": "new",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "meanOldOverNew": 1,
+        "medianOldOverNew": 1,
+        "p05OldOverNew": 0.983,
+        "pairedPixels": 44132
+      },
+      {
+        "k": 5,
+        "t": 3,
+        "oldFile": "../.scratch-verify/abi/mask-old-5.png",
+        "newFile": "../.scratch-verify/abi/mask-new-5.png",
+        "maxExtent": 0.6738,
+        "old": {
+          "tag": "old",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "new": {
+          "tag": "new",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "meanOldOverNew": 1.001,
+        "medianOldOverNew": 1,
+        "p05OldOverNew": 0.991,
+        "pairedPixels": 44186
+      },
+      {
+        "k": 6,
+        "t": 3.5,
+        "oldFile": "../.scratch-verify/abi/mask-old-6.png",
+        "newFile": "../.scratch-verify/abi/mask-new-6.png",
+        "maxExtent": 0.5948,
+        "old": {
+          "tag": "old",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "new": {
+          "tag": "new",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "meanOldOverNew": 1.003,
+        "medianOldOverNew": 1,
+        "p05OldOverNew": 0.993,
+        "pairedPixels": 42994
+      },
+      {
+        "k": 7,
+        "t": 4,
+        "oldFile": "../.scratch-verify/abi/mask-old-7.png",
+        "newFile": "../.scratch-verify/abi/mask-new-7.png",
+        "maxExtent": 0.5401,
+        "old": {
+          "tag": "old",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "new": {
+          "tag": "new",
+          "pixels": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "meanOldOverNew": 1.001,
+        "medianOldOverNew": 1,
+        "p05OldOverNew": 0.992,
+        "pairedPixels": 43254
+      }
+    ]
+  }
+}

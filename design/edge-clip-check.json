@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T08:22:33.186Z",
+  "generatedAt": "2026-11-10T09:11:00.716Z",
   "report": "design/edge-report.json",
   "criteria": {
     "viewport": "body bbox at least 1 px from each viewport edge",
@@ -14,15 +14,15 @@
       "name": "left · d0",
       "box": {
         "x0": 0,
-        "y0": 137,
-        "x1": 553,
-        "y1": 762
+        "y0": 125,
+        "x1": 562,
+        "y1": 775
       },
       "boxFloat": [
-        -72.11,
-        137.3,
-        552.85,
-        762.26
+        -87.95,
+        125.06,
+        562.02,
+        775.03
       ],
       "boxVisible": {
         "left": false,
@@ -33,21 +33,21 @@
       "thresholds": {
         "body60": {
           "value": 60,
-          "pixels": 52061,
+          "pixels": 50062,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 7,
-            "minY": 302,
-            "maxX": 488,
-            "maxY": 601,
-            "width": 482,
-            "height": 300
+            "minX": 11,
+            "minY": 303,
+            "maxX": 480,
+            "maxY": 597,
+            "width": 470,
+            "height": 295
           },
           "distances": {
             "left": null,
-            "right": 64,
-            "top": 165,
-            "bottom": 160
+            "right": 81,
+            "top": 178,
+            "bottom": 177
           },
           "longestEdgeRun": {
             "left": 0,
@@ -73,21 +73,21 @@
         },
         "glow8": {
           "value": 8,
-          "pixels": 54411,
+          "pixels": 52621,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 6,
-            "minY": 301,
-            "maxX": 488,
-            "maxY": 601,
-            "width": 483,
-            "height": 301
+            "minX": 10,
+            "minY": 302,
+            "maxX": 481,
+            "maxY": 598,
+            "width": 472,
+            "height": 297
           },
           "distances": {
             "left": null,
-            "right": 64,
-            "top": 164,
-            "bottom": 160
+            "right": 80,
+            "top": 177,
+            "bottom": 176
           },
           "longestEdgeRun": {
             "left": 0,
@@ -99,21 +99,21 @@
         },
         "glow2": {
           "value": 2,
-          "pixels": 54613,
+          "pixels": 52834,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 6,
-            "minY": 301,
-            "maxX": 488,
-            "maxY": 601,
-            "width": 483,
-            "height": 301
+            "minX": 10,
+            "minY": 302,
+            "maxX": 481,
+            "maxY": 598,
+            "width": 472,
+            "height": 297
           },
           "distances": {
             "left": null,
-            "right": 64,
-            "top": 164,
-            "bottom": 160
+            "right": 80,
+            "top": 177,
+            "bottom": 176
           },
           "longestEdgeRun": {
             "left": 0,
@@ -131,25 +131,25 @@
         "darkOutside": 0
       },
       "viewportGaps": {
-        "left": 7,
-        "right": 951,
-        "top": 302,
-        "bottom": 298
+        "left": 11,
+        "right": 959,
+        "top": 303,
+        "bottom": 302
       }
     },
     {
       "name": "right · d0",
       "box": {
-        "x0": 877,
-        "y0": 137,
+        "x0": 858,
+        "y0": 125,
         "x1": 1440,
-        "y1": 762
+        "y1": 775
       },
       "boxFloat": [
-        877.03,
-        137.43,
-        1502.03,
-        762.42
+        858.17,
+        125,
+        1508.14,
+        774.97
       ],
       "boxVisible": {
         "left": true,
@@ -160,909 +160,20 @@
       "thresholds": {
         "body60": {
           "value": 60,
-          "pixels": 50622,
+          "pixels": 49910,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 959,
-            "minY": 296,
+            "minX": 939,
+            "minY": 298,
             "maxX": 1431,
-            "maxY": 587,
-            "width": 473,
-            "height": 292
-          },
-          "distances": {
-            "left": 82,
-            "right": null,
-            "top": 159,
-            "bottom": 174
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 53559,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 958,
-            "minY": 295,
-            "maxX": 1432,
-            "maxY": 588,
-            "width": 475,
-            "height": 294
+            "maxY": 593,
+            "width": 493,
+            "height": 296
           },
           "distances": {
             "left": 81,
             "right": null,
-            "top": 158,
-            "bottom": 173
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 53760,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 958,
-            "minY": 295,
-            "maxX": 1432,
-            "maxY": 588,
-            "width": 475,
-            "height": 294
-          },
-          "distances": {
-            "left": 81,
-            "right": null,
-            "top": 158,
-            "bottom": 173
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 959,
-        "right": 8,
-        "top": 296,
-        "bottom": 312
-      }
-    },
-    {
-      "name": "top · d0",
-      "box": {
-        "x0": 408,
-        "y0": 0,
-        "x1": 1033,
-        "y1": 469
-      },
-      "boxFloat": [
-        407.54,
-        -156.35,
-        1032.53,
-        468.64
-      ],
-      "boxVisible": {
-        "left": true,
-        "right": true,
-        "top": false,
-        "bottom": true
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 51713,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 479,
-            "minY": 8,
-            "maxX": 961,
-            "maxY": 304,
-            "width": 483,
-            "height": 297
-          },
-          "distances": {
-            "left": 71,
-            "right": 71,
-            "top": null,
-            "bottom": 164
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 54304,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 478,
-            "minY": 7,
-            "maxX": 962,
-            "maxY": 304,
-            "width": 485,
-            "height": 298
-          },
-          "distances": {
-            "left": 70,
-            "right": 70,
-            "top": null,
-            "bottom": 164
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 54527,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 478,
-            "minY": 7,
-            "maxX": 962,
-            "maxY": 304,
-            "width": 485,
-            "height": 298
-          },
-          "distances": {
-            "left": 70,
-            "right": 70,
-            "top": null,
-            "bottom": 164
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 479,
-        "right": 478,
-        "top": 8,
-        "bottom": 595
-      }
-    },
-    {
-      "name": "bottom · d0",
-      "box": {
-        "x0": 407,
-        "y0": 438,
-        "x1": 1032,
-        "y1": 900
-      },
-      "boxFloat": [
-        407.41,
-        438.16,
-        1032.33,
-        1063.09
-      ],
-      "boxVisible": {
-        "left": true,
-        "right": true,
-        "top": true,
-        "bottom": false
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 48723,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 494,
-            "minY": 597,
-            "maxX": 949,
-            "maxY": 893,
-            "width": 456,
-            "height": 297
-          },
-          "distances": {
-            "left": 87,
-            "right": 82,
-            "top": 159,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 51339,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 494,
-            "minY": 597,
-            "maxX": 950,
-            "maxY": 893,
-            "width": 457,
-            "height": 297
-          },
-          "distances": {
-            "left": 87,
-            "right": 81,
-            "top": 159,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 51515,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 493,
-            "minY": 597,
-            "maxX": 950,
-            "maxY": 893,
-            "width": 458,
-            "height": 297
-          },
-          "distances": {
-            "left": 86,
-            "right": 81,
-            "top": 159,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 494,
-        "right": 490,
-        "top": 597,
-        "bottom": 6
-      }
-    },
-    {
-      "name": "top-left · d0",
-      "box": {
-        "x0": 0,
-        "y0": 0,
-        "x1": 565,
-        "y1": 473
-      },
-      "boxFloat": [
-        -59.86,
-        -151.76,
-        565.14,
-        473.24
-      ],
-      "boxVisible": {
-        "left": false,
-        "right": true,
-        "top": false,
-        "bottom": true
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 52076,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 7,
-            "minY": 8,
-            "maxX": 485,
-            "maxY": 310,
-            "width": 479,
-            "height": 303
-          },
-          "distances": {
-            "left": null,
-            "right": 79,
-            "top": null,
-            "bottom": 162
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 54836,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 6,
-            "minY": 8,
-            "maxX": 485,
-            "maxY": 310,
-            "width": 480,
-            "height": 303
-          },
-          "distances": {
-            "left": null,
-            "right": 79,
-            "top": null,
-            "bottom": 162
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 55024,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 6,
-            "minY": 8,
-            "maxX": 486,
-            "maxY": 310,
-            "width": 481,
-            "height": 303
-          },
-          "distances": {
-            "left": null,
-            "right": 78,
-            "top": null,
-            "bottom": 162
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 7,
-        "right": 954,
-        "top": 8,
-        "bottom": 589
-      }
-    },
-    {
-      "name": "top-right · d0",
-      "box": {
-        "x0": 889,
-        "y0": 0,
-        "x1": 1440,
-        "y1": 470
-      },
-      "boxFloat": [
-        888.51,
-        -155.37,
-        1513.48,
-        469.6
-      ],
-      "boxVisible": {
-        "left": true,
-        "right": false,
-        "top": false,
-        "bottom": true
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 50643,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 974,
-            "minY": 6,
-            "maxX": 1431,
-            "maxY": 305,
-            "width": 458,
-            "height": 300
-          },
-          "distances": {
-            "left": 85,
-            "right": null,
-            "top": null,
-            "bottom": 164
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 53284,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 974,
-            "minY": 5,
-            "maxX": 1432,
-            "maxY": 305,
-            "width": 459,
-            "height": 301
-          },
-          "distances": {
-            "left": 85,
-            "right": null,
-            "top": null,
-            "bottom": 164
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 53473,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 974,
-            "minY": 5,
-            "maxX": 1432,
-            "maxY": 305,
-            "width": 459,
-            "height": 301
-          },
-          "distances": {
-            "left": 85,
-            "right": null,
-            "top": null,
-            "bottom": 164
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 974,
-        "right": 8,
-        "top": 6,
-        "bottom": 594
-      }
-    },
-    {
-      "name": "bottom-left · d0",
-      "box": {
-        "x0": 0,
-        "y0": 444,
-        "x1": 566,
-        "y1": 900
-      },
-      "boxFloat": [
-        -59.13,
-        444.18,
-        565.82,
-        1069.13
-      ],
-      "boxVisible": {
-        "left": false,
-        "right": true,
-        "top": true,
-        "bottom": false
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 52524,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 8,
-            "minY": 604,
-            "maxX": 502,
-            "maxY": 894,
-            "width": 495,
-            "height": 291
-          },
-          "distances": {
-            "left": null,
-            "right": 63,
-            "top": 160,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 54197,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 8,
-            "minY": 604,
-            "maxX": 502,
-            "maxY": 895,
-            "width": 495,
-            "height": 292
-          },
-          "distances": {
-            "left": null,
-            "right": 63,
-            "top": 160,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 54409,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 8,
-            "minY": 604,
-            "maxX": 503,
-            "maxY": 895,
-            "width": 496,
-            "height": 292
-          },
-          "distances": {
-            "left": null,
-            "right": 62,
-            "top": 160,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 8,
-        "right": 937,
-        "top": 604,
-        "bottom": 5
-      }
-    },
-    {
-      "name": "bottom-right · d0",
-      "box": {
-        "x0": 879,
-        "y0": 431,
-        "x1": 1440,
-        "y1": 900
-      },
-      "boxFloat": [
-        878.79,
-        430.82,
-        1503.78,
-        1055.81
-      ],
-      "boxVisible": {
-        "left": true,
-        "right": false,
-        "top": true,
-        "bottom": false
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 52538,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 946,
-            "minY": 595,
-            "maxX": 1432,
-            "maxY": 891,
-            "width": 487,
-            "height": 297
-          },
-          "distances": {
-            "left": 67,
-            "right": null,
-            "top": 164,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 55157,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 945,
-            "minY": 595,
-            "maxX": 1432,
-            "maxY": 892,
-            "width": 488,
-            "height": 298
-          },
-          "distances": {
-            "left": 66,
-            "right": null,
-            "top": 164,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 55365,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 945,
-            "minY": 595,
-            "maxX": 1432,
-            "maxY": 892,
-            "width": 488,
-            "height": 298
-          },
-          "distances": {
-            "left": 66,
-            "right": null,
-            "top": 164,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 946,
-        "right": 7,
-        "top": 595,
-        "bottom": 8
-      }
-    },
-    {
-      "name": "center · d0",
-      "box": {
-        "x0": 408,
-        "y0": 138,
-        "x1": 1032,
-        "y1": 763
-      },
-      "boxFloat": [
-        407.52,
-        137.61,
-        1032.49,
-        762.58
-      ],
-      "boxVisible": {
-        "left": true,
-        "right": true,
-        "top": true,
-        "bottom": true
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 41934,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 559,
-            "minY": 294,
-            "maxX": 861,
-            "maxY": 581,
-            "width": 303,
-            "height": 288
-          },
-          "distances": {
-            "left": 151,
-            "right": 170,
-            "top": 156,
+            "top": 173,
             "bottom": 181
           },
           "longestEdgeRun": {
@@ -1089,21 +200,21 @@
         },
         "glow8": {
           "value": 8,
-          "pixels": 44495,
+          "pixels": 52726,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 559,
-            "minY": 293,
-            "maxX": 861,
-            "maxY": 582,
-            "width": 303,
-            "height": 290
+            "minX": 939,
+            "minY": 298,
+            "maxX": 1432,
+            "maxY": 593,
+            "width": 494,
+            "height": 296
           },
           "distances": {
-            "left": 151,
-            "right": 170,
-            "top": 155,
-            "bottom": 180
+            "left": 81,
+            "right": null,
+            "top": 173,
+            "bottom": 181
           },
           "longestEdgeRun": {
             "left": 0,
@@ -1115,21 +226,21 @@
         },
         "glow2": {
           "value": 2,
-          "pixels": 44692,
+          "pixels": 52910,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 559,
-            "minY": 293,
-            "maxX": 862,
-            "maxY": 582,
-            "width": 304,
-            "height": 290
+            "minX": 939,
+            "minY": 298,
+            "maxX": 1432,
+            "maxY": 593,
+            "width": 494,
+            "height": 296
           },
           "distances": {
-            "left": 151,
-            "right": 169,
-            "top": 155,
-            "bottom": 180
+            "left": 81,
+            "right": null,
+            "top": 173,
+            "bottom": 181
           },
           "longestEdgeRun": {
             "left": 0,
@@ -1147,50 +258,50 @@
         "darkOutside": 0
       },
       "viewportGaps": {
-        "left": 559,
-        "right": 578,
-        "top": 294,
-        "bottom": 318
+        "left": 939,
+        "right": 8,
+        "top": 298,
+        "bottom": 306
       }
     },
     {
-      "name": "left · d0.95",
+      "name": "top · d0",
       "box": {
-        "x0": 0,
-        "y0": 301,
-        "x1": 274,
-        "y1": 599
+        "x0": 395,
+        "y0": 0,
+        "x1": 1045,
+        "y1": 479
       },
       "boxFloat": [
-        -24.51,
-        300.71,
-        273.94,
-        599.15
+        395.02,
+        -171.3,
+        1044.94,
+        478.61
       ],
       "boxVisible": {
-        "left": false,
+        "left": true,
         "right": true,
-        "top": true,
+        "top": false,
         "bottom": true
       },
       "thresholds": {
         "body60": {
           "value": 60,
-          "pixels": 11509,
+          "pixels": 52885,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 8,
-            "minY": 379,
-            "maxX": 235,
-            "maxY": 523,
-            "width": 228,
-            "height": 145
+            "minX": 466,
+            "minY": 6,
+            "maxX": 959,
+            "maxY": 306,
+            "width": 494,
+            "height": 301
           },
           "distances": {
-            "left": null,
-            "right": 38,
-            "top": 78,
-            "bottom": 75
+            "left": 71,
+            "right": 85,
+            "top": null,
+            "bottom": 172
           },
           "longestEdgeRun": {
             "left": 0,
@@ -1216,21 +327,21 @@
         },
         "glow8": {
           "value": 8,
-          "pixels": 12322,
+          "pixels": 55449,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 7,
-            "minY": 379,
-            "maxX": 235,
-            "maxY": 523,
-            "width": 229,
-            "height": 145
+            "minX": 466,
+            "minY": 6,
+            "maxX": 959,
+            "maxY": 306,
+            "width": 494,
+            "height": 301
           },
           "distances": {
-            "left": null,
-            "right": 38,
-            "top": 78,
-            "bottom": 75
+            "left": 71,
+            "right": 85,
+            "top": null,
+            "bottom": 172
           },
           "longestEdgeRun": {
             "left": 0,
@@ -1242,21 +353,1418 @@
         },
         "glow2": {
           "value": 2,
-          "pixels": 12376,
+          "pixels": 55635,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 466,
+            "minY": 6,
+            "maxX": 959,
+            "maxY": 306,
+            "width": 494,
+            "height": 301
+          },
+          "distances": {
+            "left": 71,
+            "right": 85,
+            "top": null,
+            "bottom": 172
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 466,
+        "right": 480,
+        "top": 6,
+        "bottom": 593
+      }
+    },
+    {
+      "name": "bottom · d0",
+      "box": {
+        "x0": 395,
+        "y0": 424,
+        "x1": 1045,
+        "y1": 900
+      },
+      "boxFloat": [
+        394.89,
+        424.28,
+        1044.86,
+        1074.26
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": true,
+        "top": true,
+        "bottom": false
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 58202,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 431,
+            "minY": 593,
+            "maxX": 988,
+            "maxY": 895,
+            "width": 558,
+            "height": 303
+          },
+          "distances": {
+            "left": 36,
+            "right": 56,
+            "top": 169,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 61377,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 430,
+            "minY": 593,
+            "maxX": 989,
+            "maxY": 896,
+            "width": 560,
+            "height": 304
+          },
+          "distances": {
+            "left": 35,
+            "right": 55,
+            "top": 169,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 61620,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 430,
+            "minY": 593,
+            "maxX": 989,
+            "maxY": 896,
+            "width": 560,
+            "height": 304
+          },
+          "distances": {
+            "left": 35,
+            "right": 55,
+            "top": 169,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 431,
+        "right": 451,
+        "top": 593,
+        "bottom": 4
+      }
+    },
+    {
+      "name": "top-left · d0",
+      "box": {
+        "x0": 0,
+        "y0": 0,
+        "x1": 573,
+        "y1": 478
+      },
+      "boxFloat": [
+        -76.76,
+        -171.55,
+        573.14,
+        478.35
+      ],
+      "boxVisible": {
+        "left": false,
+        "right": true,
+        "top": false,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 51716,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 10,
+            "minY": 6,
+            "maxX": 479,
+            "maxY": 304,
+            "width": 470,
+            "height": 299
+          },
+          "distances": {
+            "left": null,
+            "right": 93,
+            "top": null,
+            "bottom": 173
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 54075,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 10,
+            "minY": 6,
+            "maxX": 480,
+            "maxY": 305,
+            "width": 471,
+            "height": 300
+          },
+          "distances": {
+            "left": null,
+            "right": 92,
+            "top": null,
+            "bottom": 172
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 54271,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 10,
+            "minY": 6,
+            "maxX": 480,
+            "maxY": 305,
+            "width": 471,
+            "height": 300
+          },
+          "distances": {
+            "left": null,
+            "right": 92,
+            "top": null,
+            "bottom": 172
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 10,
+        "right": 960,
+        "top": 6,
+        "bottom": 595
+      }
+    },
+    {
+      "name": "top-right · d0",
+      "box": {
+        "x0": 861,
+        "y0": 0,
+        "x1": 1440,
+        "y1": 487
+      },
+      "boxFloat": [
+        860.66,
+        -162.72,
+        1510.64,
+        487.25
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": false,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 50889,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 940,
+            "minY": 7,
+            "maxX": 1432,
+            "maxY": 301,
+            "width": 493,
+            "height": 295
+          },
+          "distances": {
+            "left": 79,
+            "right": null,
+            "top": null,
+            "bottom": 185
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 53677,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 940,
+            "minY": 7,
+            "maxX": 1433,
+            "maxY": 301,
+            "width": 494,
+            "height": 295
+          },
+          "distances": {
+            "left": 79,
+            "right": null,
+            "top": null,
+            "bottom": 185
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 53857,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 940,
+            "minY": 7,
+            "maxX": 1433,
+            "maxY": 301,
+            "width": 494,
+            "height": 295
+          },
+          "distances": {
+            "left": 79,
+            "right": null,
+            "top": null,
+            "bottom": 185
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 940,
+        "right": 7,
+        "top": 7,
+        "bottom": 598
+      }
+    },
+    {
+      "name": "bottom-left · d0",
+      "box": {
+        "x0": 0,
+        "y0": 399,
+        "x1": 524,
+        "y1": 900
+      },
+      "boxFloat": [
+        -126.01,
+        399.03,
+        523.93,
+        1048.97
+      ],
+      "boxVisible": {
+        "left": false,
+        "right": true,
+        "top": true,
+        "bottom": false
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 46374,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 13,
+            "minY": 580,
+            "maxX": 394,
+            "maxY": 892,
+            "width": 382,
+            "height": 313
+          },
+          "distances": {
+            "left": null,
+            "right": 129,
+            "top": 181,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 48634,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 12,
+            "minY": 580,
+            "maxX": 394,
+            "maxY": 892,
+            "width": 383,
+            "height": 313
+          },
+          "distances": {
+            "left": null,
+            "right": 129,
+            "top": 181,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 48804,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 12,
+            "minY": 580,
+            "maxX": 394,
+            "maxY": 892,
+            "width": 383,
+            "height": 313
+          },
+          "distances": {
+            "left": null,
+            "right": 129,
+            "top": 181,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 13,
+        "right": 1045,
+        "top": 580,
+        "bottom": 7
+      }
+    },
+    {
+      "name": "bottom-right · d0",
+      "box": {
+        "x0": 873,
+        "y0": 425,
+        "x1": 1440,
+        "y1": 900
+      },
+      "boxFloat": [
+        873.24,
+        425.27,
+        1523.21,
+        1075.23
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": false
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 49895,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 965,
+            "minY": 592,
+            "maxX": 1423,
+            "maxY": 889,
+            "width": 459,
+            "height": 298
+          },
+          "distances": {
+            "left": 92,
+            "right": null,
+            "top": 167,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 52789,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 965,
+            "minY": 592,
+            "maxX": 1423,
+            "maxY": 889,
+            "width": 459,
+            "height": 298
+          },
+          "distances": {
+            "left": 92,
+            "right": null,
+            "top": 167,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 52966,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 965,
+            "minY": 592,
+            "maxX": 1423,
+            "maxY": 889,
+            "width": 459,
+            "height": 298
+          },
+          "distances": {
+            "left": 92,
+            "right": null,
+            "top": 167,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 965,
+        "right": 16,
+        "top": 592,
+        "bottom": 10
+      }
+    },
+    {
+      "name": "center · d0",
+      "box": {
+        "x0": 395,
+        "y0": 125,
+        "x1": 1045,
+        "y1": 775
+      },
+      "boxFloat": [
+        395,
+        125.07,
+        1044.94,
+        775.01
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": true,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 38078,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 620,
+            "minY": 302,
+            "maxX": 839,
+            "maxY": 587,
+            "width": 220,
+            "height": 286
+          },
+          "distances": {
+            "left": 225,
+            "right": 205,
+            "top": 177,
+            "bottom": 187
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 39585,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 619,
+            "minY": 301,
+            "maxX": 839,
+            "maxY": 587,
+            "width": 221,
+            "height": 287
+          },
+          "distances": {
+            "left": 224,
+            "right": 205,
+            "top": 176,
+            "bottom": 187
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 39705,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 619,
+            "minY": 301,
+            "maxX": 839,
+            "maxY": 587,
+            "width": 221,
+            "height": 287
+          },
+          "distances": {
+            "left": 224,
+            "right": 205,
+            "top": 176,
+            "bottom": 187
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 620,
+        "right": 600,
+        "top": 302,
+        "bottom": 312
+      }
+    },
+    {
+      "name": "left · d0.95",
+      "box": {
+        "x0": 0,
+        "y0": 295,
+        "x1": 276,
+        "y1": 605
+      },
+      "boxFloat": [
+        -34,
+        294.91,
+        276.42,
+        605.34
+      ],
+      "boxVisible": {
+        "left": false,
+        "right": true,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 11437,
           "litOutsideBox": 0,
           "bbox": {
             "minX": 7,
-            "minY": 379,
-            "maxX": 235,
+            "minY": 375,
+            "maxX": 227,
+            "maxY": 517,
+            "width": 221,
+            "height": 143
+          },
+          "distances": {
+            "left": null,
+            "right": 48,
+            "top": 80,
+            "bottom": 87
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 12176,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 7,
+            "minY": 375,
+            "maxX": 227,
+            "maxY": 517,
+            "width": 221,
+            "height": 143
+          },
+          "distances": {
+            "left": null,
+            "right": 48,
+            "top": 80,
+            "bottom": 87
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 12224,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 7,
+            "minY": 375,
+            "maxX": 227,
+            "maxY": 517,
+            "width": 221,
+            "height": 143
+          },
+          "distances": {
+            "left": null,
+            "right": 48,
+            "top": 80,
+            "bottom": 87
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 7,
+        "right": 1212,
+        "top": 375,
+        "bottom": 382
+      }
+    },
+    {
+      "name": "right · d0.95",
+      "box": {
+        "x0": 1146,
+        "y0": 295,
+        "x1": 1440,
+        "y1": 605
+      },
+      "boxFloat": [
+        1145.82,
+        294.87,
+        1456.16,
+        605.21
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 12530,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 1172,
+            "minY": 380,
+            "maxX": 1425,
             "maxY": 523,
-            "width": 229,
+            "width": 254,
+            "height": 144
+          },
+          "distances": {
+            "left": 26,
+            "right": null,
+            "top": 85,
+            "bottom": 81
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 13201,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 1171,
+            "minY": 380,
+            "maxX": 1426,
+            "maxY": 524,
+            "width": 256,
+            "height": 145
+          },
+          "distances": {
+            "left": 25,
+            "right": null,
+            "top": 85,
+            "bottom": 80
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 13259,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 1171,
+            "minY": 380,
+            "maxX": 1426,
+            "maxY": 524,
+            "width": 256,
+            "height": 145
+          },
+          "distances": {
+            "left": 25,
+            "right": null,
+            "top": 85,
+            "bottom": 80
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 1172,
+        "right": 14,
+        "top": 380,
+        "bottom": 376
+      }
+    },
+    {
+      "name": "top · d0.95",
+      "box": {
+        "x0": 565,
+        "y0": 0,
+        "x1": 875,
+        "y1": 236
+      },
+      "boxFloat": [
+        564.91,
+        -74.39,
+        875.09,
+        235.79
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": true,
+        "top": false,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 11580,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 602,
+            "minY": 6,
+            "maxX": 839,
+            "maxY": 143,
+            "width": 238,
+            "height": 138
+          },
+          "distances": {
+            "left": 37,
+            "right": 35,
+            "top": null,
+            "bottom": 92
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 12314,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 602,
+            "minY": 6,
+            "maxX": 839,
+            "maxY": 144,
+            "width": 238,
+            "height": 139
+          },
+          "distances": {
+            "left": 37,
+            "right": 35,
+            "top": null,
+            "bottom": 91
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 12354,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 602,
+            "minY": 6,
+            "maxX": 839,
+            "maxY": 144,
+            "width": 238,
+            "height": 139
+          },
+          "distances": {
+            "left": 37,
+            "right": 35,
+            "top": null,
+            "bottom": 91
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 602,
+        "right": 600,
+        "top": 6,
+        "bottom": 756
+      }
+    },
+    {
+      "name": "bottom · d0.95",
+      "box": {
+        "x0": 565,
+        "y0": 667,
+        "x1": 875,
+        "y1": 900
+      },
+      "boxFloat": [
+        564.78,
+        667.31,
+        875.17,
+        977.69
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": true,
+        "top": true,
+        "bottom": false
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 10994,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 627,
+            "minY": 752,
+            "maxX": 826,
+            "maxY": 891,
+            "width": 200,
+            "height": 140
+          },
+          "distances": {
+            "left": 62,
+            "right": 48,
+            "top": 85,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 11625,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 627,
+            "minY": 752,
+            "maxX": 826,
+            "maxY": 891,
+            "width": 200,
+            "height": 140
+          },
+          "distances": {
+            "left": 62,
+            "right": 48,
+            "top": 85,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 11661,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 627,
+            "minY": 752,
+            "maxX": 826,
+            "maxY": 891,
+            "width": 200,
+            "height": 140
+          },
+          "distances": {
+            "left": 62,
+            "right": 48,
+            "top": 85,
+            "bottom": null
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 627,
+        "right": 613,
+        "top": 752,
+        "bottom": 8
+      }
+    },
+    {
+      "name": "top-left · d0.95",
+      "box": {
+        "x0": 0,
+        "y0": 0,
+        "x1": 273,
+        "y1": 236
+      },
+      "boxFloat": [
+        -37.15,
+        -74.54,
+        273.16,
+        235.77
+      ],
+      "boxVisible": {
+        "left": false,
+        "right": true,
+        "top": false,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 11608,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 8,
+            "minY": 6,
+            "maxX": 232,
+            "maxY": 150,
+            "width": 225,
             "height": 145
           },
           "distances": {
             "left": null,
-            "right": 38,
-            "top": 78,
-            "bottom": 75
+            "right": 40,
+            "top": null,
+            "bottom": 85
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 12362,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 8,
+            "minY": 6,
+            "maxX": 232,
+            "maxY": 151,
+            "width": 225,
+            "height": 146
+          },
+          "distances": {
+            "left": null,
+            "right": 40,
+            "top": null,
+            "bottom": 84
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 12399,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 8,
+            "minY": 6,
+            "maxX": 232,
+            "maxY": 151,
+            "width": 225,
+            "height": 146
+          },
+          "distances": {
+            "left": null,
+            "right": 40,
+            "top": null,
+            "bottom": 84
           },
           "longestEdgeRun": {
             "left": 0,
@@ -1275,176 +1783,49 @@
       },
       "viewportGaps": {
         "left": 8,
-        "right": 1204,
-        "top": 379,
-        "bottom": 376
+        "right": 1207,
+        "top": 6,
+        "bottom": 749
       }
     },
     {
-      "name": "right · d0.95",
+      "name": "top-right · d0.95",
       "box": {
-        "x0": 1216,
-        "y0": 301,
+        "x0": 1162,
+        "y0": 0,
         "x1": 1440,
-        "y1": 599
+        "y1": 235
       },
       "boxFloat": [
-        1215.57,
-        301.03,
-        1513.93,
-        599.39
+        1162.45,
+        -75.42,
+        1472.84,
+        234.97
       ],
       "boxVisible": {
         "left": true,
         "right": false,
-        "top": true,
-        "bottom": true
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 8673,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 1298,
-            "minY": 376,
-            "maxX": 1424,
-            "maxY": 506,
-            "width": 127,
-            "height": 131
-          },
-          "distances": {
-            "left": 82,
-            "right": null,
-            "top": 75,
-            "bottom": 92
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 9357,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 1298,
-            "minY": 376,
-            "maxX": 1425,
-            "maxY": 506,
-            "width": 128,
-            "height": 131
-          },
-          "distances": {
-            "left": 82,
-            "right": null,
-            "top": 75,
-            "bottom": 92
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 9389,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 1298,
-            "minY": 376,
-            "maxX": 1425,
-            "maxY": 506,
-            "width": 128,
-            "height": 131
-          },
-          "distances": {
-            "left": 82,
-            "right": null,
-            "top": 75,
-            "bottom": 92
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 1298,
-        "right": 15,
-        "top": 376,
-        "bottom": 393
-      }
-    },
-    {
-      "name": "top · d0.95",
-      "box": {
-        "x0": 571,
-        "y0": 0,
-        "x1": 869,
-        "y1": 226
-      },
-      "boxFloat": [
-        570.89,
-        -72.51,
-        869.32,
-        225.92
-      ],
-      "boxVisible": {
-        "left": true,
-        "right": true,
         "top": false,
         "bottom": true
       },
       "thresholds": {
         "body60": {
           "value": 60,
-          "pixels": 11563,
+          "pixels": 11953,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 607,
+            "minX": 1200,
             "minY": 8,
-            "maxX": 830,
+            "maxX": 1432,
             "maxY": 148,
-            "width": 224,
+            "width": 233,
             "height": 141
           },
           "distances": {
-            "left": 36,
-            "right": 38,
+            "left": 38,
+            "right": null,
             "top": null,
-            "bottom": 77
+            "bottom": 86
           },
           "longestEdgeRun": {
             "left": 0,
@@ -1470,21 +1851,21 @@
         },
         "glow8": {
           "value": 8,
-          "pixels": 12329,
+          "pixels": 12640,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 607,
-            "minY": 8,
-            "maxX": 830,
-            "maxY": 148,
-            "width": 224,
-            "height": 141
+            "minX": 1200,
+            "minY": 7,
+            "maxX": 1432,
+            "maxY": 149,
+            "width": 233,
+            "height": 143
           },
           "distances": {
-            "left": 36,
-            "right": 38,
+            "left": 38,
+            "right": null,
             "top": null,
-            "bottom": 77
+            "bottom": 85
           },
           "longestEdgeRun": {
             "left": 0,
@@ -1496,21 +1877,21 @@
         },
         "glow2": {
           "value": 2,
-          "pixels": 12401,
+          "pixels": 12680,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 606,
+            "minX": 1200,
             "minY": 7,
-            "maxX": 830,
-            "maxY": 148,
-            "width": 225,
-            "height": 142
+            "maxX": 1432,
+            "maxY": 149,
+            "width": 233,
+            "height": 143
           },
           "distances": {
-            "left": 35,
-            "right": 38,
+            "left": 38,
+            "right": null,
             "top": null,
-            "bottom": 77
+            "bottom": 85
           },
           "longestEdgeRun": {
             "left": 0,
@@ -1528,28 +1909,28 @@
         "darkOutside": 0
       },
       "viewportGaps": {
-        "left": 607,
-        "right": 609,
+        "left": 1200,
+        "right": 7,
         "top": 8,
         "bottom": 751
       }
     },
     {
-      "name": "bottom · d0.95",
+      "name": "bottom-left · d0.95",
       "box": {
-        "x0": 571,
-        "y0": 680,
-        "x1": 869,
+        "x0": 0,
+        "y0": 667,
+        "x1": 282,
         "y1": 900
       },
       "boxFloat": [
-        570.75,
-        679.93,
-        869.25,
-        978.43
+        -28.62,
+        667.18,
+        281.8,
+        977.59
       ],
       "boxVisible": {
-        "left": true,
+        "left": false,
         "right": true,
         "top": true,
         "bottom": false
@@ -1557,20 +1938,20 @@
       "thresholds": {
         "body60": {
           "value": 60,
-          "pixels": 11359,
+          "pixels": 11607,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 604,
-            "minY": 754,
-            "maxX": 838,
-            "maxY": 893,
+            "minX": 7,
+            "minY": 750,
+            "maxX": 241,
+            "maxY": 891,
             "width": 235,
-            "height": 140
+            "height": 142
           },
           "distances": {
-            "left": 33,
-            "right": 30,
-            "top": 74,
+            "left": null,
+            "right": 40,
+            "top": 83,
             "bottom": null
           },
           "longestEdgeRun": {
@@ -1597,20 +1978,20 @@
         },
         "glow8": {
           "value": 8,
-          "pixels": 12274,
+          "pixels": 12290,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 604,
-            "minY": 754,
-            "maxX": 839,
-            "maxY": 893,
-            "width": 236,
-            "height": 140
+            "minX": 7,
+            "minY": 750,
+            "maxX": 241,
+            "maxY": 891,
+            "width": 235,
+            "height": 142
           },
           "distances": {
-            "left": 33,
-            "right": 29,
-            "top": 74,
+            "left": null,
+            "right": 40,
+            "top": 83,
             "bottom": null
           },
           "longestEdgeRun": {
@@ -1623,148 +2004,21 @@
         },
         "glow2": {
           "value": 2,
-          "pixels": 12311,
+          "pixels": 12341,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 604,
-            "minY": 754,
-            "maxX": 839,
-            "maxY": 893,
-            "width": 236,
-            "height": 140
+            "minX": 7,
+            "minY": 750,
+            "maxX": 241,
+            "maxY": 891,
+            "width": 235,
+            "height": 142
           },
           "distances": {
-            "left": 33,
-            "right": 29,
-            "top": 74,
+            "left": null,
+            "right": 40,
+            "top": 83,
             "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 604,
-        "right": 601,
-        "top": 754,
-        "bottom": 6
-      }
-    },
-    {
-      "name": "top-left · d0.95",
-      "box": {
-        "x0": 0,
-        "y0": 0,
-        "x1": 252,
-        "y1": 227
-      },
-      "boxFloat": [
-        -46.07,
-        -71.46,
-        252.44,
-        227.04
-      ],
-      "boxVisible": {
-        "left": false,
-        "right": true,
-        "top": false,
-        "bottom": true
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 11126,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 7,
-            "minY": 7,
-            "maxX": 199,
-            "maxY": 151,
-            "width": 193,
-            "height": 145
-          },
-          "distances": {
-            "left": null,
-            "right": 52,
-            "top": null,
-            "bottom": 75
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 11687,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 7,
-            "minY": 7,
-            "maxX": 200,
-            "maxY": 152,
-            "width": 194,
-            "height": 146
-          },
-          "distances": {
-            "left": null,
-            "right": 51,
-            "top": null,
-            "bottom": 74
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 11732,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 7,
-            "minY": 7,
-            "maxX": 200,
-            "maxY": 152,
-            "width": 194,
-            "height": 146
-          },
-          "distances": {
-            "left": null,
-            "right": 51,
-            "top": null,
-            "bottom": 74
           },
           "longestEdgeRun": {
             "left": 0,
@@ -1783,278 +2037,24 @@
       },
       "viewportGaps": {
         "left": 7,
-        "right": 1240,
-        "top": 7,
-        "bottom": 748
-      }
-    },
-    {
-      "name": "top-right · d0.95",
-      "box": {
-        "x0": 1171,
-        "y0": 0,
-        "x1": 1440,
-        "y1": 231
-      },
-      "boxFloat": [
-        1170.97,
-        -67.5,
-        1469.33,
-        230.85
-      ],
-      "boxVisible": {
-        "left": true,
-        "right": false,
-        "top": false,
-        "bottom": true
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 11345,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 1208,
-            "minY": 6,
-            "maxX": 1431,
-            "maxY": 148,
-            "width": 224,
-            "height": 143
-          },
-          "distances": {
-            "left": 37,
-            "right": null,
-            "top": null,
-            "bottom": 82
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 12117,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 1208,
-            "minY": 6,
-            "maxX": 1431,
-            "maxY": 148,
-            "width": 224,
-            "height": 143
-          },
-          "distances": {
-            "left": 37,
-            "right": null,
-            "top": null,
-            "bottom": 82
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 12164,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 1208,
-            "minY": 6,
-            "maxX": 1431,
-            "maxY": 148,
-            "width": 224,
-            "height": 143
-          },
-          "distances": {
-            "left": 37,
-            "right": null,
-            "top": null,
-            "bottom": 82
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 1208,
-        "right": 8,
-        "top": 6,
-        "bottom": 751
-      }
-    },
-    {
-      "name": "bottom-left · d0.95",
-      "box": {
-        "x0": 0,
-        "y0": 672,
-        "x1": 277,
-        "y1": 900
-      },
-      "boxFloat": [
-        -21.09,
-        671.53,
-        277.44,
-        970.05
-      ],
-      "boxVisible": {
-        "left": false,
-        "right": true,
-        "top": true,
-        "bottom": false
-      },
-      "thresholds": {
-        "body60": {
-          "value": 60,
-          "pixels": 11778,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 9,
-            "minY": 750,
-            "maxX": 244,
-            "maxY": 893,
-            "width": 236,
-            "height": 144
-          },
-          "distances": {
-            "left": null,
-            "right": 32,
-            "top": 78,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "body120": {
-          "value": 120,
-          "pixels": 0,
-          "litOutsideBox": 0,
-          "bbox": null,
-          "distances": null,
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow8": {
-          "value": 8,
-          "pixels": 12628,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 8,
-            "minY": 750,
-            "maxX": 245,
-            "maxY": 893,
-            "width": 238,
-            "height": 144
-          },
-          "distances": {
-            "left": null,
-            "right": 31,
-            "top": 78,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        },
-        "glow2": {
-          "value": 2,
-          "pixels": 12684,
-          "litOutsideBox": 0,
-          "bbox": {
-            "minX": 8,
-            "minY": 750,
-            "maxX": 245,
-            "maxY": 893,
-            "width": 238,
-            "height": 144
-          },
-          "distances": {
-            "left": null,
-            "right": 31,
-            "top": 78,
-            "bottom": null
-          },
-          "longestEdgeRun": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          },
-          "bodyCutSides": []
-        }
-      },
-      "verdict": {
-        "clipped": false,
-        "reachesEdge": false,
-        "darkReachesEdge": false,
-        "darkOutside": 0
-      },
-      "viewportGaps": {
-        "left": 9,
-        "right": 1195,
+        "right": 1198,
         "top": 750,
-        "bottom": 6
+        "bottom": 8
       }
     },
     {
       "name": "bottom-right · d0.95",
       "box": {
-        "x0": 1169,
-        "y0": 676,
+        "x0": 1161,
+        "y0": 669,
         "x1": 1440,
         "y1": 900
       },
       "boxFloat": [
-        1168.97,
-        676.19,
-        1467.41,
-        974.63
+        1160.75,
+        669.46,
+        1471.1,
+        979.81
       ],
       "boxVisible": {
         "left": true,
@@ -2065,20 +2065,20 @@
       "thresholds": {
         "body60": {
           "value": 60,
-          "pixels": 11284,
+          "pixels": 11527,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 1199,
+            "minX": 1203,
             "minY": 752,
-            "maxX": 1431,
-            "maxY": 891,
-            "width": 233,
-            "height": 140
+            "maxX": 1429,
+            "maxY": 892,
+            "width": 227,
+            "height": 141
           },
           "distances": {
-            "left": 30,
+            "left": 42,
             "right": null,
-            "top": 76,
+            "top": 83,
             "bottom": null
           },
           "longestEdgeRun": {
@@ -2105,20 +2105,20 @@
         },
         "glow8": {
           "value": 8,
-          "pixels": 12111,
+          "pixels": 12232,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 1199,
+            "minX": 1202,
             "minY": 752,
-            "maxX": 1432,
-            "maxY": 892,
-            "width": 234,
-            "height": 141
+            "maxX": 1429,
+            "maxY": 893,
+            "width": 228,
+            "height": 142
           },
           "distances": {
-            "left": 30,
+            "left": 41,
             "right": null,
-            "top": 76,
+            "top": 83,
             "bottom": null
           },
           "longestEdgeRun": {
@@ -2131,20 +2131,20 @@
         },
         "glow2": {
           "value": 2,
-          "pixels": 12170,
+          "pixels": 12280,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 1199,
+            "minX": 1202,
             "minY": 752,
-            "maxX": 1432,
-            "maxY": 892,
-            "width": 234,
-            "height": 141
+            "maxX": 1429,
+            "maxY": 893,
+            "width": 228,
+            "height": 142
           },
           "distances": {
-            "left": 30,
+            "left": 41,
             "right": null,
-            "top": 76,
+            "top": 83,
             "bottom": null
           },
           "longestEdgeRun": {
@@ -2163,25 +2163,25 @@
         "darkOutside": 0
       },
       "viewportGaps": {
-        "left": 1199,
-        "right": 8,
+        "left": 1203,
+        "right": 10,
         "top": 752,
-        "bottom": 8
+        "bottom": 7
       }
     },
     {
       "name": "center · d0.95",
       "box": {
-        "x0": 571,
-        "y0": 301,
-        "x1": 869,
-        "y1": 599
+        "x0": 565,
+        "y0": 295,
+        "x1": 875,
+        "y1": 605
       },
       "boxFloat": [
-        570.88,
-        300.71,
-        869.28,
-        599.11
+        564.79,
+        294.88,
+        875.24,
+        605.34
       ],
       "boxVisible": {
         "left": true,
@@ -2192,21 +2192,21 @@
       "thresholds": {
         "body60": {
           "value": 60,
-          "pixels": 10464,
+          "pixels": 11889,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 624,
-            "minY": 378,
-            "maxX": 818,
-            "maxY": 516,
-            "width": 195,
-            "height": 139
+            "minX": 605,
+            "minY": 379,
+            "maxX": 839,
+            "maxY": 520,
+            "width": 235,
+            "height": 142
           },
           "distances": {
-            "left": 53,
-            "right": 50,
-            "top": 77,
-            "bottom": 82
+            "left": 40,
+            "right": 35,
+            "top": 84,
+            "bottom": 84
           },
           "longestEdgeRun": {
             "left": 0,
@@ -2232,21 +2232,21 @@
         },
         "glow8": {
           "value": 8,
-          "pixels": 11109,
+          "pixels": 12593,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 623,
-            "minY": 378,
-            "maxX": 818,
-            "maxY": 516,
-            "width": 196,
-            "height": 139
+            "minX": 604,
+            "minY": 379,
+            "maxX": 840,
+            "maxY": 520,
+            "width": 237,
+            "height": 142
           },
           "distances": {
-            "left": 52,
-            "right": 50,
-            "top": 77,
-            "bottom": 82
+            "left": 39,
+            "right": 34,
+            "top": 84,
+            "bottom": 84
           },
           "longestEdgeRun": {
             "left": 0,
@@ -2258,21 +2258,21 @@
         },
         "glow2": {
           "value": 2,
-          "pixels": 11150,
+          "pixels": 12646,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 623,
-            "minY": 378,
-            "maxX": 818,
-            "maxY": 516,
-            "width": 196,
-            "height": 139
+            "minX": 604,
+            "minY": 379,
+            "maxX": 840,
+            "maxY": 520,
+            "width": 237,
+            "height": 142
           },
           "distances": {
-            "left": 52,
-            "right": 50,
-            "top": 77,
-            "bottom": 82
+            "left": 39,
+            "right": 34,
+            "top": 84,
+            "bottom": 84
           },
           "longestEdgeRun": {
             "left": 0,
@@ -2290,25 +2290,25 @@
         "darkOutside": 0
       },
       "viewportGaps": {
-        "left": 624,
-        "right": 621,
-        "top": 378,
-        "bottom": 383
+        "left": 605,
+        "right": 600,
+        "top": 379,
+        "bottom": 379
       }
     },
     {
       "name": "splay settled",
       "box": {
-        "x0": 879,
-        "y0": 137,
+        "x0": 849,
+        "y0": 125,
         "x1": 1440,
-        "y1": 762
+        "y1": 775
       },
       "boxFloat": [
-        878.83,
-        137.09,
-        1503.8,
-        762.06
+        848.97,
+        124.99,
+        1498.77,
+        774.78
       ],
       "boxVisible": {
         "left": true,
@@ -2319,20 +2319,20 @@
       "thresholds": {
         "body60": {
           "value": 60,
-          "pixels": 48646,
+          "pixels": 52525,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 963,
-            "minY": 290,
-            "maxX": 1433,
-            "maxY": 595,
-            "width": 471,
-            "height": 306
+            "minX": 923,
+            "minY": 297,
+            "maxX": 1431,
+            "maxY": 608,
+            "width": 509,
+            "height": 312
           },
           "distances": {
-            "left": 84,
+            "left": 74,
             "right": null,
-            "top": 153,
+            "top": 172,
             "bottom": 166
           },
           "longestEdgeRun": {
@@ -2359,21 +2359,21 @@
         },
         "glow8": {
           "value": 8,
-          "pixels": 50623,
+          "pixels": 54367,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 962,
-            "minY": 289,
-            "maxX": 1433,
-            "maxY": 595,
-            "width": 472,
-            "height": 307
+            "minX": 923,
+            "minY": 297,
+            "maxX": 1432,
+            "maxY": 609,
+            "width": 510,
+            "height": 313
           },
           "distances": {
-            "left": 83,
+            "left": 74,
             "right": null,
-            "top": 152,
-            "bottom": 166
+            "top": 172,
+            "bottom": 165
           },
           "longestEdgeRun": {
             "left": 0,
@@ -2385,21 +2385,21 @@
         },
         "glow2": {
           "value": 2,
-          "pixels": 50792,
+          "pixels": 54548,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 962,
-            "minY": 289,
-            "maxX": 1433,
-            "maxY": 595,
-            "width": 472,
-            "height": 307
+            "minX": 923,
+            "minY": 297,
+            "maxX": 1432,
+            "maxY": 609,
+            "width": 510,
+            "height": 313
           },
           "distances": {
-            "left": 83,
+            "left": 74,
             "right": null,
-            "top": 152,
-            "bottom": 166
+            "top": 172,
+            "bottom": 165
           },
           "longestEdgeRun": {
             "left": 0,
@@ -2417,25 +2417,25 @@
         "darkOutside": 0
       },
       "viewportGaps": {
-        "left": 963,
-        "right": 6,
-        "top": 290,
-        "bottom": 304
+        "left": 923,
+        "right": 8,
+        "top": 297,
+        "bottom": 291
       }
     },
     {
       "name": "splay peak",
       "box": {
-        "x0": 958,
-        "y0": 118,
+        "x0": 849,
+        "y0": 125,
         "x1": 1440,
-        "y1": 742
+        "y1": 774
       },
       "boxFloat": [
-        958.33,
-        118.13,
-        1582.36,
-        742.16
+        849.09,
+        124.78,
+        1498.59,
+        774.28
       ],
       "boxVisible": {
         "left": true,
@@ -2446,21 +2446,21 @@
       "thresholds": {
         "body60": {
           "value": 60,
-          "pixels": 35674,
+          "pixels": 50810,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 1150,
-            "minY": 280,
-            "maxX": 1386,
-            "maxY": 563,
-            "width": 237,
-            "height": 284
+            "minX": 939,
+            "minY": 292,
+            "maxX": 1421,
+            "maxY": 597,
+            "width": 483,
+            "height": 306
           },
           "distances": {
-            "left": 192,
+            "left": 90,
             "right": null,
-            "top": 162,
-            "bottom": 178
+            "top": 167,
+            "bottom": 176
           },
           "longestEdgeRun": {
             "left": 0,
@@ -2486,21 +2486,21 @@
         },
         "glow8": {
           "value": 8,
-          "pixels": 37029,
+          "pixels": 52783,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 1150,
-            "minY": 280,
-            "maxX": 1386,
-            "maxY": 563,
-            "width": 237,
-            "height": 284
+            "minX": 938,
+            "minY": 291,
+            "maxX": 1421,
+            "maxY": 597,
+            "width": 484,
+            "height": 307
           },
           "distances": {
-            "left": 192,
+            "left": 89,
             "right": null,
-            "top": 162,
-            "bottom": 178
+            "top": 166,
+            "bottom": 176
           },
           "longestEdgeRun": {
             "left": 0,
@@ -2512,21 +2512,21 @@
         },
         "glow2": {
           "value": 2,
-          "pixels": 37127,
+          "pixels": 52948,
           "litOutsideBox": 0,
           "bbox": {
-            "minX": 1149,
-            "minY": 280,
-            "maxX": 1386,
-            "maxY": 564,
-            "width": 238,
-            "height": 285
+            "minX": 938,
+            "minY": 291,
+            "maxX": 1421,
+            "maxY": 597,
+            "width": 484,
+            "height": 307
           },
           "distances": {
-            "left": 191,
+            "left": 89,
             "right": null,
-            "top": 162,
-            "bottom": 177
+            "top": 166,
+            "bottom": 176
           },
           "longestEdgeRun": {
             "left": 0,
@@ -2544,10 +2544,1026 @@
         "darkOutside": 0
       },
       "viewportGaps": {
-        "left": 1150,
-        "right": 53,
-        "top": 280,
-        "bottom": 336
+        "left": 939,
+        "right": 18,
+        "top": 292,
+        "bottom": 302
+      }
+    },
+    {
+      "name": "splay-wall-400",
+      "box": {
+        "x0": 849,
+        "y0": 125,
+        "x1": 1440,
+        "y1": 775
+      },
+      "boxFloat": [
+        848.55,
+        124.86,
+        1498.46,
+        774.77
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 47498,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 991,
+            "minY": 301,
+            "maxX": 1395,
+            "maxY": 629,
+            "width": 405,
+            "height": 329
+          },
+          "distances": {
+            "left": 142,
+            "right": null,
+            "top": 176,
+            "bottom": 145
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 49163,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 991,
+            "minY": 300,
+            "maxX": 1396,
+            "maxY": 629,
+            "width": 406,
+            "height": 330
+          },
+          "distances": {
+            "left": 142,
+            "right": null,
+            "top": 175,
+            "bottom": 145
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 49344,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 991,
+            "minY": 300,
+            "maxX": 1396,
+            "maxY": 629,
+            "width": 406,
+            "height": 330
+          },
+          "distances": {
+            "left": 142,
+            "right": null,
+            "top": 175,
+            "bottom": 145
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 991,
+        "right": 44,
+        "top": 301,
+        "bottom": 270
+      }
+    },
+    {
+      "name": "splay-wall-800",
+      "box": {
+        "x0": 893,
+        "y0": 125,
+        "x1": 1440,
+        "y1": 775
+      },
+      "boxFloat": [
+        892.57,
+        125.15,
+        1542.55,
+        775.13
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 47829,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 1014,
+            "minY": 301,
+            "maxX": 1433,
+            "maxY": 618,
+            "width": 420,
+            "height": 318
+          },
+          "distances": {
+            "left": 121,
+            "right": null,
+            "top": 176,
+            "bottom": 156
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 49477,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 1013,
+            "minY": 301,
+            "maxX": 1433,
+            "maxY": 618,
+            "width": 421,
+            "height": 318
+          },
+          "distances": {
+            "left": 120,
+            "right": null,
+            "top": 176,
+            "bottom": 156
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 49629,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 1013,
+            "minY": 301,
+            "maxX": 1433,
+            "maxY": 618,
+            "width": 421,
+            "height": 318
+          },
+          "distances": {
+            "left": 120,
+            "right": null,
+            "top": 176,
+            "bottom": 156
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 1014,
+        "right": 6,
+        "top": 301,
+        "bottom": 281
+      }
+    },
+    {
+      "name": "splay-wall-1200",
+      "box": {
+        "x0": 886,
+        "y0": 125,
+        "x1": 1440,
+        "y1": 775
+      },
+      "boxFloat": [
+        885.6,
+        125.09,
+        1535.57,
+        775.06
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 48921,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 999,
+            "minY": 300,
+            "maxX": 1431,
+            "maxY": 615,
+            "width": 433,
+            "height": 316
+          },
+          "distances": {
+            "left": 113,
+            "right": null,
+            "top": 175,
+            "bottom": 159
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 50621,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 998,
+            "minY": 300,
+            "maxX": 1431,
+            "maxY": 615,
+            "width": 434,
+            "height": 316
+          },
+          "distances": {
+            "left": 112,
+            "right": null,
+            "top": 175,
+            "bottom": 159
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 50830,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 998,
+            "minY": 300,
+            "maxX": 1431,
+            "maxY": 615,
+            "width": 434,
+            "height": 316
+          },
+          "distances": {
+            "left": 112,
+            "right": null,
+            "top": 175,
+            "bottom": 159
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 999,
+        "right": 8,
+        "top": 300,
+        "bottom": 284
+      }
+    },
+    {
+      "name": "splay-wall-1600",
+      "box": {
+        "x0": 884,
+        "y0": 125,
+        "x1": 1440,
+        "y1": 775
+      },
+      "boxFloat": [
+        884.34,
+        124.93,
+        1534.24,
+        774.83
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 49852,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 992,
+            "minY": 296,
+            "maxX": 1432,
+            "maxY": 607,
+            "width": 441,
+            "height": 312
+          },
+          "distances": {
+            "left": 108,
+            "right": null,
+            "top": 171,
+            "bottom": 167
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 51639,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 991,
+            "minY": 296,
+            "maxX": 1432,
+            "maxY": 608,
+            "width": 442,
+            "height": 313
+          },
+          "distances": {
+            "left": 107,
+            "right": null,
+            "top": 171,
+            "bottom": 166
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 51797,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 991,
+            "minY": 296,
+            "maxX": 1432,
+            "maxY": 608,
+            "width": 442,
+            "height": 313
+          },
+          "distances": {
+            "left": 107,
+            "right": null,
+            "top": 171,
+            "bottom": 166
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 992,
+        "right": 7,
+        "top": 296,
+        "bottom": 292
+      }
+    },
+    {
+      "name": "splay-wall-2000",
+      "box": {
+        "x0": 882,
+        "y0": 125,
+        "x1": 1440,
+        "y1": 775
+      },
+      "boxFloat": [
+        881.57,
+        125,
+        1531.51,
+        774.94
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 49950,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 979,
+            "minY": 292,
+            "maxX": 1432,
+            "maxY": 603,
+            "width": 454,
+            "height": 312
+          },
+          "distances": {
+            "left": 97,
+            "right": null,
+            "top": 167,
+            "bottom": 171
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 51859,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 979,
+            "minY": 292,
+            "maxX": 1433,
+            "maxY": 603,
+            "width": 455,
+            "height": 312
+          },
+          "distances": {
+            "left": 97,
+            "right": null,
+            "top": 167,
+            "bottom": 171
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 52009,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 979,
+            "minY": 292,
+            "maxX": 1433,
+            "maxY": 603,
+            "width": 455,
+            "height": 312
+          },
+          "distances": {
+            "left": 97,
+            "right": null,
+            "top": 167,
+            "bottom": 171
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 979,
+        "right": 7,
+        "top": 292,
+        "bottom": 296
+      }
+    },
+    {
+      "name": "splay-wall-2400",
+      "box": {
+        "x0": 875,
+        "y0": 125,
+        "x1": 1440,
+        "y1": 775
+      },
+      "boxFloat": [
+        874.57,
+        125.06,
+        1524.5,
+        775
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 49573,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 959,
+            "minY": 290,
+            "maxX": 1432,
+            "maxY": 603,
+            "width": 474,
+            "height": 314
+          },
+          "distances": {
+            "left": 84,
+            "right": null,
+            "top": 165,
+            "bottom": 171
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 51508,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 959,
+            "minY": 290,
+            "maxX": 1433,
+            "maxY": 603,
+            "width": 475,
+            "height": 314
+          },
+          "distances": {
+            "left": 84,
+            "right": null,
+            "top": 165,
+            "bottom": 171
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 51711,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 959,
+            "minY": 290,
+            "maxX": 1433,
+            "maxY": 603,
+            "width": 475,
+            "height": 314
+          },
+          "distances": {
+            "left": 84,
+            "right": null,
+            "top": 165,
+            "bottom": 171
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 959,
+        "right": 7,
+        "top": 290,
+        "bottom": 296
+      }
+    },
+    {
+      "name": "splay-wall-2800",
+      "box": {
+        "x0": 868,
+        "y0": 125,
+        "x1": 1440,
+        "y1": 775
+      },
+      "boxFloat": [
+        868.26,
+        125.16,
+        1518.12,
+        775.02
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 49543,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 944,
+            "minY": 291,
+            "maxX": 1432,
+            "maxY": 601,
+            "width": 489,
+            "height": 311
+          },
+          "distances": {
+            "left": 76,
+            "right": null,
+            "top": 166,
+            "bottom": 173
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 51509,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 943,
+            "minY": 291,
+            "maxX": 1432,
+            "maxY": 601,
+            "width": 490,
+            "height": 311
+          },
+          "distances": {
+            "left": 75,
+            "right": null,
+            "top": 166,
+            "bottom": 173
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 51678,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 943,
+            "minY": 291,
+            "maxX": 1432,
+            "maxY": 601,
+            "width": 490,
+            "height": 311
+          },
+          "distances": {
+            "left": 75,
+            "right": null,
+            "top": 166,
+            "bottom": 173
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 944,
+        "right": 7,
+        "top": 291,
+        "bottom": 298
+      }
+    },
+    {
+      "name": "splay-wall-3200",
+      "box": {
+        "x0": 867,
+        "y0": 125,
+        "x1": 1440,
+        "y1": 775
+      },
+      "boxFloat": [
+        867.26,
+        125.02,
+        1517.19,
+        774.95
+      ],
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "thresholds": {
+        "body60": {
+          "value": 60,
+          "pixels": 50037,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 940,
+            "minY": 294,
+            "maxX": 1429,
+            "maxY": 600,
+            "width": 490,
+            "height": 307
+          },
+          "distances": {
+            "left": 73,
+            "right": null,
+            "top": 169,
+            "bottom": 174
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "body120": {
+          "value": 120,
+          "pixels": 0,
+          "litOutsideBox": 0,
+          "bbox": null,
+          "distances": null,
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow8": {
+          "value": 8,
+          "pixels": 52035,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 940,
+            "minY": 293,
+            "maxX": 1429,
+            "maxY": 600,
+            "width": 490,
+            "height": 308
+          },
+          "distances": {
+            "left": 73,
+            "right": null,
+            "top": 168,
+            "bottom": 174
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        },
+        "glow2": {
+          "value": 2,
+          "pixels": 52207,
+          "litOutsideBox": 0,
+          "bbox": {
+            "minX": 940,
+            "minY": 293,
+            "maxX": 1430,
+            "maxY": 600,
+            "width": 491,
+            "height": 308
+          },
+          "distances": {
+            "left": 73,
+            "right": null,
+            "top": 168,
+            "bottom": 174
+          },
+          "longestEdgeRun": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "bodyCutSides": []
+        }
+      },
+      "verdict": {
+        "clipped": false,
+        "reachesEdge": false,
+        "darkReachesEdge": false,
+        "darkOutside": 0
+      },
+      "viewportGaps": {
+        "left": 940,
+        "right": 10,
+        "top": 294,
+        "bottom": 299
       }
     }
   ],
@@ -2562,16 +3578,16 @@
     "skipped": true,
     "note": "Lead decision: fixed-pose arm animation makes per-frame bbox a noisy apparent-size proxy; the FOV/box change is checked structurally (FOV_SCALE 1.25, base box 625)."
   },
-  "extentMax": 0.9461,
+  "extentMax": 0.8873,
   "extentWithin097": true,
   "extentAbove099": false,
   "targetChecks": [
     {
       "name": "left · d0",
       "distances": {
-        "right": 64,
-        "top": 165,
-        "bottom": 160
+        "right": 81,
+        "top": 178,
+        "bottom": 177
       },
       "boxVisible": {
         "left": false,
@@ -2585,13 +3601,13 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 64,
+      "minDistancePx": 81,
       "straightCut": false,
       "viewportGaps": {
-        "left": 7,
-        "right": 951,
-        "top": 302,
-        "bottom": 298
+        "left": 11,
+        "right": 959,
+        "top": 303,
+        "bottom": 302
       },
       "viewportPass": true,
       "canvasPass": true,
@@ -2600,9 +3616,9 @@
     {
       "name": "right · d0",
       "distances": {
-        "left": 82,
-        "top": 159,
-        "bottom": 174
+        "left": 81,
+        "top": 173,
+        "bottom": 181
       },
       "boxVisible": {
         "left": true,
@@ -2616,13 +3632,13 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 82,
+      "minDistancePx": 81,
       "straightCut": false,
       "viewportGaps": {
-        "left": 959,
+        "left": 939,
         "right": 8,
-        "top": 296,
-        "bottom": 312
+        "top": 298,
+        "bottom": 306
       },
       "viewportPass": true,
       "canvasPass": true,
@@ -2632,8 +3648,8 @@
       "name": "top · d0",
       "distances": {
         "left": 71,
-        "right": 71,
-        "bottom": 164
+        "right": 85,
+        "bottom": 172
       },
       "boxVisible": {
         "left": true,
@@ -2650,10 +3666,10 @@
       "minDistancePx": 71,
       "straightCut": false,
       "viewportGaps": {
-        "left": 479,
-        "right": 478,
-        "top": 8,
-        "bottom": 595
+        "left": 466,
+        "right": 480,
+        "top": 6,
+        "bottom": 593
       },
       "viewportPass": true,
       "canvasPass": true,
@@ -2662,9 +3678,9 @@
     {
       "name": "bottom · d0",
       "distances": {
-        "left": 87,
-        "right": 82,
-        "top": 159
+        "left": 36,
+        "right": 56,
+        "top": 169
       },
       "boxVisible": {
         "left": true,
@@ -2678,13 +3694,13 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 82,
+      "minDistancePx": 36,
       "straightCut": false,
       "viewportGaps": {
-        "left": 494,
-        "right": 490,
-        "top": 597,
-        "bottom": 6
+        "left": 431,
+        "right": 451,
+        "top": 593,
+        "bottom": 4
       },
       "viewportPass": true,
       "canvasPass": true,
@@ -2693,12 +3709,42 @@
     {
       "name": "top-left · d0",
       "distances": {
-        "right": 79,
-        "bottom": 162
+        "right": 93,
+        "bottom": 173
       },
       "boxVisible": {
         "left": false,
         "right": true,
+        "top": false,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 93,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 10,
+        "right": 960,
+        "top": 6,
+        "bottom": 595
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "top-right · d0",
+      "distances": {
+        "left": 79,
+        "bottom": 185
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
         "top": false,
         "bottom": true
       },
@@ -2711,24 +3757,179 @@
       "minDistancePx": 79,
       "straightCut": false,
       "viewportGaps": {
-        "left": 7,
-        "right": 954,
-        "top": 8,
-        "bottom": 589
+        "left": 940,
+        "right": 7,
+        "top": 7,
+        "bottom": 598
       },
       "viewportPass": true,
       "canvasPass": true,
       "pass": true
     },
     {
-      "name": "top-right · d0",
+      "name": "bottom-left · d0",
       "distances": {
-        "left": 85,
-        "bottom": 164
+        "right": 129,
+        "top": 181
+      },
+      "boxVisible": {
+        "left": false,
+        "right": true,
+        "top": true,
+        "bottom": false
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 129,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 13,
+        "right": 1045,
+        "top": 580,
+        "bottom": 7
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "bottom-right · d0",
+      "distances": {
+        "left": 92,
+        "top": 167
       },
       "boxVisible": {
         "left": true,
         "right": false,
+        "top": true,
+        "bottom": false
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 92,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 965,
+        "right": 16,
+        "top": 592,
+        "bottom": 10
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "center · d0",
+      "distances": {
+        "left": 225,
+        "right": 205,
+        "top": 177,
+        "bottom": 187
+      },
+      "boxVisible": {
+        "left": true,
+        "right": true,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 177,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 620,
+        "right": 600,
+        "top": 302,
+        "bottom": 312
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "left · d0.95",
+      "distances": {
+        "right": 48,
+        "top": 80,
+        "bottom": 87
+      },
+      "boxVisible": {
+        "left": false,
+        "right": true,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 48,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 7,
+        "right": 1212,
+        "top": 375,
+        "bottom": 382
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "right · d0.95",
+      "distances": {
+        "left": 26,
+        "top": 85,
+        "bottom": 81
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 26,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 1172,
+        "right": 14,
+        "top": 380,
+        "bottom": 376
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "top · d0.95",
+      "distances": {
+        "left": 37,
+        "right": 35,
+        "bottom": 92
+      },
+      "boxVisible": {
+        "left": true,
+        "right": true,
         "top": false,
         "bottom": true
       },
@@ -2738,26 +3939,27 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 85,
+      "minDistancePx": 35,
       "straightCut": false,
       "viewportGaps": {
-        "left": 974,
-        "right": 8,
+        "left": 602,
+        "right": 600,
         "top": 6,
-        "bottom": 594
+        "bottom": 756
       },
       "viewportPass": true,
       "canvasPass": true,
       "pass": true
     },
     {
-      "name": "bottom-left · d0",
+      "name": "bottom · d0.95",
       "distances": {
-        "right": 63,
-        "top": 160
+        "left": 62,
+        "right": 48,
+        "top": 85
       },
       "boxVisible": {
-        "left": false,
+        "left": true,
         "right": true,
         "top": true,
         "bottom": false
@@ -2768,42 +3970,12 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 63,
+      "minDistancePx": 48,
       "straightCut": false,
       "viewportGaps": {
-        "left": 8,
-        "right": 937,
-        "top": 604,
-        "bottom": 5
-      },
-      "viewportPass": true,
-      "canvasPass": true,
-      "pass": true
-    },
-    {
-      "name": "bottom-right · d0",
-      "distances": {
-        "left": 67,
-        "top": 164
-      },
-      "boxVisible": {
-        "left": true,
-        "right": false,
-        "top": true,
-        "bottom": false
-      },
-      "longestBodyRun": {
-        "left": 0,
-        "right": 0,
-        "top": 0,
-        "bottom": 0
-      },
-      "minDistancePx": 67,
-      "straightCut": false,
-      "viewportGaps": {
-        "left": 946,
-        "right": 7,
-        "top": 595,
+        "left": 627,
+        "right": 613,
+        "top": 752,
         "bottom": 8
       },
       "viewportPass": true,
@@ -2811,17 +3983,15 @@
       "pass": true
     },
     {
-      "name": "center · d0",
+      "name": "top-left · d0.95",
       "distances": {
-        "left": 151,
-        "right": 170,
-        "top": 156,
-        "bottom": 181
+        "right": 40,
+        "bottom": 85
       },
       "boxVisible": {
-        "left": true,
+        "left": false,
         "right": true,
-        "top": true,
+        "top": false,
         "bottom": true
       },
       "longestBodyRun": {
@@ -2830,29 +4000,28 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 151,
+      "minDistancePx": 40,
       "straightCut": false,
       "viewportGaps": {
-        "left": 559,
-        "right": 578,
-        "top": 294,
-        "bottom": 318
+        "left": 8,
+        "right": 1207,
+        "top": 6,
+        "bottom": 749
       },
       "viewportPass": true,
       "canvasPass": true,
       "pass": true
     },
     {
-      "name": "left · d0.95",
+      "name": "top-right · d0.95",
       "distances": {
-        "right": 38,
-        "top": 78,
-        "bottom": 75
+        "left": 38,
+        "bottom": 86
       },
       "boxVisible": {
-        "left": false,
-        "right": true,
-        "top": true,
+        "left": true,
+        "right": false,
+        "top": false,
         "bottom": true
       },
       "longestBodyRun": {
@@ -2864,162 +4033,9 @@
       "minDistancePx": 38,
       "straightCut": false,
       "viewportGaps": {
-        "left": 8,
-        "right": 1204,
-        "top": 379,
-        "bottom": 376
-      },
-      "viewportPass": true,
-      "canvasPass": true,
-      "pass": true
-    },
-    {
-      "name": "right · d0.95",
-      "distances": {
-        "left": 82,
-        "top": 75,
-        "bottom": 92
-      },
-      "boxVisible": {
-        "left": true,
-        "right": false,
-        "top": true,
-        "bottom": true
-      },
-      "longestBodyRun": {
-        "left": 0,
-        "right": 0,
-        "top": 0,
-        "bottom": 0
-      },
-      "minDistancePx": 75,
-      "straightCut": false,
-      "viewportGaps": {
-        "left": 1298,
-        "right": 15,
-        "top": 376,
-        "bottom": 393
-      },
-      "viewportPass": true,
-      "canvasPass": true,
-      "pass": true
-    },
-    {
-      "name": "top · d0.95",
-      "distances": {
-        "left": 36,
-        "right": 38,
-        "bottom": 77
-      },
-      "boxVisible": {
-        "left": true,
-        "right": true,
-        "top": false,
-        "bottom": true
-      },
-      "longestBodyRun": {
-        "left": 0,
-        "right": 0,
-        "top": 0,
-        "bottom": 0
-      },
-      "minDistancePx": 36,
-      "straightCut": false,
-      "viewportGaps": {
-        "left": 607,
-        "right": 609,
+        "left": 1200,
+        "right": 7,
         "top": 8,
-        "bottom": 751
-      },
-      "viewportPass": true,
-      "canvasPass": true,
-      "pass": true
-    },
-    {
-      "name": "bottom · d0.95",
-      "distances": {
-        "left": 33,
-        "right": 30,
-        "top": 74
-      },
-      "boxVisible": {
-        "left": true,
-        "right": true,
-        "top": true,
-        "bottom": false
-      },
-      "longestBodyRun": {
-        "left": 0,
-        "right": 0,
-        "top": 0,
-        "bottom": 0
-      },
-      "minDistancePx": 30,
-      "straightCut": false,
-      "viewportGaps": {
-        "left": 604,
-        "right": 601,
-        "top": 754,
-        "bottom": 6
-      },
-      "viewportPass": true,
-      "canvasPass": true,
-      "pass": true
-    },
-    {
-      "name": "top-left · d0.95",
-      "distances": {
-        "right": 52,
-        "bottom": 75
-      },
-      "boxVisible": {
-        "left": false,
-        "right": true,
-        "top": false,
-        "bottom": true
-      },
-      "longestBodyRun": {
-        "left": 0,
-        "right": 0,
-        "top": 0,
-        "bottom": 0
-      },
-      "minDistancePx": 52,
-      "straightCut": false,
-      "viewportGaps": {
-        "left": 7,
-        "right": 1240,
-        "top": 7,
-        "bottom": 748
-      },
-      "viewportPass": true,
-      "canvasPass": true,
-      "pass": true
-    },
-    {
-      "name": "top-right · d0.95",
-      "distances": {
-        "left": 37,
-        "bottom": 82
-      },
-      "boxVisible": {
-        "left": true,
-        "right": false,
-        "top": false,
-        "bottom": true
-      },
-      "longestBodyRun": {
-        "left": 0,
-        "right": 0,
-        "top": 0,
-        "bottom": 0
-      },
-      "minDistancePx": 37,
-      "straightCut": false,
-      "viewportGaps": {
-        "left": 1208,
-        "right": 8,
-        "top": 6,
         "bottom": 751
       },
       "viewportPass": true,
@@ -3029,8 +4045,8 @@
     {
       "name": "bottom-left · d0.95",
       "distances": {
-        "right": 32,
-        "top": 78
+        "right": 40,
+        "top": 83
       },
       "boxVisible": {
         "left": false,
@@ -3044,13 +4060,13 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 32,
+      "minDistancePx": 40,
       "straightCut": false,
       "viewportGaps": {
-        "left": 9,
-        "right": 1195,
+        "left": 7,
+        "right": 1198,
         "top": 750,
-        "bottom": 6
+        "bottom": 8
       },
       "viewportPass": true,
       "canvasPass": true,
@@ -3059,8 +4075,8 @@
     {
       "name": "bottom-right · d0.95",
       "distances": {
-        "left": 30,
-        "top": 76
+        "left": 42,
+        "top": 83
       },
       "boxVisible": {
         "left": true,
@@ -3074,13 +4090,13 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 30,
+      "minDistancePx": 42,
       "straightCut": false,
       "viewportGaps": {
-        "left": 1199,
-        "right": 8,
+        "left": 1203,
+        "right": 10,
         "top": 752,
-        "bottom": 8
+        "bottom": 7
       },
       "viewportPass": true,
       "canvasPass": true,
@@ -3089,10 +4105,10 @@
     {
       "name": "center · d0.95",
       "distances": {
-        "left": 53,
-        "right": 50,
-        "top": 77,
-        "bottom": 82
+        "left": 40,
+        "right": 35,
+        "top": 84,
+        "bottom": 84
       },
       "boxVisible": {
         "left": true,
@@ -3106,13 +4122,13 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 50,
+      "minDistancePx": 35,
       "straightCut": false,
       "viewportGaps": {
-        "left": 624,
-        "right": 621,
-        "top": 378,
-        "bottom": 383
+        "left": 605,
+        "right": 600,
+        "top": 379,
+        "bottom": 379
       },
       "viewportPass": true,
       "canvasPass": true,
@@ -3121,9 +4137,226 @@
     {
       "name": "splay settled",
       "distances": {
-        "left": 84,
-        "top": 153,
+        "left": 74,
+        "top": 172,
         "bottom": 166
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 74,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 923,
+        "right": 8,
+        "top": 297,
+        "bottom": 291
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "splay peak",
+      "distances": {
+        "left": 90,
+        "top": 167,
+        "bottom": 176
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 90,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 939,
+        "right": 18,
+        "top": 292,
+        "bottom": 302
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "splay-wall-400",
+      "distances": {
+        "left": 142,
+        "top": 176,
+        "bottom": 145
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 142,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 991,
+        "right": 44,
+        "top": 301,
+        "bottom": 270
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "splay-wall-800",
+      "distances": {
+        "left": 121,
+        "top": 176,
+        "bottom": 156
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 121,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 1014,
+        "right": 6,
+        "top": 301,
+        "bottom": 281
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "splay-wall-1200",
+      "distances": {
+        "left": 113,
+        "top": 175,
+        "bottom": 159
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 113,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 999,
+        "right": 8,
+        "top": 300,
+        "bottom": 284
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "splay-wall-1600",
+      "distances": {
+        "left": 108,
+        "top": 171,
+        "bottom": 167
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 108,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 992,
+        "right": 7,
+        "top": 296,
+        "bottom": 292
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "splay-wall-2000",
+      "distances": {
+        "left": 97,
+        "top": 167,
+        "bottom": 171
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 97,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 979,
+        "right": 7,
+        "top": 292,
+        "bottom": 296
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "splay-wall-2400",
+      "distances": {
+        "left": 84,
+        "top": 165,
+        "bottom": 171
       },
       "boxVisible": {
         "left": true,
@@ -3140,21 +4373,21 @@
       "minDistancePx": 84,
       "straightCut": false,
       "viewportGaps": {
-        "left": 963,
-        "right": 6,
+        "left": 959,
+        "right": 7,
         "top": 290,
-        "bottom": 304
+        "bottom": 296
       },
       "viewportPass": true,
       "canvasPass": true,
       "pass": true
     },
     {
-      "name": "splay peak",
+      "name": "splay-wall-2800",
       "distances": {
-        "left": 192,
-        "top": 162,
-        "bottom": 178
+        "left": 76,
+        "top": 166,
+        "bottom": 173
       },
       "boxVisible": {
         "left": true,
@@ -3168,13 +4401,44 @@
         "top": 0,
         "bottom": 0
       },
-      "minDistancePx": 162,
+      "minDistancePx": 76,
       "straightCut": false,
       "viewportGaps": {
-        "left": 1150,
-        "right": 53,
-        "top": 280,
-        "bottom": 336
+        "left": 944,
+        "right": 7,
+        "top": 291,
+        "bottom": 298
+      },
+      "viewportPass": true,
+      "canvasPass": true,
+      "pass": true
+    },
+    {
+      "name": "splay-wall-3200",
+      "distances": {
+        "left": 73,
+        "top": 169,
+        "bottom": 174
+      },
+      "boxVisible": {
+        "left": true,
+        "right": false,
+        "top": true,
+        "bottom": true
+      },
+      "longestBodyRun": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "minDistancePx": 73,
+      "straightCut": false,
+      "viewportGaps": {
+        "left": 940,
+        "right": 10,
+        "top": 294,
+        "bottom": 299
       },
       "viewportPass": true,
       "canvasPass": true,
@@ -3182,5 +4446,5 @@
     }
   ],
   "targetsPass": true,
-  "conclusion": "no clipping: body bbox stays >=1 px from every viewport edge, no body pixels reach an exposed canvas edge (all straight-run counts 0, min exposed distance 30 px), max extent 0.9461"
+  "conclusion": "no clipping: body bbox stays >=1 px from every viewport edge, no body pixels reach an exposed canvas edge (all straight-run counts 0, min exposed distance 26 px), max extent 0.8873"
 }
