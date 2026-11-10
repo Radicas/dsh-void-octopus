@@ -51,10 +51,11 @@ export const DEFAULTS = {
   // --- choreography -----------------------------------------------------
   prepMin: 0.5,
   prepMax: 0.9,
-  // A 180 deg swing in 2.0-2.8 s peaks around 170 deg/s — slower than a
-  // startled animal, fast enough that the profile shot only lasts a few frames.
-  turnMin: 2.0,
-  turnMax: 2.8,
+  // A 180 deg swing in 1.6-2.6 s. The choreography also randomises which way it
+  // turns, how far (0.88-1.0 of a half turn) and whether it gathers first, so
+  // two departures never look like the same animation played twice.
+  turnMin: 1.6,
+  turnMax: 2.6,
   facingTarget: Math.PI,
   retreatMin: 2.6,
   retreatMax: 4.2,
@@ -119,6 +120,16 @@ function beginPrep(st, cfg, rand) {
 function beginTurn(st, cfg, rand) {
   enter(st, PHASE.TURN, randRange(rand, cfg.turnMin, cfg.turnMax))
   st.dpFacingFrom = st.dpFacing
+  // Not always the same shoulder, and not always a textbook half turn: a real
+  // animal commits to "away", not to "exactly 180.0 degrees, clockwise".
+  const sign = rand() < 0.5 ? 1 : -1
+  st.dpFacingTarget = cfg.facingTarget * randRange(rand, 0.88, 1.0) * sign
+}
+
+/** The departure can begin with a short gather, or skip straight to the turn. */
+function beginDeparture(st, cfg, rand) {
+  if (rand() < 0.45) beginTurn(st, cfg, rand)
+  else beginPrep(st, cfg, rand)
 }
 
 function beginRetreat(st, cfg, rand) {
@@ -162,6 +173,7 @@ export function initDeparture(st, rand = Math.random, cfg = DEFAULTS) {
   st.dpCooldown = randRange(rand, cfg.firstDelayMin, cfg.firstDelayMax)
   st.dpFacing = 0
   st.dpFacingFrom = 0
+  st.dpFacingTarget = 0
   st.dpAlpha = 1
   st.dpLift = 0
   st.dpFarDepth = cfg.farDepthMin
@@ -184,6 +196,7 @@ export function restoreDeparture(st, raw, cfg = DEFAULTS) {
   st.dpCooldown = isNum(src.cooldown) ? Math.max(0, src.cooldown) : cfg.firstDelayMin
   st.dpFacing = isNum(src.facing) ? clamp(src.facing, -Math.PI, Math.PI) : 0
   st.dpFacingFrom = isNum(src.facingFrom) ? clamp(src.facingFrom, -Math.PI, Math.PI) : st.dpFacing
+  st.dpFacingTarget = isNum(src.facingTarget) ? clamp(src.facingTarget, -Math.PI, Math.PI) : cfg.facingTarget
   st.dpAlpha = isNum(src.alpha) ? clamp01(src.alpha) : 1
   st.dpLift = isNum(src.lift) ? clamp(src.lift, 0, cfg.liftMax) : 0
   st.dpFarDepth = isNum(src.farDepth) ? clamp01(src.farDepth) : cfg.farDepthMin
@@ -197,7 +210,7 @@ export function restoreDeparture(st, raw, cfg = DEFAULTS) {
  */
 export function startDeparture(st, cfg = DEFAULTS, rand = Math.random) {
   if (st.dpPhase !== PHASE.IDLE) return false
-  beginPrep(st, cfg, rand)
+  beginDeparture(st, cfg, rand)
   return true
 }
 
@@ -222,7 +235,7 @@ export function stepDeparture(st, dt, cfg = DEFAULTS, rand = Math.random) {
     st.dpFacing = approach(st.dpFacing, 0, 1.8 * dt)
     st.dpAlpha = approach(st.dpAlpha, 1, 0.9 * dt)
     st.dpLift = approach(st.dpLift, 0, 24 * dt)
-    if (cfg.enabled && st.mode === 'rest' && st.dpCooldown <= 0) beginPrep(st, cfg, rand)
+    if (cfg.enabled && st.mode === 'rest' && st.dpCooldown <= 0) beginDeparture(st, cfg, rand)
     return st
   }
 
@@ -236,22 +249,26 @@ export function stepDeparture(st, dt, cfg = DEFAULTS, rand = Math.random) {
       if (st.dpTimer <= 0) beginTurn(st, cfg, rand)
       break
     case PHASE.TURN:
-      st.dpFacing = lerp(isNum(st.dpFacingFrom) ? st.dpFacingFrom : 0, cfg.facingTarget, smootherstep(progress))
+      st.dpFacing = lerp(
+        isNum(st.dpFacingFrom) ? st.dpFacingFrom : 0,
+        isNum(st.dpFacingTarget) ? st.dpFacingTarget : cfg.facingTarget,
+        smootherstep(progress),
+      )
       if (st.dpTimer <= 0) {
-        st.dpFacing = cfg.facingTarget
+        st.dpFacing = isNum(st.dpFacingTarget) ? st.dpFacingTarget : cfg.facingTarget
         beginRetreat(st, cfg, rand)
       }
       break
     case PHASE.RETREAT: {
       const e = smoothstep(progress)
-      st.dpFacing = approach(st.dpFacing, cfg.facingTarget, 1.2 * dt)
+      st.dpFacing = approach(st.dpFacing, isNum(st.dpFacingTarget) ? st.dpFacingTarget : cfg.facingTarget, 1.2 * dt)
       st.dpLift = cfg.liftMax * e
       st.dpAlpha = lerp(1, cfg.alphaFar, e)
       if (st.dpTimer <= 0) enter(st, PHASE.FAR, randRange(rand, cfg.farMin, cfg.farMax))
       break
     }
     case PHASE.FAR:
-      st.dpFacing = approach(st.dpFacing, cfg.facingTarget, 1.2 * dt)
+      st.dpFacing = approach(st.dpFacing, isNum(st.dpFacingTarget) ? st.dpFacingTarget : cfg.facingTarget, 1.2 * dt)
       st.dpLift = cfg.liftMax
       st.dpAlpha = cfg.alphaFar
       if (st.dpTimer <= 0) beginReturn(st, cfg, rand)
@@ -259,7 +276,7 @@ export function stepDeparture(st, dt, cfg = DEFAULTS, rand = Math.random) {
     case PHASE.RETURN: {
       const e = smootherstep(progress)
       const fade = smoothstep(progress)
-      st.dpFacing = cfg.facingTarget * (1 - e)
+      st.dpFacing = (isNum(st.dpFacingTarget) ? st.dpFacingTarget : cfg.facingTarget) * (1 - e)
       st.dpLift = cfg.liftMax * (1 - fade)
       st.dpAlpha = lerp(cfg.alphaFar, 1, fade)
       if (st.dpTimer <= 0) finish(st, cfg, rand)

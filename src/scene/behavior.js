@@ -111,10 +111,11 @@ export const DEFAULTS = {
   // target sitting on the boundary cannot flap the body back and forth.
   backDepth: 0.6,
   faceDepth: 0.5,
-  // Exponential turn, ~1 s time constant: 63% in 1 s, 95% in 3 s, initial rate
-  // ~150 deg/s. The departure choreography uses its own S-curve; this one only
-  // has to be smooth enough not to snap when the distance decides to turn.
-  backTurnTau: 1.0,
+  // A full 180 deg turn is planned to take this long (randomised per turn, and
+  // scaled down for smaller corrections). Each turn also picks its own easing,
+  // final angle and direction — see buildTurn/planFacingTurn.
+  backTurnMin: 1.25,
+  backTurnMax: 2.6,
   // Depth also lifts and dims a little. A pure resize reads as "someone shrank
   // the picture"; a small rise + falloff reads as "it went away".
   depthLift: 22,
@@ -260,6 +261,8 @@ export function createBehaviorState({ x = 0, y = 0, seed = 1, cfg = DEFAULTS } =
     depthView: cfg.depthStart,
     facing: 0,
     back: false,
+    faceSign: 0,
+    turn: null,
     jet: 0,
   }
   st.heading = randAngle(st)
@@ -269,6 +272,11 @@ export function createBehaviorState({ x = 0, y = 0, seed = 1, cfg = DEFAULTS } =
   st.timer = randRange(st, cfg.arrivalRestMin, cfg.arrivalRestMax)
   st.depthTimer = randRange(st, cfg.depthRetargetMin, cfg.depthRetargetMax)
   initDeparture(st, () => rand(st), cfg.depart || DEPART_DEFAULTS)
+  // Which shoulder the first turn goes over. A fixed one is the "always turns
+  // the same way" tell; this is the starting side, and planFacingTurn alternates
+  // from there with a 68% bias.
+  st.faceSign = rand(st) < 0.5 ? -1 : 1
+  st.turn = null
   return st
 }
 
@@ -437,6 +445,112 @@ function stepDepth(st, dt, cfg) {
 }
 
 /**
+ * Turn easing shapes. A single shape for every turn is what read as "one
+ * routine"; picking one per turn (plus a random duration, a random final angle
+ * and an optional hesitation) is what makes it read as a decision.
+ * `back` overshoots slightly and settles — the body carries a little past and
+ * comes back, which no linear/ease interpolation ever does.
+ */
+const TURN_EASE = {
+  smooth: (p) => p * p * (3 - 2 * p),
+  // Ease-in-out cubic: slower start than any ease-out shape, which is what a
+  // body with mass actually does.
+  soft: (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2),
+  back: (p) => {
+    // Ease-in-out-back: slow start, a small overshoot past the target, settle.
+    // (An ease-OUT-back would start at full speed, which reads as a flick.)
+    const c1 = 0.9
+    const c2 = c1 * 1.525
+    if (p < 0.5) {
+      const x = 2 * p
+      return (x * x * ((c2 + 1) * x - c2)) / 2
+    }
+    const x = 2 * p - 2
+    return (x * x * ((c2 + 1) * x + c2) + 2) / 2
+  },
+  hold: () => 0,
+}
+const TURN_EASE_KEYS = ['smooth', 'soft', 'back']
+
+function pickEase(st) {
+  return TURN_EASE_KEYS[Math.floor(rand(st) * TURN_EASE_KEYS.length) % TURN_EASE_KEYS.length]
+}
+
+/**
+ * Build a turn plan from the current facing to `to`: 1-3 segments, each with its
+ * own ease. Occasionally it turns partway, pauses, then finishes — the "it
+ * changed its mind and committed" beat that a single curve cannot produce.
+ */
+function buildTurn(st, to, cfg) {
+  const from = st.facing
+  const dist = to - from
+  const abs = Math.abs(dist)
+  if (abs < 0.02) return null
+  // Full 180 deg takes the configured turn band; short corrections scale down,
+  // with a floor so a small correction still has weight.
+  const base = randRange(st, cfg.backTurnMin, cfg.backTurnMax) * (abs / Math.PI) + 0.18
+  const stages = []
+  const firstEase = pickEase(st)
+  if (rand(st) < 0.3) {
+    const frac = randRange(st, 0.45, 0.75)
+    const mid = from + dist * frac
+    // The two halves take at least their proportional share of the time, so the
+    // hesitation ADDS time instead of speeding the first half up into a jerk.
+    stages.push({ from, to: mid, dur: Math.max(0.22, base * frac * randRange(st, 1.0, 1.15)), ease: firstEase })
+    stages.push({ from: mid, to: mid, dur: randRange(st, 0.12, 0.42), ease: 'hold' })
+    stages.push({ from: mid, to, dur: Math.max(0.2, base * (1 - frac) * randRange(st, 1.0, 1.2)), ease: pickEase(st) })
+  } else {
+    stages.push({ from, to, dur: base, ease: firstEase })
+  }
+  return { stages, i: 0, t: 0, delay: randRange(st, 0, 0.85) }
+}
+
+/**
+ * Start a turn in the direction the distance just asked for.
+ * The final angle is 148-180 deg (not always a textbook half turn) and the
+ * shoulder alternates with a 68% bias, so the same side does not come up twice
+ * in a row most of the time.
+ */
+function planFacingTurn(st, cfg) {
+  let to
+  if (st.back) {
+    const sign = rand(st) < 0.68 ? -st.faceSign : st.faceSign
+    st.faceSign = sign
+    to = sign * Math.PI * randRange(st, 0.82, 1.0)
+  } else {
+    to = randRange(st, -0.12, 0.12)
+  }
+  return buildTurn(st, to, cfg)
+}
+
+function advanceTurn(st, dt) {
+  const turn = st.turn
+  if (!turn) return
+  if (turn.delay > 0) {
+    turn.delay -= dt
+    return
+  }
+  const stage = turn.stages[turn.i]
+  if (!stage) {
+    st.turn = null
+    return
+  }
+  turn.t += dt
+  const p = stage.dur > 0 ? clamp01(turn.t / stage.dur) : 1
+  const ease = TURN_EASE[stage.ease] || TURN_EASE.smooth
+  st.facing = stage.from + (stage.to - stage.from) * ease(p)
+  if (p >= 1) {
+    st.facing = stage.to
+    turn.i++
+    turn.t = 0
+    if (turn.i >= turn.stages.length) {
+      st.turn = null
+      st.facing = clamp(st.facing, -Math.PI, Math.PI)
+    }
+  }
+}
+
+/**
  * Which way the body faces. Two drivers, in priority order:
  *
  *  1. a departure owns the turn (it turns at close range, then withdraws);
@@ -445,23 +559,35 @@ function stepDepth(st, dt, cfg) {
  *     缩小的时候不背对我": going away and facing away are the same decision.
  *
  * Thresholds are hysteretic so a target sitting on the boundary cannot flap.
+ * The turn itself is planned (see buildTurn), not a damped follow: a damped
+ * follow always looks the same, which is exactly the complaint.
  */
 function stepFacing(st, dt, cfg) {
   const depCfg = cfg.depart || DEPART_DEFAULTS
   if (st.dpPhase !== DEPART_PHASE.IDLE) {
     st.facing = st.dpFacing
     st.back = st.dpPhase !== DEPART_PHASE.RETURN
+    st.turn = null
     return
   }
   if (depCfg.enabled === false) {
     st.back = false
-    st.facing += (0 - st.facing) * (1 - Math.exp(-dt / cfg.backTurnTau))
+    st.turn = null
+    st.facing += (0 - st.facing) * (1 - Math.exp(-dt / 1))
     return
   }
-  if (st.depthTarget >= cfg.backDepth) st.back = true
-  else if (st.depthTarget <= cfg.faceDepth) st.back = false
-  const target = st.back ? Math.PI : 0
-  st.facing += (target - st.facing) * (1 - Math.exp(-dt / (cfg.backTurnTau > 0 ? cfg.backTurnTau : 0.55)))
+  if (st.depthTarget >= cfg.backDepth) {
+    if (!st.back) {
+      st.back = true
+      st.turn = planFacingTurn(st, cfg)
+    }
+  } else if (st.depthTarget <= cfg.faceDepth) {
+    if (st.back) {
+      st.back = false
+      st.turn = planFacingTurn(st, cfg)
+    }
+  }
+  advanceTurn(st, dt)
 }
 
 /**
@@ -515,6 +641,8 @@ export function clampBehavior(st, bounds) {
   st.depthView = clamp01(Number.isFinite(st.depthView) ? st.depthView : st.depth)
   st.facing = clamp(Number.isFinite(st.facing) ? st.facing : 0, -Math.PI, Math.PI)
   st.back = st.back === true
+  st.faceSign = st.faceSign === -1 ? -1 : 1
+  st.turn = null
   st.dpFacing = clamp(Number.isFinite(st.dpFacing) ? st.dpFacing : 0, -Math.PI, Math.PI)
   st.dpAlpha = clamp01(Number.isFinite(st.dpAlpha) ? st.dpAlpha : 1)
   st.dpLift = clamp(Number.isFinite(st.dpLift) ? st.dpLift : 0, 0, DEPART_DEFAULTS.liftMax)
@@ -624,6 +752,7 @@ export function serializeBehavior(st) {
     depthView: r2(st.depthView == null ? st.depth : st.depthView),
     facing: r2(st.facing || 0),
     back: st.back === true,
+    faceSign: st.faceSign === -1 ? -1 : 1,
     // Departure state is nested so a payload from before this feature simply
     // lacks the key and restores as idle (see restoreDeparture).
     dp: {
@@ -633,6 +762,7 @@ export function serializeBehavior(st) {
       cooldown: r2(Math.max(0, st.dpCooldown || 0)),
       facing: r2(st.dpFacing || 0),
       facingFrom: r2(st.dpFacingFrom || 0),
+      facingTarget: r2(st.dpFacingTarget || 0),
       alpha: r2(st.dpAlpha == null ? 1 : st.dpAlpha),
       lift: r2(st.dpLift || 0),
       farDepth: r2(st.dpFarDepth || 0),
@@ -704,6 +834,8 @@ export function restoreBehavior(raw, bounds, cfg = DEFAULTS) {
     depthView: isNum(src.depthView) ? clamp01(src.depthView) : hasDepth ? clamp01(src.depth) : cfg.depthStart,
     facing: isNum(src.facing) ? clamp(src.facing, -Math.PI, Math.PI) : 0,
     back: src.back === true,
+    faceSign: src.faceSign === -1 ? -1 : 1,
+    turn: null,
     jet: 0,
   }
   restoreDeparture(st, src.dp, cfg.depart || DEPART_DEFAULTS)

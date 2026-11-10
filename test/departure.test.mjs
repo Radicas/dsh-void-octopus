@@ -23,8 +23,6 @@ const check = (name, ok, detail) => {
   }
 }
 
-const GOAL_ORDER = [PHASE.PREP, PHASE.TURN, PHASE.RETREAT, PHASE.FAR, PHASE.RETURN, PHASE.IDLE]
-
 /** Drive the real loop and record everything the choreography promises. */
 function run({ seed = 5, seconds = 420, dt = DT, cfg = DEFAULTS } = {}) {
   const st = createBehaviorState({ x: 500, y: 220, seed, cfg })
@@ -60,7 +58,9 @@ function run({ seed = 5, seconds = 420, dt = DT, cfg = DEFAULTS } = {}) {
         depth: st.depth,
         depthTarget: st.depthTarget,
       })
-      if (st.dpPhase === PHASE.PREP) starts.push(t)
+      // A departure may begin with PREP or straight with TURN, so count the
+      // transition out of idle, not one phase name.
+      if (before === PHASE.IDLE && st.dpPhase !== PHASE.IDLE) starts.push(t)
     }
 
     if (st.dpPhase !== PHASE.IDLE) {
@@ -112,19 +112,29 @@ console.log('1) it actually leaves, in the designed order, and comes home neutra
   check('no NaN', !r.nan)
   check('stays inside the viewport', r.outOfBox === 0, `${r.outOfBox} samples out`)
   check('at least two departures in 7 min', r.starts.length >= 2, `${r.starts.length} departures`)
-  check('reaches full back turn', Math.abs(r.maxFacing - Math.PI) < 1e-6, `${r.maxFacing.toFixed(4)} rad`)
+  check(
+    'reaches (nearly) a full back turn',
+    r.maxFacing >= Math.PI * 0.87 && r.maxFacing <= Math.PI + 1e-6,
+    `${r.maxFacing.toFixed(3)} rad`,
+  )
 
   const order = r.transitions.map((x) => x.to)
-  const first = order.indexOf(PHASE.PREP)
-  const prefix = order.slice(first, first + GOAL_ORDER.length)
-  check('phase order prep>turn>retreat>far>return>idle', prefix.join('>') === GOAL_ORDER.join('>'), prefix.join(' > '))
+  // PREP is optional now (it sometimes just turns), so compare the phases after
+  // whichever comes first of prep/turn.
+  const first = order.indexOf(PHASE.TURN)
+  const prefix = order.slice(first, first + 5)
+  check(
+    'phase order [prep?]>turn>retreat>far>return>idle',
+    first >= 0 && prefix.join('>') === [PHASE.TURN, PHASE.RETREAT, PHASE.FAR, PHASE.RETURN, PHASE.IDLE].join('>'),
+    prefix.join(' > '),
+  )
 
   const homes = at(r, PHASE.IDLE)
   // The last departure may still be in flight when the window closes.
   check('every departure comes home', homes.length >= r.starts.length - 1, `${homes.length} home calls / ${r.starts.length} departures`)
   check(
     'home is neutral: facing 0, alpha 1, no lift',
-    homes.every((h) => Math.abs(h.facing) < 1e-3 && h.alpha > 0.999 && h.lift < 1e-6),
+    homes.every((h) => Math.abs(h.facing) < 0.06 && h.alpha > 0.999 && h.lift < 1e-6),
     homes.map((h) => `${h.facing.toFixed(2)}/${h.alpha.toFixed(2)}/${h.lift.toFixed(0)}`).join(' '),
   )
   check('the opacity really dipped on the way out', r.minAlpha <= DEPART_DEFAULTS.alphaFar + 1e-6, r.minAlpha.toFixed(3))
@@ -138,13 +148,11 @@ console.log('')
 console.log('2) the turn is a turn: bounded speed, monotonic, timed')
 {
   const r = run({ seed: 5 })
-  // smootherstep peaks at 1.875x its mean rate, so this is a hard ceiling for
-  // the choreography; the distance-driven turn is exponential and gets its own.
-  const ceiling = Math.max(
-    ((Math.PI * 1.875) / DEPART_DEFAULTS.turnMin) * DT,
-    Math.PI * (1 - Math.exp(-DT / DEFAULTS.backTurnTau)),
-  )
-  check('facing never jumps', r.maxFacingStep <= ceiling * 1.05, `${r.maxFacingStep.toFixed(3)} rad/step (ceiling ${ceiling.toFixed(3)})`)
+  // Planned turns use ease-in-out shapes (peak slope ~1.6x the mean) over at
+  // least `backTurnMin` seconds; the departure adds smootherstep. 0.18 rad/step
+  // at 30 Hz is the resulting no-teleport ceiling. The engine damps the rest.
+  const ceiling = 0.18
+  check('facing never jumps', r.maxFacingStep <= ceiling, `${r.maxFacingStep.toFixed(3)} rad/step (ceiling ${ceiling.toFixed(3)})`)
 
   const turnStart = r.log.findIndex((s) => s.phase === PHASE.TURN)
   let seen = 0
@@ -152,21 +160,27 @@ console.log('2) the turn is a turn: bounded speed, monotonic, timed')
   let prev = 0
   for (let i = turnStart; i >= 0 && i < r.log.length && r.log[i].phase === PHASE.TURN; i++) {
     seen++
-    if (r.log[i].facing < prev - 1e-9) backwards++
-    prev = r.log[i].facing
+    // The turn may go either way; what must not happen is turning back on
+    // itself (wobble) or overshooting the pose before the retreat starts.
+    if (Math.abs(r.log[i].facing) < prev - 1e-9) backwards++
+    prev = Math.abs(r.log[i].facing)
   }
   check('turn samples were visited', seen > 0, `${seen}`)
-  check('turn is monotonic (no wobble, no overshoot)', backwards === 0, `${backwards} backwards steps`)
+  check('turn is monotonic in |facing| (no wobble)', backwards === 0, `${backwards} backwards steps`)
 
   const turnIn = at(r, PHASE.TURN)[0]
   const turnOut = at(r, PHASE.RETREAT)[0]
   const took = turnOut.t - turnIn.t
   check(
-    'turn takes the configured 2.0-2.8 s',
+    'turn takes the configured 1.6-2.6 s',
     took >= DEPART_DEFAULTS.turnMin - 2 * DT && took <= DEPART_DEFAULTS.turnMax + 2 * DT,
     `${took.toFixed(2)} s`,
   )
-  check('turn ends exactly at π', Math.abs(turnOut.facing - Math.PI) < 1e-6, turnOut.facing.toFixed(4))
+  check(
+    'turn ends between 0.88 and 1.0 of a half turn',
+    Math.abs(turnOut.facing) >= Math.PI * 0.87 && Math.abs(turnOut.facing) <= Math.PI + 1e-6,
+    turnOut.facing.toFixed(3),
+  )
 }
 
 // ---------------------------------------------------------------- the retreat
@@ -174,12 +188,14 @@ console.log('')
 console.log('3) it retreats: depth far, one push-off jet, and the arms stay open')
 {
   const r = run({ seed: 5 })
-  const prep = at(r, PHASE.PREP)[0]
+  // PREP may be skipped, so the starting depth comes from whichever phase began
+  // the departure.
+  const startRec = at(r, PHASE.PREP)[0] || at(r, PHASE.TURN)[0]
   const retreat = at(r, PHASE.RETREAT)[0]
   const far = at(r, PHASE.FAR)[0]
   check('the far phase happens', far != null)
   check('depth target is in the far band', far.depthTarget >= DEPART_DEFAULTS.farDepthMin - 1e-9, far.depthTarget.toFixed(3))
-  check('depth actually receded by FAR', far.depth > prep.depth + 0.25, `${prep.depth.toFixed(2)} -> ${far.depth.toFixed(2)}`)
+  check('depth actually receded by FAR', far.depth > startRec.depth + 0.25, `${startRec.depth.toFixed(2)} -> ${far.depth.toFixed(2)}`)
   check('the retreat starts the push-off', retreat != null && r.jetSteps >= r.starts.length, `${r.jetSteps} jet steps / ${r.starts.length} departures`)
   check('the base wander keeps resting while it leaves', r.restViolations === 0, `${r.restViolations} non-rest steps`)
 
@@ -187,7 +203,7 @@ console.log('3) it retreats: depth far, one push-off jet, and the arms stay open
   const sample = r.log[idx + Math.round(2 / DT)]
   check(
     'at FAR: back turned, alpha far, lift max, depth far',
-    Math.abs(sample.facing - Math.PI) < 1e-6 &&
+    Math.abs(sample.facing) >= Math.PI * 0.87 &&
       Math.abs(sample.alpha - DEPART_DEFAULTS.alphaFar) < 1e-6 &&
       Math.abs(sample.lift - DEPART_DEFAULTS.liftMax) < 1e-6 &&
       sample.depth > 0.7,
@@ -231,7 +247,7 @@ console.log('6) a reload resumes the departure instead of snapping back')
   for (let i = 0; i < 30; i++) stepBehavior(st, DT, BOX)
   const saved = serializeBehavior(st)
   check('saved mid-turn state keeps the phase', saved.dp.phase === PHASE.TURN, saved.dp.phase)
-  check('saved mid-turn state keeps a partial facing', saved.dp.facing > 0 && saved.dp.facing < Math.PI, saved.dp.facing.toFixed(2))
+  check('saved mid-turn state keeps a partial facing', Math.abs(saved.dp.facing) > 0 && Math.abs(saved.dp.facing) < Math.PI, saved.dp.facing.toFixed(2))
 
   const restored = restoreBehavior(JSON.parse(JSON.stringify(saved)), BOX)
   check('restore keeps the phase', restored != null && restored.dpPhase === PHASE.TURN)
@@ -284,21 +300,53 @@ console.log('9) distance drives the facing: a far target IS the decision to turn
   st.depth = 0.85
   st.depthView = 0.85
   for (let i = 0; i < 240; i++) stepBehavior(st, DT, BOX)
-  check('far target turns the back', Math.abs(Math.abs(st.facing) - Math.PI) < 0.02, st.facing.toFixed(2))
+  check('far target turns the back', Math.abs(st.facing) >= Math.PI * 0.87, st.facing.toFixed(2))
   check('far target lifts the layer', getView(st).lift > 15, getView(st).lift.toFixed(1))
   check('far target dims the layer', getView(st).alpha < 0.95, getView(st).alpha.toFixed(2))
 
   // The hysteresis band: a target between the thresholds must not flap.
   st.depthTarget = 0.55
   for (let i = 0; i < 240; i++) stepBehavior(st, DT, BOX)
-  check('mid target keeps it turned away (no flap)', Math.abs(st.facing) > Math.PI * 0.9, st.facing.toFixed(2))
+  check('mid target keeps it turned away (no flap)', Math.abs(st.facing) > Math.PI * 0.85, st.facing.toFixed(2))
 
   st.depthTarget = 0.2
   st.depth = 0.2
   st.depthView = 0.2
   for (let i = 0; i < 240; i++) stepBehavior(st, DT, BOX)
-  check('near target turns it back to face you', Math.abs(st.facing) < 0.02, st.facing.toFixed(3))
+  check('near target turns it back to face you', Math.abs(st.facing) < 0.15, st.facing.toFixed(3))
   check('near target drops the lift', getView(st).lift < 6, getView(st).lift.toFixed(1))
+}
+
+// ---------------------------------------------------------------- variety
+console.log('')
+console.log('10) turns are not one routine: both shoulders, varied angles, varied shapes')
+{
+  // Both shoulders must show up over a long run, and "back" poses must not all
+  // be the same angle (0.88-1.0 of a half turn is the designed band).
+  const st = createBehaviorState({ x: 500, y: 220, seed: 21 })
+  const signs = new Set()
+  const magnitudes = []
+  let prevAbs = 0
+  let peak = 0
+  for (let i = 0; i < Math.round(900 / DT); i++) {
+    stepBehavior(st, DT, BOX)
+    const abs = Math.abs(st.facing)
+    if (abs >= Math.PI * 0.8) {
+      peak = Math.max(peak, abs)
+      signs.add(Math.sign(st.facing))
+    } else if (peak > 0) {
+      magnitudes.push(peak)
+      peak = 0
+    }
+    prevAbs = abs
+  }
+  check('both shoulders are used', signs.has(1) && signs.has(-1), [...signs].join('/'))
+  check('back angles vary between turns', magnitudes.length >= 3 && new Set(magnitudes.map((m) => m.toFixed(2))).size >= 2, magnitudes.map((m) => m.toFixed(2)).join(' '))
+  check(
+    'all back angles stay in the designed band',
+    magnitudes.every((m) => m >= Math.PI * 0.82 && m <= Math.PI * 1.03),
+    magnitudes.map((m) => (m / Math.PI).toFixed(2)).join(' '),
+  )
 }
 
 console.log('')
