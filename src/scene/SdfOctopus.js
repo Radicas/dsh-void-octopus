@@ -3,7 +3,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 import { sdfVertex, sdfFragment, ARM_POINT_RADIUS } from './sdfShader.js'
-import { computeArmTargets, advanceStrokePhase, advanceWaveOffset } from './armPose.js'
+import { computeArmTargets, advanceStrokePhase, advanceWaveOffset, createTurnLag, stepTurnLag } from './armPose.js'
 
 export const ACTIVITIES = {
   idle: { speed: 0.72, glow: 0.75, energy: 0.22 },
@@ -214,6 +214,13 @@ export function createSdfOctopus({
   let pitch = 0
   let roll = 0
   let lastYaw = 0
+  // The arms' own yaw lags the body's (see stepTurnLag in armPose.js). Without
+  // it the yaw below is a pure view rotation, so every arm turns in lockstep
+  // with the mantle and the read is "a picture was turned", not "an animal
+  // turned itself". Solved right after the body yaw it follows.
+  const turnLagState = createTurnLag()
+  let turnLagNow = 0
+  let turnBraceNow = 0
   const armCurl = new Float32Array(8)
   const armCurlTarget = new Float32Array(8)
   let stretch = 0
@@ -473,6 +480,8 @@ export function createSdfOctopus({
     stretch: 0,
     coil: 0,
     armCurl,
+    turnLag: 0,
+    turnBrace: 0,
   }
 
   const buildArms = (t) => {
@@ -487,6 +496,8 @@ export function createSdfOctopus({
     armState.pulse = pulse
     armState.stretch = stretch
     armState.coil = coil
+    armState.turnLag = turnLagNow
+    armState.turnBrace = turnBraceNow
     computeArmTargets(armTargets, armState)
   }
 
@@ -663,6 +674,11 @@ export function createSdfOctopus({
     pitch = damp(pitch, targetPitch, 2.6, dt)
     const yawRate = (yaw - lastYaw) / Math.max(dt, 1e-3)
     lastYaw = yaw
+    // The arms do not snap round with the mantle: they are towed, so their yaw
+    // trails the body's by a spring-delayed angle (largest at the tips) and keeps
+    // draining for ~1 s after the body has stopped. This is the whole of 0.9.28.
+    turnLagNow = stepTurnLag(turnLagState, yaw, dt)
+    turnBraceNow = turnLagState.brace
     roll = damp(
       roll,
       Math.sin(time * 0.17) * 0.015 +
@@ -884,6 +900,19 @@ export function createSdfOctopus({
     },
     getFacing() {
       return facing
+    },
+    /**
+     * Signed angle (radians) by which the arms' yaw trails the body's. Non-zero
+     * only while turning and for ~1 s after; exposed for the verification
+     * harness — nothing in the plugin reads it.
+     * @returns {number}
+     */
+    getTurnLag() {
+      return turnLagNow
+    },
+    /** 0..1 brace envelope that goes with getTurnLag(). @returns {number} */
+    getTurnBrace() {
+      return turnBraceNow
     },
     getJet() {
       return Math.min(1, pulse * 0.6 + jetImpulse * 0.5 + jetSurge * 0.55)

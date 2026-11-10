@@ -496,6 +496,11 @@ function VoidOctopusAmbient(props) {
         state() {
           return { ...getDeparture(motion), view: getView(motion, cfg) }
         },
+        /** Arms-vs-body yaw lag (radians). 0 when not turning. */
+        turnLag() {
+          const engine = engineRef.current
+          return engine && typeof engine.getTurnLag === 'function' ? engine.getTurnLag() : 0
+        },
       }
     } catch (err) {
       /* no window (SSR) */

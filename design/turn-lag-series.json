@@ -1,0 +1,2690 @@
+[
+  {
+    "ms": 16.67,
+    "facing": 0,
+    "facingDeg": 0,
+    "lag": -0.00038,
+    "brace": 0
+  },
+  {
+    "ms": 33.33,
+    "facing": 0,
+    "facingDeg": 0,
+    "lag": -0.00038,
+    "brace": 0
+  },
+  {
+    "ms": 50,
+    "facing": 0,
+    "facingDeg": 0,
+    "lag": -0.00038,
+    "brace": 0
+  },
+  {
+    "ms": 66.67,
+    "facing": 0,
+    "facingDeg": 0,
+    "lag": -0.00038,
+    "brace": 0
+  },
+  {
+    "ms": 83.33,
+    "facing": 0,
+    "facingDeg": 0,
+    "lag": -0.00038,
+    "brace": 0
+  },
+  {
+    "ms": 100,
+    "facing": 0.00199,
+    "facingDeg": 0.114,
+    "lag": -0.00038,
+    "brace": 0
+  },
+  {
+    "ms": 116.67,
+    "facing": 0.00372,
+    "facingDeg": 0.213,
+    "lag": -0.00039,
+    "brace": 0
+  },
+  {
+    "ms": 133.33,
+    "facing": 0.00524,
+    "facingDeg": 0.3,
+    "lag": -0.0004,
+    "brace": 0
+  },
+  {
+    "ms": 150,
+    "facing": 0.00658,
+    "facingDeg": 0.377,
+    "lag": -0.00042,
+    "brace": 0
+  },
+  {
+    "ms": 166.67,
+    "facing": 0.00774,
+    "facingDeg": 0.444,
+    "lag": -0.00045,
+    "brace": 0
+  },
+  {
+    "ms": 183.33,
+    "facing": 0.01449,
+    "facingDeg": 0.83,
+    "lag": -0.00051,
+    "brace": 0
+  },
+  {
+    "ms": 200,
+    "facing": 0.0204,
+    "facingDeg": 1.169,
+    "lag": -0.00059,
+    "brace": 0
+  },
+  {
+    "ms": 216.67,
+    "facing": 0.02557,
+    "facingDeg": 1.465,
+    "lag": -0.0007,
+    "brace": 0
+  },
+  {
+    "ms": 233.33,
+    "facing": 0.03009,
+    "facingDeg": 1.724,
+    "lag": -0.00086,
+    "brace": 0
+  },
+  {
+    "ms": 250,
+    "facing": 0.03405,
+    "facingDeg": 1.951,
+    "lag": -0.00108,
+    "brace": 0
+  },
+  {
+    "ms": 266.67,
+    "facing": 0.04665,
+    "facingDeg": 2.673,
+    "lag": -0.00136,
+    "brace": 0
+  },
+  {
+    "ms": 283.33,
+    "facing": 0.05768,
+    "facingDeg": 3.305,
+    "lag": -0.00172,
+    "brace": 0
+  },
+  {
+    "ms": 300,
+    "facing": 0.06733,
+    "facingDeg": 3.858,
+    "lag": -0.00217,
+    "brace": 0
+  },
+  {
+    "ms": 316.67,
+    "facing": 0.07578,
+    "facingDeg": 4.342,
+    "lag": -0.00273,
+    "brace": 0
+  },
+  {
+    "ms": 333.33,
+    "facing": 0.08317,
+    "facingDeg": 4.765,
+    "lag": -0.0034,
+    "brace": 0
+  },
+  {
+    "ms": 350,
+    "facing": 0.10183,
+    "facingDeg": 5.835,
+    "lag": -0.0042,
+    "brace": 0
+  },
+  {
+    "ms": 366.67,
+    "facing": 0.11817,
+    "facingDeg": 6.771,
+    "lag": -0.00514,
+    "brace": 0
+  },
+  {
+    "ms": 383.33,
+    "facing": 0.13247,
+    "facingDeg": 7.59,
+    "lag": -0.00624,
+    "brace": 0
+  },
+  {
+    "ms": 400,
+    "facing": 0.14498,
+    "facingDeg": 8.307,
+    "lag": -0.00751,
+    "brace": 0
+  },
+  {
+    "ms": 416.67,
+    "facing": 0.15593,
+    "facingDeg": 8.934,
+    "lag": -0.00895,
+    "brace": 0
+  },
+  {
+    "ms": 433.33,
+    "facing": 0.18044,
+    "facingDeg": 10.338,
+    "lag": -0.01057,
+    "brace": 0
+  },
+  {
+    "ms": 450,
+    "facing": 0.20188,
+    "facingDeg": 11.567,
+    "lag": -0.01239,
+    "brace": 0
+  },
+  {
+    "ms": 466.67,
+    "facing": 0.22065,
+    "facingDeg": 12.643,
+    "lag": -0.0144,
+    "brace": 0
+  },
+  {
+    "ms": 483.33,
+    "facing": 0.23708,
+    "facingDeg": 13.584,
+    "lag": -0.01662,
+    "brace": 0
+  },
+  {
+    "ms": 500,
+    "facing": 0.25146,
+    "facingDeg": 14.407,
+    "lag": -0.01905,
+    "brace": 0
+  },
+  {
+    "ms": 516.67,
+    "facing": 0.28134,
+    "facingDeg": 16.12,
+    "lag": -0.02168,
+    "brace": 0.006
+  },
+  {
+    "ms": 533.33,
+    "facing": 0.3075,
+    "facingDeg": 17.618,
+    "lag": -0.02451,
+    "brace": 0.0161
+  },
+  {
+    "ms": 550,
+    "facing": 0.33039,
+    "facingDeg": 18.93,
+    "lag": -0.02756,
+    "brace": 0.027
+  },
+  {
+    "ms": 566.67,
+    "facing": 0.35042,
+    "facingDeg": 20.078,
+    "lag": -0.03081,
+    "brace": 0.0386
+  },
+  {
+    "ms": 583.33,
+    "facing": 0.36795,
+    "facingDeg": 21.082,
+    "lag": -0.03426,
+    "brace": 0.0509
+  },
+  {
+    "ms": 600,
+    "facing": 0.40264,
+    "facingDeg": 23.07,
+    "lag": -0.03789,
+    "brace": 0.0639
+  },
+  {
+    "ms": 616.67,
+    "facing": 0.433,
+    "facingDeg": 24.809,
+    "lag": -0.0417,
+    "brace": 0.0775
+  },
+  {
+    "ms": 633.33,
+    "facing": 0.45957,
+    "facingDeg": 26.332,
+    "lag": -0.04569,
+    "brace": 0.0918
+  },
+  {
+    "ms": 650,
+    "facing": 0.48283,
+    "facingDeg": 27.664,
+    "lag": -0.04985,
+    "brace": 0.1066
+  },
+  {
+    "ms": 666.67,
+    "facing": 0.50318,
+    "facingDeg": 28.83,
+    "lag": -0.05415,
+    "brace": 0.122
+  },
+  {
+    "ms": 683.33,
+    "facing": 0.54204,
+    "facingDeg": 31.057,
+    "lag": -0.05858,
+    "brace": 0.1378
+  },
+  {
+    "ms": 700,
+    "facing": 0.57605,
+    "facingDeg": 33.005,
+    "lag": -0.06314,
+    "brace": 0.1541
+  },
+  {
+    "ms": 716.67,
+    "facing": 0.60581,
+    "facingDeg": 34.71,
+    "lag": -0.06781,
+    "brace": 0.1708
+  },
+  {
+    "ms": 733.33,
+    "facing": 0.63186,
+    "facingDeg": 36.203,
+    "lag": -0.07258,
+    "brace": 0.1878
+  },
+  {
+    "ms": 750,
+    "facing": 0.65466,
+    "facingDeg": 37.509,
+    "lag": -0.07741,
+    "brace": 0.205
+  },
+  {
+    "ms": 766.67,
+    "facing": 0.69702,
+    "facingDeg": 39.936,
+    "lag": -0.08231,
+    "brace": 0.2225
+  },
+  {
+    "ms": 783.33,
+    "facing": 0.73409,
+    "facingDeg": 42.06,
+    "lag": -0.08725,
+    "brace": 0.2402
+  },
+  {
+    "ms": 800,
+    "facing": 0.76654,
+    "facingDeg": 43.919,
+    "lag": -0.09222,
+    "brace": 0.2579
+  },
+  {
+    "ms": 816.67,
+    "facing": 0.79493,
+    "facingDeg": 45.546,
+    "lag": -0.0972,
+    "brace": 0.2757
+  },
+  {
+    "ms": 833.33,
+    "facing": 0.81978,
+    "facingDeg": 46.97,
+    "lag": -0.10218,
+    "brace": 0.2935
+  },
+  {
+    "ms": 850,
+    "facing": 0.86497,
+    "facingDeg": 49.559,
+    "lag": -0.10714,
+    "brace": 0.3112
+  },
+  {
+    "ms": 866.67,
+    "facing": 0.90451,
+    "facingDeg": 51.824,
+    "lag": -0.11206,
+    "brace": 0.3288
+  },
+  {
+    "ms": 883.33,
+    "facing": 0.93911,
+    "facingDeg": 53.807,
+    "lag": -0.11694,
+    "brace": 0.3462
+  },
+  {
+    "ms": 900,
+    "facing": 0.9694,
+    "facingDeg": 55.542,
+    "lag": -0.12175,
+    "brace": 0.3634
+  },
+  {
+    "ms": 916.67,
+    "facing": 0.9959,
+    "facingDeg": 57.061,
+    "lag": -0.12649,
+    "brace": 0.3803
+  },
+  {
+    "ms": 933.33,
+    "facing": 1.04321,
+    "facingDeg": 59.772,
+    "lag": -0.13114,
+    "brace": 0.3969
+  },
+  {
+    "ms": 950,
+    "facing": 1.08462,
+    "facingDeg": 62.144,
+    "lag": -0.13569,
+    "brace": 0.4132
+  },
+  {
+    "ms": 966.67,
+    "facing": 1.12085,
+    "facingDeg": 64.22,
+    "lag": -0.14014,
+    "brace": 0.4291
+  },
+  {
+    "ms": 983.33,
+    "facing": 1.15256,
+    "facingDeg": 66.037,
+    "lag": -0.14447,
+    "brace": 0.4445
+  },
+  {
+    "ms": 1000,
+    "facing": 1.18032,
+    "facingDeg": 67.627,
+    "lag": -0.14867,
+    "brace": 0.4595
+  },
+  {
+    "ms": 1016.67,
+    "facing": 1.22906,
+    "facingDeg": 70.42,
+    "lag": -0.15274,
+    "brace": 0.4741
+  },
+  {
+    "ms": 1033.33,
+    "facing": 1.27172,
+    "facingDeg": 72.864,
+    "lag": -0.15667,
+    "brace": 0.4881
+  },
+  {
+    "ms": 1050,
+    "facing": 1.30905,
+    "facingDeg": 75.003,
+    "lag": -0.16046,
+    "brace": 0.5017
+  },
+  {
+    "ms": 1066.67,
+    "facing": 1.34172,
+    "facingDeg": 76.875,
+    "lag": -0.16411,
+    "brace": 0.5147
+  },
+  {
+    "ms": 1083.33,
+    "facing": 1.37032,
+    "facingDeg": 78.513,
+    "lag": -0.16761,
+    "brace": 0.5272
+  },
+  {
+    "ms": 1100,
+    "facing": 1.4198,
+    "facingDeg": 81.348,
+    "lag": -0.17095,
+    "brace": 0.5391
+  },
+  {
+    "ms": 1116.67,
+    "facing": 1.4631,
+    "facingDeg": 83.829,
+    "lag": -0.17413,
+    "brace": 0.5505
+  },
+  {
+    "ms": 1133.33,
+    "facing": 1.50099,
+    "facingDeg": 86.001,
+    "lag": -0.17717,
+    "brace": 0.5613
+  },
+  {
+    "ms": 1150,
+    "facing": 1.53416,
+    "facingDeg": 87.901,
+    "lag": -0.18006,
+    "brace": 0.5716
+  },
+  {
+    "ms": 1166.67,
+    "facing": 1.56319,
+    "facingDeg": 89.564,
+    "lag": -0.18279,
+    "brace": 0.5814
+  },
+  {
+    "ms": 1183.33,
+    "facing": 1.6127,
+    "facingDeg": 92.401,
+    "lag": -0.18538,
+    "brace": 0.5906
+  },
+  {
+    "ms": 1200,
+    "facing": 1.65604,
+    "facingDeg": 94.884,
+    "lag": -0.18781,
+    "brace": 0.5993
+  },
+  {
+    "ms": 1216.67,
+    "facing": 1.69396,
+    "facingDeg": 97.057,
+    "lag": -0.19011,
+    "brace": 0.6075
+  },
+  {
+    "ms": 1233.33,
+    "facing": 1.72715,
+    "facingDeg": 98.959,
+    "lag": -0.19227,
+    "brace": 0.6153
+  },
+  {
+    "ms": 1250,
+    "facing": 1.7562,
+    "facingDeg": 100.623,
+    "lag": -0.19429,
+    "brace": 0.6225
+  },
+  {
+    "ms": 1266.67,
+    "facing": 1.80505,
+    "facingDeg": 103.422,
+    "lag": -0.19618,
+    "brace": 0.6292
+  },
+  {
+    "ms": 1283.33,
+    "facing": 1.84781,
+    "facingDeg": 105.872,
+    "lag": -0.19794,
+    "brace": 0.6355
+  },
+  {
+    "ms": 1300,
+    "facing": 1.88523,
+    "facingDeg": 108.016,
+    "lag": -0.19958,
+    "brace": 0.6414
+  },
+  {
+    "ms": 1316.67,
+    "facing": 1.91798,
+    "facingDeg": 109.892,
+    "lag": -0.2011,
+    "brace": 0.6468
+  },
+  {
+    "ms": 1333.33,
+    "facing": 1.94664,
+    "facingDeg": 111.534,
+    "lag": -0.20251,
+    "brace": 0.6518
+  },
+  {
+    "ms": 1350,
+    "facing": 1.99413,
+    "facingDeg": 114.255,
+    "lag": -0.20381,
+    "brace": 0.6565
+  },
+  {
+    "ms": 1366.67,
+    "facing": 2.03569,
+    "facingDeg": 116.637,
+    "lag": -0.20501,
+    "brace": 0.6608
+  },
+  {
+    "ms": 1383.33,
+    "facing": 2.07207,
+    "facingDeg": 118.721,
+    "lag": -0.20611,
+    "brace": 0.6647
+  },
+  {
+    "ms": 1400,
+    "facing": 2.1039,
+    "facingDeg": 120.545,
+    "lag": -0.20712,
+    "brace": 0.6683
+  },
+  {
+    "ms": 1416.67,
+    "facing": 2.13177,
+    "facingDeg": 122.141,
+    "lag": -0.20804,
+    "brace": 0.6716
+  },
+  {
+    "ms": 1433.33,
+    "facing": 2.1772,
+    "facingDeg": 124.744,
+    "lag": -0.20888,
+    "brace": 0.6746
+  },
+  {
+    "ms": 1450,
+    "facing": 2.21696,
+    "facingDeg": 127.022,
+    "lag": -0.20963,
+    "brace": 0.6772
+  },
+  {
+    "ms": 1466.67,
+    "facing": 2.25176,
+    "facingDeg": 129.016,
+    "lag": -0.2103,
+    "brace": 0.6797
+  },
+  {
+    "ms": 1483.33,
+    "facing": 2.28221,
+    "facingDeg": 130.761,
+    "lag": -0.21091,
+    "brace": 0.6818
+  },
+  {
+    "ms": 1500,
+    "facing": 2.30886,
+    "facingDeg": 132.288,
+    "lag": -0.21144,
+    "brace": 0.6837
+  },
+  {
+    "ms": 1516.67,
+    "facing": 2.35154,
+    "facingDeg": 134.733,
+    "lag": -0.2119,
+    "brace": 0.6854
+  },
+  {
+    "ms": 1533.33,
+    "facing": 2.38888,
+    "facingDeg": 136.873,
+    "lag": -0.2123,
+    "brace": 0.6868
+  },
+  {
+    "ms": 1550,
+    "facing": 2.42157,
+    "facingDeg": 138.746,
+    "lag": -0.21264,
+    "brace": 0.688
+  },
+  {
+    "ms": 1566.67,
+    "facing": 2.45017,
+    "facingDeg": 140.384,
+    "lag": -0.21291,
+    "brace": 0.689
+  },
+  {
+    "ms": 1583.33,
+    "facing": 2.4752,
+    "facingDeg": 141.819,
+    "lag": -0.21313,
+    "brace": 0.6897
+  },
+  {
+    "ms": 1600,
+    "facing": 2.51442,
+    "facingDeg": 144.066,
+    "lag": -0.21328,
+    "brace": 0.6903
+  },
+  {
+    "ms": 1616.67,
+    "facing": 2.54874,
+    "facingDeg": 146.032,
+    "lag": -0.21338,
+    "brace": 0.6906
+  },
+  {
+    "ms": 1633.33,
+    "facing": 2.57877,
+    "facingDeg": 147.753,
+    "lag": -0.21342,
+    "brace": 0.6908
+  },
+  {
+    "ms": 1650,
+    "facing": 2.60506,
+    "facingDeg": 149.259,
+    "lag": -0.2134,
+    "brace": 0.6907
+  },
+  {
+    "ms": 1666.67,
+    "facing": 2.62806,
+    "facingDeg": 150.577,
+    "lag": -0.21333,
+    "brace": 0.6905
+  },
+  {
+    "ms": 1683.33,
+    "facing": 2.66311,
+    "facingDeg": 152.585,
+    "lag": -0.2132,
+    "brace": 0.69
+  },
+  {
+    "ms": 1700,
+    "facing": 2.69379,
+    "facingDeg": 154.343,
+    "lag": -0.21301,
+    "brace": 0.6893
+  },
+  {
+    "ms": 1716.67,
+    "facing": 2.72064,
+    "facingDeg": 155.881,
+    "lag": -0.21276,
+    "brace": 0.6884
+  },
+  {
+    "ms": 1733.33,
+    "facing": 2.74414,
+    "facingDeg": 157.228,
+    "lag": -0.21245,
+    "brace": 0.6873
+  },
+  {
+    "ms": 1750,
+    "facing": 2.7647,
+    "facingDeg": 158.406,
+    "lag": -0.21208,
+    "brace": 0.686
+  },
+  {
+    "ms": 1766.67,
+    "facing": 2.7949,
+    "facingDeg": 160.136,
+    "lag": -0.21164,
+    "brace": 0.6844
+  },
+  {
+    "ms": 1783.33,
+    "facing": 2.82133,
+    "facingDeg": 161.65,
+    "lag": -0.21114,
+    "brace": 0.6826
+  },
+  {
+    "ms": 1800,
+    "facing": 2.84445,
+    "facingDeg": 162.975,
+    "lag": -0.21057,
+    "brace": 0.6806
+  },
+  {
+    "ms": 1816.67,
+    "facing": 2.86469,
+    "facingDeg": 164.135,
+    "lag": -0.20993,
+    "brace": 0.6783
+  },
+  {
+    "ms": 1833.33,
+    "facing": 2.88241,
+    "facingDeg": 165.15,
+    "lag": -0.20922,
+    "brace": 0.6758
+  },
+  {
+    "ms": 1850,
+    "facing": 2.90704,
+    "facingDeg": 166.561,
+    "lag": -0.20844,
+    "brace": 0.673
+  },
+  {
+    "ms": 1866.67,
+    "facing": 2.92861,
+    "facingDeg": 167.797,
+    "lag": -0.20757,
+    "brace": 0.6699
+  },
+  {
+    "ms": 1883.33,
+    "facing": 2.94748,
+    "facingDeg": 168.878,
+    "lag": -0.20663,
+    "brace": 0.6665
+  },
+  {
+    "ms": 1900,
+    "facing": 2.96399,
+    "facingDeg": 169.824,
+    "lag": -0.20561,
+    "brace": 0.6629
+  },
+  {
+    "ms": 1916.67,
+    "facing": 2.97844,
+    "facingDeg": 170.652,
+    "lag": -0.20449,
+    "brace": 0.6589
+  },
+  {
+    "ms": 1933.33,
+    "facing": 2.99682,
+    "facingDeg": 171.705,
+    "lag": -0.20329,
+    "brace": 0.6546
+  },
+  {
+    "ms": 1950,
+    "facing": 3.01291,
+    "facingDeg": 172.627,
+    "lag": -0.20199,
+    "brace": 0.65
+  },
+  {
+    "ms": 1966.67,
+    "facing": 3.02699,
+    "facingDeg": 173.434,
+    "lag": -0.20059,
+    "brace": 0.645
+  },
+  {
+    "ms": 1983.33,
+    "facing": 3.03931,
+    "facingDeg": 174.139,
+    "lag": -0.1991,
+    "brace": 0.6396
+  },
+  {
+    "ms": 2000,
+    "facing": 3.05009,
+    "facingDeg": 174.757,
+    "lag": -0.1975,
+    "brace": 0.6339
+  },
+  {
+    "ms": 2016.67,
+    "facing": 3.06151,
+    "facingDeg": 175.412,
+    "lag": -0.19579,
+    "brace": 0.6278
+  },
+  {
+    "ms": 2033.33,
+    "facing": 3.07151,
+    "facingDeg": 175.984,
+    "lag": -0.19396,
+    "brace": 0.6213
+  },
+  {
+    "ms": 2050,
+    "facing": 3.08026,
+    "facingDeg": 176.486,
+    "lag": -0.19202,
+    "brace": 0.6143
+  },
+  {
+    "ms": 2066.67,
+    "facing": 3.08791,
+    "facingDeg": 176.924,
+    "lag": -0.18995,
+    "brace": 0.607
+  },
+  {
+    "ms": 2083.33,
+    "facing": 3.09461,
+    "facingDeg": 177.308,
+    "lag": -0.18776,
+    "brace": 0.5991
+  },
+  {
+    "ms": 2100,
+    "facing": 3.10048,
+    "facingDeg": 177.644,
+    "lag": -0.18544,
+    "brace": 0.5908
+  },
+  {
+    "ms": 2116.67,
+    "facing": 3.10561,
+    "facingDeg": 177.938,
+    "lag": -0.18298,
+    "brace": 0.5821
+  },
+  {
+    "ms": 2133.33,
+    "facing": 3.1101,
+    "facingDeg": 178.196,
+    "lag": -0.18038,
+    "brace": 0.5728
+  },
+  {
+    "ms": 2150,
+    "facing": 3.11403,
+    "facingDeg": 178.421,
+    "lag": -0.17764,
+    "brace": 0.563
+  },
+  {
+    "ms": 2166.67,
+    "facing": 3.11747,
+    "facingDeg": 178.618,
+    "lag": -0.17476,
+    "brace": 0.5527
+  },
+  {
+    "ms": 2183.33,
+    "facing": 3.12048,
+    "facingDeg": 178.791,
+    "lag": -0.17174,
+    "brace": 0.5419
+  },
+  {
+    "ms": 2200,
+    "facing": 3.12312,
+    "facingDeg": 178.942,
+    "lag": -0.16858,
+    "brace": 0.5306
+  },
+  {
+    "ms": 2216.67,
+    "facing": 3.12542,
+    "facingDeg": 179.074,
+    "lag": -0.16527,
+    "brace": 0.5188
+  },
+  {
+    "ms": 2233.33,
+    "facing": 3.12744,
+    "facingDeg": 179.189,
+    "lag": -0.16183,
+    "brace": 0.5065
+  },
+  {
+    "ms": 2250,
+    "facing": 3.12921,
+    "facingDeg": 179.29,
+    "lag": -0.15826,
+    "brace": 0.4938
+  },
+  {
+    "ms": 2266.67,
+    "facing": 3.13075,
+    "facingDeg": 179.379,
+    "lag": -0.15456,
+    "brace": 0.4806
+  },
+  {
+    "ms": 2283.33,
+    "facing": 3.13211,
+    "facingDeg": 179.457,
+    "lag": -0.15074,
+    "brace": 0.4669
+  },
+  {
+    "ms": 2300,
+    "facing": 3.13329,
+    "facingDeg": 179.524,
+    "lag": -0.14682,
+    "brace": 0.4529
+  },
+  {
+    "ms": 2316.67,
+    "facing": 3.13433,
+    "facingDeg": 179.584,
+    "lag": -0.14279,
+    "brace": 0.4385
+  },
+  {
+    "ms": 2333.33,
+    "facing": 3.13523,
+    "facingDeg": 179.636,
+    "lag": -0.13868,
+    "brace": 0.4238
+  },
+  {
+    "ms": 2350,
+    "facing": 3.13603,
+    "facingDeg": 179.681,
+    "lag": -0.13449,
+    "brace": 0.4089
+  },
+  {
+    "ms": 2366.67,
+    "facing": 3.13672,
+    "facingDeg": 179.721,
+    "lag": -0.13023,
+    "brace": 0.3937
+  },
+  {
+    "ms": 2383.33,
+    "facing": 3.13733,
+    "facingDeg": 179.756,
+    "lag": -0.12593,
+    "brace": 0.3783
+  },
+  {
+    "ms": 2400,
+    "facing": 3.13786,
+    "facingDeg": 179.786,
+    "lag": -0.1216,
+    "brace": 0.3628
+  },
+  {
+    "ms": 2416.67,
+    "facing": 3.13833,
+    "facingDeg": 179.813,
+    "lag": -0.11724,
+    "brace": 0.3473
+  },
+  {
+    "ms": 2433.33,
+    "facing": 3.13874,
+    "facingDeg": 179.836,
+    "lag": -0.11287,
+    "brace": 0.3317
+  },
+  {
+    "ms": 2450,
+    "facing": 3.13909,
+    "facingDeg": 179.857,
+    "lag": -0.10852,
+    "brace": 0.3161
+  },
+  {
+    "ms": 2466.67,
+    "facing": 3.1394,
+    "facingDeg": 179.875,
+    "lag": -0.10419,
+    "brace": 0.3007
+  },
+  {
+    "ms": 2483.33,
+    "facing": 3.13968,
+    "facingDeg": 179.89,
+    "lag": -0.09989,
+    "brace": 0.2853
+  },
+  {
+    "ms": 2500,
+    "facing": 3.13992,
+    "facingDeg": 179.904,
+    "lag": -0.09565,
+    "brace": 0.2702
+  },
+  {
+    "ms": 2516.67,
+    "facing": 3.14013,
+    "facingDeg": 179.916,
+    "lag": -0.09147,
+    "brace": 0.2552
+  },
+  {
+    "ms": 2533.33,
+    "facing": 3.14031,
+    "facingDeg": 179.926,
+    "lag": -0.08737,
+    "brace": 0.2406
+  },
+  {
+    "ms": 2550,
+    "facing": 3.14047,
+    "facingDeg": 179.936,
+    "lag": -0.08335,
+    "brace": 0.2262
+  },
+  {
+    "ms": 2566.67,
+    "facing": 3.14061,
+    "facingDeg": 179.944,
+    "lag": -0.07943,
+    "brace": 0.2123
+  },
+  {
+    "ms": 2583.33,
+    "facing": 3.14073,
+    "facingDeg": 179.951,
+    "lag": -0.07562,
+    "brace": 0.1986
+  },
+  {
+    "ms": 2600,
+    "facing": 3.14084,
+    "facingDeg": 179.957,
+    "lag": -0.07192,
+    "brace": 0.1854
+  },
+  {
+    "ms": 2616.67,
+    "facing": 3.14093,
+    "facingDeg": 179.962,
+    "lag": -0.06835,
+    "brace": 0.1727
+  },
+  {
+    "ms": 2633.33,
+    "facing": 3.14102,
+    "facingDeg": 179.967,
+    "lag": -0.06491,
+    "brace": 0.1604
+  },
+  {
+    "ms": 2650,
+    "facing": 3.14109,
+    "facingDeg": 179.971,
+    "lag": -0.0616,
+    "brace": 0.1486
+  },
+  {
+    "ms": 2666.67,
+    "facing": 3.14115,
+    "facingDeg": 179.975,
+    "lag": -0.05843,
+    "brace": 0.1372
+  },
+  {
+    "ms": 2683.33,
+    "facing": 3.14121,
+    "facingDeg": 179.978,
+    "lag": -0.0554,
+    "brace": 0.1264
+  },
+  {
+    "ms": 2700,
+    "facing": 3.14125,
+    "facingDeg": 179.981,
+    "lag": -0.05251,
+    "brace": 0.1161
+  },
+  {
+    "ms": 2716.67,
+    "facing": 3.1413,
+    "facingDeg": 179.983,
+    "lag": -0.04977,
+    "brace": 0.1063
+  },
+  {
+    "ms": 2733.33,
+    "facing": 3.14133,
+    "facingDeg": 179.985,
+    "lag": -0.04717,
+    "brace": 0.097
+  },
+  {
+    "ms": 2750,
+    "facing": 3.14137,
+    "facingDeg": 179.987,
+    "lag": -0.04471,
+    "brace": 0.0883
+  },
+  {
+    "ms": 2766.67,
+    "facing": 3.14139,
+    "facingDeg": 179.989,
+    "lag": -0.04239,
+    "brace": 0.08
+  },
+  {
+    "ms": 2783.33,
+    "facing": 3.14142,
+    "facingDeg": 179.99,
+    "lag": -0.04021,
+    "brace": 0.0722
+  },
+  {
+    "ms": 2800,
+    "facing": 3.14144,
+    "facingDeg": 179.991,
+    "lag": -0.03816,
+    "brace": 0.0649
+  },
+  {
+    "ms": 2816.67,
+    "facing": 3.14146,
+    "facingDeg": 179.992,
+    "lag": -0.03625,
+    "brace": 0.058
+  },
+  {
+    "ms": 2833.33,
+    "facing": 3.14148,
+    "facingDeg": 179.993,
+    "lag": -0.03445,
+    "brace": 0.0516
+  },
+  {
+    "ms": 2850,
+    "facing": 3.14149,
+    "facingDeg": 179.994,
+    "lag": -0.03278,
+    "brace": 0.0456
+  },
+  {
+    "ms": 2866.67,
+    "facing": 3.1415,
+    "facingDeg": 179.995,
+    "lag": -0.03121,
+    "brace": 0.0401
+  },
+  {
+    "ms": 2883.33,
+    "facing": 3.14151,
+    "facingDeg": 179.996,
+    "lag": -0.02976,
+    "brace": 0.0349
+  },
+  {
+    "ms": 2900,
+    "facing": 3.14152,
+    "facingDeg": 179.996,
+    "lag": -0.02841,
+    "brace": 0.03
+  },
+  {
+    "ms": 2916.67,
+    "facing": 3.14153,
+    "facingDeg": 179.997,
+    "lag": -0.02715,
+    "brace": 0.0255
+  },
+  {
+    "ms": 2933.33,
+    "facing": 3.14154,
+    "facingDeg": 179.997,
+    "lag": -0.02598,
+    "brace": 0.0214
+  },
+  {
+    "ms": 2950,
+    "facing": 3.14155,
+    "facingDeg": 179.997,
+    "lag": -0.02489,
+    "brace": 0.0175
+  },
+  {
+    "ms": 2966.67,
+    "facing": 3.14155,
+    "facingDeg": 179.998,
+    "lag": -0.02388,
+    "brace": 0.0139
+  },
+  {
+    "ms": 2983.33,
+    "facing": 3.14156,
+    "facingDeg": 179.998,
+    "lag": -0.02294,
+    "brace": 0.0105
+  },
+  {
+    "ms": 3000,
+    "facing": 3.14156,
+    "facingDeg": 179.998,
+    "lag": -0.02206,
+    "brace": 0.0074
+  },
+  {
+    "ms": 3016.67,
+    "facing": 3.14157,
+    "facingDeg": 179.998,
+    "lag": -0.02124,
+    "brace": 0.0044
+  },
+  {
+    "ms": 3033.33,
+    "facing": 3.14157,
+    "facingDeg": 179.999,
+    "lag": -0.02047,
+    "brace": 0.0017
+  },
+  {
+    "ms": 3050,
+    "facing": 3.14157,
+    "facingDeg": 179.999,
+    "lag": -0.01975,
+    "brace": 0
+  },
+  {
+    "ms": 3066.67,
+    "facing": 3.14157,
+    "facingDeg": 179.999,
+    "lag": -0.01907,
+    "brace": 0
+  },
+  {
+    "ms": 3083.33,
+    "facing": 3.14158,
+    "facingDeg": 179.999,
+    "lag": -0.01843,
+    "brace": 0
+  },
+  {
+    "ms": 3100,
+    "facing": 3.14158,
+    "facingDeg": 179.999,
+    "lag": -0.01782,
+    "brace": 0
+  },
+  {
+    "ms": 3116.67,
+    "facing": 3.14158,
+    "facingDeg": 179.999,
+    "lag": -0.01723,
+    "brace": 0
+  },
+  {
+    "ms": 3133.33,
+    "facing": 3.14158,
+    "facingDeg": 179.999,
+    "lag": -0.01668,
+    "brace": 0
+  },
+  {
+    "ms": 3150,
+    "facing": 3.14158,
+    "facingDeg": 179.999,
+    "lag": -0.01614,
+    "brace": 0
+  },
+  {
+    "ms": 3166.67,
+    "facing": 3.14158,
+    "facingDeg": 180,
+    "lag": -0.01562,
+    "brace": 0
+  },
+  {
+    "ms": 3183.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01512,
+    "brace": 0
+  },
+  {
+    "ms": 3200,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01463,
+    "brace": 0
+  },
+  {
+    "ms": 3216.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01416,
+    "brace": 0
+  },
+  {
+    "ms": 3233.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01369,
+    "brace": 0
+  },
+  {
+    "ms": 3250,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01323,
+    "brace": 0
+  },
+  {
+    "ms": 3266.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01279,
+    "brace": 0
+  },
+  {
+    "ms": 3283.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01234,
+    "brace": 0
+  },
+  {
+    "ms": 3300,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01191,
+    "brace": 0
+  },
+  {
+    "ms": 3316.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01148,
+    "brace": 0
+  },
+  {
+    "ms": 3333.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01106,
+    "brace": 0
+  },
+  {
+    "ms": 3350,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01064,
+    "brace": 0
+  },
+  {
+    "ms": 3366.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.01023,
+    "brace": 0
+  },
+  {
+    "ms": 3383.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00982,
+    "brace": 0
+  },
+  {
+    "ms": 3400,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00943,
+    "brace": 0
+  },
+  {
+    "ms": 3416.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00891,
+    "brace": 0
+  },
+  {
+    "ms": 3433.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00853,
+    "brace": 0
+  },
+  {
+    "ms": 3450,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00816,
+    "brace": 0
+  },
+  {
+    "ms": 3466.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00779,
+    "brace": 0
+  },
+  {
+    "ms": 3483.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00743,
+    "brace": 0
+  },
+  {
+    "ms": 3500,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00709,
+    "brace": 0
+  },
+  {
+    "ms": 3516.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00675,
+    "brace": 0
+  },
+  {
+    "ms": 3533.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00642,
+    "brace": 0
+  },
+  {
+    "ms": 3550,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00611,
+    "brace": 0
+  },
+  {
+    "ms": 3566.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0058,
+    "brace": 0
+  },
+  {
+    "ms": 3583.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00551,
+    "brace": 0
+  },
+  {
+    "ms": 3600,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00523,
+    "brace": 0
+  },
+  {
+    "ms": 3616.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00496,
+    "brace": 0
+  },
+  {
+    "ms": 3633.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0047,
+    "brace": 0
+  },
+  {
+    "ms": 3650,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00446,
+    "brace": 0
+  },
+  {
+    "ms": 3666.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00423,
+    "brace": 0
+  },
+  {
+    "ms": 3683.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.004,
+    "brace": 0
+  },
+  {
+    "ms": 3700,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0038,
+    "brace": 0
+  },
+  {
+    "ms": 3716.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0036,
+    "brace": 0
+  },
+  {
+    "ms": 3733.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00341,
+    "brace": 0
+  },
+  {
+    "ms": 3750,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00324,
+    "brace": 0
+  },
+  {
+    "ms": 3766.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00307,
+    "brace": 0
+  },
+  {
+    "ms": 3783.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00292,
+    "brace": 0
+  },
+  {
+    "ms": 3800,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00277,
+    "brace": 0
+  },
+  {
+    "ms": 3816.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00264,
+    "brace": 0
+  },
+  {
+    "ms": 3833.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00251,
+    "brace": 0
+  },
+  {
+    "ms": 3850,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00239,
+    "brace": 0
+  },
+  {
+    "ms": 3866.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00228,
+    "brace": 0
+  },
+  {
+    "ms": 3883.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00218,
+    "brace": 0
+  },
+  {
+    "ms": 3900,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00208,
+    "brace": 0
+  },
+  {
+    "ms": 3916.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00199,
+    "brace": 0
+  },
+  {
+    "ms": 3933.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00191,
+    "brace": 0
+  },
+  {
+    "ms": 3950,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00183,
+    "brace": 0
+  },
+  {
+    "ms": 3966.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00176,
+    "brace": 0
+  },
+  {
+    "ms": 3983.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00169,
+    "brace": 0
+  },
+  {
+    "ms": 4000,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00163,
+    "brace": 0
+  },
+  {
+    "ms": 4016.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00157,
+    "brace": 0
+  },
+  {
+    "ms": 4033.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00151,
+    "brace": 0
+  },
+  {
+    "ms": 4050,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00146,
+    "brace": 0
+  },
+  {
+    "ms": 4066.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0014,
+    "brace": 0
+  },
+  {
+    "ms": 4083.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00135,
+    "brace": 0
+  },
+  {
+    "ms": 4100,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00131,
+    "brace": 0
+  },
+  {
+    "ms": 4116.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00126,
+    "brace": 0
+  },
+  {
+    "ms": 4133.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00122,
+    "brace": 0
+  },
+  {
+    "ms": 4150,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00117,
+    "brace": 0
+  },
+  {
+    "ms": 4166.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00113,
+    "brace": 0
+  },
+  {
+    "ms": 4183.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00109,
+    "brace": 0
+  },
+  {
+    "ms": 4200,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00105,
+    "brace": 0
+  },
+  {
+    "ms": 4216.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00102,
+    "brace": 0
+  },
+  {
+    "ms": 4233.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00098,
+    "brace": 0
+  },
+  {
+    "ms": 4250,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00094,
+    "brace": 0
+  },
+  {
+    "ms": 4266.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0009,
+    "brace": 0
+  },
+  {
+    "ms": 4283.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00087,
+    "brace": 0
+  },
+  {
+    "ms": 4300,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00083,
+    "brace": 0
+  },
+  {
+    "ms": 4316.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0008,
+    "brace": 0
+  },
+  {
+    "ms": 4333.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00077,
+    "brace": 0
+  },
+  {
+    "ms": 4350,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00073,
+    "brace": 0
+  },
+  {
+    "ms": 4366.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0007,
+    "brace": 0
+  },
+  {
+    "ms": 4383.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00067,
+    "brace": 0
+  },
+  {
+    "ms": 4400,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00064,
+    "brace": 0
+  },
+  {
+    "ms": 4416.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00061,
+    "brace": 0
+  },
+  {
+    "ms": 4433.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00058,
+    "brace": 0
+  },
+  {
+    "ms": 4450,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00055,
+    "brace": 0
+  },
+  {
+    "ms": 4466.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00052,
+    "brace": 0
+  },
+  {
+    "ms": 4483.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00049,
+    "brace": 0
+  },
+  {
+    "ms": 4500,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00047,
+    "brace": 0
+  },
+  {
+    "ms": 4516.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00044,
+    "brace": 0
+  },
+  {
+    "ms": 4533.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00042,
+    "brace": 0
+  },
+  {
+    "ms": 4550,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00039,
+    "brace": 0
+  },
+  {
+    "ms": 4566.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00037,
+    "brace": 0
+  },
+  {
+    "ms": 4583.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00035,
+    "brace": 0
+  },
+  {
+    "ms": 4600,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00033,
+    "brace": 0
+  },
+  {
+    "ms": 4616.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00031,
+    "brace": 0
+  },
+  {
+    "ms": 4633.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00029,
+    "brace": 0
+  },
+  {
+    "ms": 4650,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00027,
+    "brace": 0
+  },
+  {
+    "ms": 4666.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00026,
+    "brace": 0
+  },
+  {
+    "ms": 4683.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00024,
+    "brace": 0
+  },
+  {
+    "ms": 4700,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00022,
+    "brace": 0
+  },
+  {
+    "ms": 4716.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00021,
+    "brace": 0
+  },
+  {
+    "ms": 4733.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0002,
+    "brace": 0
+  },
+  {
+    "ms": 4750,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00018,
+    "brace": 0
+  },
+  {
+    "ms": 4766.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00017,
+    "brace": 0
+  },
+  {
+    "ms": 4783.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00016,
+    "brace": 0
+  },
+  {
+    "ms": 4800,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00015,
+    "brace": 0
+  },
+  {
+    "ms": 4816.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00014,
+    "brace": 0
+  },
+  {
+    "ms": 4833.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00013,
+    "brace": 0
+  },
+  {
+    "ms": 4850,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00012,
+    "brace": 0
+  },
+  {
+    "ms": 4866.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00012,
+    "brace": 0
+  },
+  {
+    "ms": 4883.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00011,
+    "brace": 0
+  },
+  {
+    "ms": 4900,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.0001,
+    "brace": 0
+  },
+  {
+    "ms": 4916.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00009,
+    "brace": 0
+  },
+  {
+    "ms": 4933.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00009,
+    "brace": 0
+  },
+  {
+    "ms": 4950,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00008,
+    "brace": 0
+  },
+  {
+    "ms": 4966.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00008,
+    "brace": 0
+  },
+  {
+    "ms": 4983.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 5000,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 5016.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5033.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5050,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5066.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5083.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00004,
+    "brace": 0
+  },
+  {
+    "ms": 5100,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00004,
+    "brace": 0
+  },
+  {
+    "ms": 5116.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00004,
+    "brace": 0
+  },
+  {
+    "ms": 5133.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00003,
+    "brace": 0
+  },
+  {
+    "ms": 5150,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00003,
+    "brace": 0
+  },
+  {
+    "ms": 5166.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00003,
+    "brace": 0
+  },
+  {
+    "ms": 5183.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00002,
+    "brace": 0
+  },
+  {
+    "ms": 5200,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00002,
+    "brace": 0
+  },
+  {
+    "ms": 5216.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00002,
+    "brace": 0
+  },
+  {
+    "ms": 5233.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00001,
+    "brace": 0
+  },
+  {
+    "ms": 5250,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00001,
+    "brace": 0
+  },
+  {
+    "ms": 5266.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": -0.00001,
+    "brace": 0
+  },
+  {
+    "ms": 5283.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0,
+    "brace": 0
+  },
+  {
+    "ms": 5300,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0,
+    "brace": 0
+  },
+  {
+    "ms": 5316.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0,
+    "brace": 0
+  },
+  {
+    "ms": 5333.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00001,
+    "brace": 0
+  },
+  {
+    "ms": 5350,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00001,
+    "brace": 0
+  },
+  {
+    "ms": 5366.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00001,
+    "brace": 0
+  },
+  {
+    "ms": 5383.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00001,
+    "brace": 0
+  },
+  {
+    "ms": 5400,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00002,
+    "brace": 0
+  },
+  {
+    "ms": 5416.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00002,
+    "brace": 0
+  },
+  {
+    "ms": 5433.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00002,
+    "brace": 0
+  },
+  {
+    "ms": 5450,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00002,
+    "brace": 0
+  },
+  {
+    "ms": 5466.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00003,
+    "brace": 0
+  },
+  {
+    "ms": 5483.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00003,
+    "brace": 0
+  },
+  {
+    "ms": 5500,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00003,
+    "brace": 0
+  },
+  {
+    "ms": 5516.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00003,
+    "brace": 0
+  },
+  {
+    "ms": 5533.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00003,
+    "brace": 0
+  },
+  {
+    "ms": 5550,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00004,
+    "brace": 0
+  },
+  {
+    "ms": 5566.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00004,
+    "brace": 0
+  },
+  {
+    "ms": 5583.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00004,
+    "brace": 0
+  },
+  {
+    "ms": 5600,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00004,
+    "brace": 0
+  },
+  {
+    "ms": 5616.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00004,
+    "brace": 0
+  },
+  {
+    "ms": 5633.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5650,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5666.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5683.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5700,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5716.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5733.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5750,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00005,
+    "brace": 0
+  },
+  {
+    "ms": 5766.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5783.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5800,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5816.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5833.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5850,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5866.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5883.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5900,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5916.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5933.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5950,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00006,
+    "brace": 0
+  },
+  {
+    "ms": 5966.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 5983.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6000,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6016.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6033.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6050,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6066.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6083.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6100,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6116.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6133.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6150,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6166.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6183.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6200,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6216.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6233.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6250,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6266.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00007,
+    "brace": 0
+  },
+  {
+    "ms": 6283.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00008,
+    "brace": 0
+  },
+  {
+    "ms": 6300,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00008,
+    "brace": 0
+  },
+  {
+    "ms": 6316.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00008,
+    "brace": 0
+  },
+  {
+    "ms": 6333.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00008,
+    "brace": 0
+  },
+  {
+    "ms": 6350,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00008,
+    "brace": 0
+  },
+  {
+    "ms": 6366.67,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00008,
+    "brace": 0
+  },
+  {
+    "ms": 6383.33,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00008,
+    "brace": 0
+  },
+  {
+    "ms": 6400,
+    "facing": 3.14159,
+    "facingDeg": 180,
+    "lag": 0.00008,
+    "brace": 0
+  }
+]

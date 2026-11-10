@@ -31,9 +31,109 @@ export const TAU = Math.PI * 2
  * @property {number} stretch       0..1 overall stretch action
  * @property {number} coil          0..1 whole-crown contraction
  * @property {ArrayLike<number>} armCurl  per-arm curl, length 8
+ * @property {number} [turnLag]     rad the arms' yaw trails the body's (signed)
+ * @property {number} [turnBrace]   0..1 how hard the arms are bracing in a turn
  */
 
 const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v)
+const clamp = (v, lo, hi) => (v < lo ? lo : v > hi ? hi : v)
+
+/** Wrap to (-PI, PI] so a yaw delta is always taken the short way round. */
+const wrapPi = (a) => {
+  let x = (a + Math.PI) % TAU
+  if (x < 0) x += TAU
+  return x - Math.PI
+}
+
+/**
+ * Rotation weight along one arm, root -> tip.
+ *
+ * The root (point 0) sits INSIDE the mantle and must travel with the body: a
+ * root that lagged would tear the arm out of the body and would also eat into
+ * the 1.15x neighbour-gap invariant. Everything the eye reads as "the tentacles
+ * slide" happens further out, so the lag is weighted in as `u ** 1.4`.
+ */
+const LAG_WEIGHT = new Float64Array(POINTS_PER_ARM)
+for (let i = 0; i < POINTS_PER_ARM; i++) {
+  LAG_WEIGHT[i] = Math.pow(i / (POINTS_PER_ARM - 1), 1.4)
+}
+
+/**
+ * The crown's own yaw: a damped torsional follower that trails the body's.
+ *
+ * Why this exists (0.9.28). The body yaw is applied in the shader as a view
+ * rotation, so before this the arms had no way to know the body was turning —
+ * the whole creature rotated as one rigid piece. On screen that reads as "a
+ * picture being turned around", not "an animal turning itself". A real octopus
+ * turns with its mantle and its arms are towed: their angular rate differs from
+ * the body's, the difference is largest at the tips, and it is still draining
+ * away after the body has stopped.
+ *
+ * Steady state: while the body turns at `rate`, the arms sit `tau * rate`
+ * behind it. When the body stops, the target returns to zero and the deliberately
+ * under-damped spring (zeta < 1) carries the arms PAST neutral once before they
+ * settle — that single overshoot is the "they keep sliding for a moment" read.
+ */
+export const TURN_LAG_DEFAULTS = {
+  tau: 0.13, // s: steady-state trail per rad/s of body yaw rate
+  omega: 7.0, // rad/s: natural frequency of the lag spring
+  zeta: 0.38, // damping ratio: < 1 on purpose; the settle-back overshoots once
+  limit: 0.3, // rad: soft cap (arm tips are ~1.8 out, so 0.3 rad is ~0.54 units)
+  rateSmooth: 14, // 1/s: one-pole low-pass on the measured yaw rate
+  substeps: 2,
+}
+
+/**
+ * @param {object} [opts] overrides for TURN_LAG_DEFAULTS
+ * @returns {{lag:number, vel:number, yawRate:number, lastYaw:number, brace:number}}
+ */
+export function createTurnLag(opts) {
+  return Object.assign(
+    { lag: 0, vel: 0, yawRate: 0, lastYaw: 0, brace: 0 },
+    TURN_LAG_DEFAULTS,
+    opts || {},
+  )
+}
+
+/**
+ * Advance the lag spring by `dt` toward the body yaw `yaw`. Mutates `st`.
+ *
+ * The measured rate is low-passed before it drives the target: a dropped frame
+ * otherwise turns one stiff body step into a spike in the arms, which is the
+ * opposite of "towed". Semi-implicit Euler in `substeps` passes, so a 20 fps
+ * frame (dt = 0.05) integrates the same spring as 120 fps does.
+ *
+ * @param {object} st state from createTurnLag
+ * @param {number} yaw current body yaw (radians)
+ * @param {number} dt seconds
+ * @returns {number} the lag to hand to computeArmTargets, radians (signed)
+ */
+export function stepTurnLag(st, yaw, dt) {
+  if (!(dt > 0)) return st.lag
+  const healthy = Number.isFinite(yaw) ? yaw : st.lastYaw
+  const dYaw = wrapPi(healthy - st.lastYaw)
+  st.lastYaw = healthy
+  // A teleport (debug `face(180)`, a restored state mid-turn) must not kick the
+  // spring with a 30 rad/s spike; the engine's own damping already limits real
+  // turns to a few rad/s.
+  const raw = clamp(dYaw / Math.max(dt, 1e-3), -8, 8)
+  st.yawRate += (raw - st.yawRate) * (1 - Math.exp(-st.rateSmooth * dt))
+  // Soft saturation, not a clamp: a clamp makes the arms freeze at the cap for
+  // as long as a violent yaw lasts, which reads as a mechanism hitting a stop.
+  // tanh keeps the response continuous and only bites on extreme turn rates.
+  const target = st.limit * Math.tanh((-st.tau * st.yawRate) / st.limit)
+  const steps = Math.max(1, Math.round(st.substeps))
+  const h = dt / steps
+  const w2 = st.omega * st.omega
+  const c = 2 * st.zeta * st.omega
+  for (let i = 0; i < steps; i++) {
+    st.vel += ((target - st.lag) * w2 - st.vel * c) * h
+    st.lag = clamp(st.lag + st.vel * h, -st.limit, st.limit)
+  }
+  if (Math.abs(st.lag) > st.limit) st.lag = clamp(st.lag, -st.limit, st.limit)
+  st.brace = clamp01((Math.abs(st.lag) - 0.02) / (st.limit - 0.02))
+  return st.lag
+}
 
 /**
  * Write all control points for one frame.
@@ -57,6 +157,15 @@ export function computeArmTargets(out, s) {
   const pulse = s.pulse
   const jetSurge = s.jetSurge
   const stretch = s.stretch
+  // Turn lag is solved OUTSIDE (stepTurnLag) and arrives as an angle. Zero while
+  // the body is not turning, and then the whole block below costs one branch.
+  const turnLag = Number.isFinite(s.turnLag) ? s.turnLag : 0
+  const turnBrace = clamp01(
+    s.turnBrace != null && Number.isFinite(s.turnBrace)
+      ? s.turnBrace
+      : Math.abs(turnLag) / TURN_LAG_DEFAULTS.limit,
+  )
+  const lagActive = Math.abs(turnLag) > 1e-4
 
   for (let k = 0; k < ARM_COUNT; k++) {
     const angle = (k / ARM_COUNT) * TAU + 0.22
@@ -138,6 +247,27 @@ export function computeArmTargets(out, s) {
       x += trailX * drag
       y += trailY * drag
       z += trailZ * drag
+
+      // The arms' yaw trails the body's: rotate this point about the body Y axis
+      // by `turnLag * weight`. Root stays with the mantle, tip is towed furthest.
+      // Applied to the finished point (not to the control polygon) because the
+      // twist has to survive the stroke/drift/trail offsets above — they are
+      // part of the arm, not of the body frame.
+      //
+      // The brace sink is vertical-only and identical for every arm at a given
+      // point index. That is deliberate: it keeps neighbouring arms rigidly
+      // related, so the "adjacent gap >= 1.15x sum of radii" invariant holds
+      // EXACTLY at the maximum lag instead of being eroded by the fix.
+      if (lagActive) {
+        const a = turnLag * LAG_WEIGHT[i]
+        const ca = Math.cos(a)
+        const sa = Math.sin(a)
+        const nx = x * ca + z * sa
+        const nz = -x * sa + z * ca
+        x = nx
+        z = nz
+        y -= turnBrace * 0.08 * LAG_WEIGHT[i]
+      }
 
       const point = out[base + i]
       point.x = x
