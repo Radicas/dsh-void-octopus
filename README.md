@@ -14,6 +14,62 @@
   ```
 - 状态来源只有 `useSessionStatus` 的 `running` 和 `useChat` 的 `runningCalls` / 流式文本长度，不读语义。
 - 点击不会脉冲（避免误触界面），鼠标移动会让它轻微转头。
+- **每隔 1.5–3 分钟它会转身背对你、退到远处漂一会儿，再转回来**（`src/scene/departure.js`）。不读内容、不打扰：背对时你看到的是它的轮廓和八腕，不是眼睛。
+
+## 0.9.25 背对你，然后退远
+
+**现象**：这只章鱼在结构上只能正脸示人。0.9.23 给了它游走，0.9.24 给了它远近，但身体的 yaw 一直是「跟随游动 + 鼠标」的混音，并且被 clamp 在 ±0.8 rad —— 超过 90° 才叫「背面」，46° 最多算侧脸。所以无论它游到哪、退多远，你看到的永远是它正对着你。
+
+### ① 两个 yaw 通道，不是一个
+
+| 通道 | 用途 | 约束 |
+|---|---|---|
+| `sway` | 游动 / 鼠标 / 巡游带来的身体摆动 | 仍然 clamp ±0.8 rad（正是它保证正脸可读） |
+| `facing` | 刻意的「转身背对你」 | 可到 π，独立阻尼，不参与 sway 的 clamp |
+
+两者相加后**不再**被 clamp。0.9.24 及以前把 clamp 加在总和上，这才是「背面不可能」的根因。背对时 sway 还会衰减到 30%：身体一边背对你一边扭胯，读起来是「还在展示」，不是「走了」。
+
+### ② 离场是一段有时序的编舞，不是一次赋值
+
+`src/scene/departure.js`：纯函数、可单测，从 REST 出发，每 80–210 s 触发一次（平均约 2.4 分钟）。
+
+| 段 | 时长 | facing | depth | 其它 |
+|---|---|---|---|---|
+| PREP | 0.5–0.9 s | 0 | 冻结 | 收势，腕先稳住 |
+| TURN | 2.0–2.8 s | 0→π | 冻结 | 必须在近处转，退远了看不清转身 |
+| RETREAT | 2.6–4.2 s | π | → 0.86–0.97 | 喷水推进一次；层中心上抬 30 px；透明度 → 0.42 |
+| FAR | 6–18 s | π | 保持 | `swimAmount → 0`，收拢的腕张开成伞，读作漂着 |
+| RETURN | 2.2–3.4 s | π→0 | → 0.18–0.42 | 转回来、拉近、恢复亮度 |
+
+几个刻意的决定：
+
+- **转身期间深度冻结**：否则同一段时间里既「转」又「缩」，两边都看不清。
+- **退远不只靠 `scale`**：层中心同时上抬 30 px，否则读作「有人把图片缩小了」，而不是「它走了」。
+- **透明度用 CSS 变量复合**：`opacity: calc(.8 * var(--void-alpha, 1))`，`.is-quiet` 与 reduced-motion 同样乘这一项 —— 直接写 inline `opacity` 会把「打字淡到 0.2」覆盖掉。
+- **离开期间基础游走被按住**：rest 计时器保底 + 关掉「歇腻了就走」的随机判定，否则它会一边转身一边开始巡游。
+- **`prefers-reduced-motion` 整段关闭**：转身 + 退远是大幅运动，正是这类用户明确拒绝的。
+
+### ③ 验证
+
+- `npm test` 新增 [test/departure.test.mjs](test/departure.test.mjs)：相位顺序、转身限速（实测 0.089 rad/step，理论上限 0.098）、转身单调无过冲、耗时 2.0–2.8 s、深度真的进远带、每段离场只喷一次推进、cooldown 间隔、reduced-motion 关闭、中途刷新可续（幂等）、`1/120` 与 `0.05` 两档 dt 不 NaN 且每次都能回得来。
+- 真插件挂载冒烟（[test/harness.html](test/harness.html) + 真实 `client.js`，缓存 Chromium + CDP）：实测相位 `prep > turn > retreat > far > return > idle`，时间线 0 s → 1.0 s turn → 3.5 s retreat → 7.2 s far（`alpha 0.35`、`scale 0.548`、y +30 px）→ 26.0 s return → 28.4 s idle，控制台无异常。
+- 角度探针（demo `?facing=`，0/45/90/135/180°，420×420 缓冲）：
+
+| 角度 | 覆盖率 | 平均亮度 | 细节（边缘能量） |
+|---|---|---|---|
+| 0° 正脸 | 18.3% | 170.6 | 15.08 |
+| 90° 侧脸 | 18.2% | 173.8 | 17.85 |
+| 180° 背面 | 20.1% | 175.6 | 17.19 |
+
+背面不是「一块黑」：覆盖、亮度、细节都和正脸同一量级，papillae 噪声、边缘光、湿润高光都还在。失去的是**眼睛** —— 它最强的识别符号，所以背面主要靠轮廓 + 八腕 + 蹼来读。对比图见 [design/facing-front.png](design/facing-front.png)、[design/facing-profile.png](design/facing-profile.png)、[design/facing-back.png](design/facing-back.png)；真实插件挂载时的「远处背对」见 [design/departure-far.png](design/departure-far.png)。
+
+### ④ 怎么试 / 怎么改口味
+
+- 正常等：装好后每隔 1–3 分钟自己来一次，不需要操作。
+- 不等：控制台 `__dshVoidOctopus.depart()` 立刻来一次；`__dshVoidOctopus.face(180)` 定住角度看背面，`__dshVoidOctopus.release()` 放开。
+- demo：`demo/index.html?facing=180&studio=1` 静态背面；`?facing=90` 侧脸。
+- 口味参数都在 [departure.js](src/scene/departure.js) 的 `DEFAULTS`：`gapMin / gapMax`（频率）、`turnMin / turnMax`（转身快慢）、`facingTarget`（想留 3/4 背就写 2.6）、`farMin / farMax`（在远处待多久）、`alphaFar`（远处多淡）。
+
 
 ## 0.9.24 第三个维度：它会靠近你，也会退很远
 
@@ -781,5 +837,7 @@ npm run selfcheck    # 发布门禁：loader 包装 / React 外置 / three 内�
 ## 已知限制与下一步
 
 - 游走状态会持久化（`behavior-v1`），刷新后接着走；但不能拖拽，也不能被指针“叫住”，下一步可以加拖拽 + 好奇/跟随。
+- **背面没有眼睛**：转身后靠轮廓、八腕和蹼读作章鱼。如果觉得背面太空，可以加一道从外套膜顶到冠部的浅脊、或更强的背部 papillae（shader 内 5–10 行，不动几何）。
+- 离场一定是「转回来」的；「一直背对漂在远处直到你恢复工作」是下一步的可选项（把 FAR 后的 RETURN 关掉即可）。
 - 浅色主题下 `screen` 混合会偏弱，目前按深色 UI 调校。
 - 只有一只生物；下一步可以做第二套配色/第二只虚空生物。

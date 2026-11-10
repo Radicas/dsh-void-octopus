@@ -5,6 +5,8 @@ import {
   createBehaviorState,
   stepBehavior,
   getSwim,
+  getDeparture,
+  startDeparture,
   depthScale,
   serializeBehavior,
   restoreBehavior,
@@ -24,15 +26,19 @@ const CSS = `
   z-index: 50;
   pointer-events: none;
   mix-blend-mode: screen;
-  opacity: 0.8;
-  transition: opacity 900ms ease;
+  /* The departure changes distance, so the opacity is a product: the base fade
+     (typing dims it to 0.2) times the distance fade. It cannot be an inline
+     style.opacity, because that would override the .is-quiet class instead of
+     composing with it. */
+  opacity: calc(0.8 * var(--void-alpha, 1));
+  transition: opacity 460ms ease;
   will-change: transform;
   transform-origin: 50% 50%;
   -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 56%, rgba(0, 0, 0, 0.72) 72%, transparent 88%);
   mask-image: radial-gradient(ellipse at 50% 50%, #000 56%, rgba(0, 0, 0, 0.72) 72%, transparent 88%);
 }
 .dsh-void-ambient.is-quiet {
-  opacity: 0.2;
+  opacity: calc(0.2 * var(--void-alpha, 1));
 }
 .dsh-void-ambient canvas {
   display: block;
@@ -127,7 +133,7 @@ const CSS = `
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .dsh-void-ambient { opacity: 0.5; }
+  .dsh-void-ambient { opacity: calc(0.5 * var(--void-alpha, 1)); }
 }
 `
 
@@ -338,6 +344,10 @@ function VoidOctopusAmbient(props) {
       speedScale: reduce ? 0.4 : 1,
       restScale: reduce ? 1.6 : 1,
       hoverScale: reduce ? 0.45 : 1,
+      // Turning its back and sliding away is exactly the kind of large motion
+      // reduced-motion users opted out of, so the whole choreography is off
+      // there (the wander itself stays, just calmer).
+      depart: Object.assign({}, MOTION_DEFAULTS.depart, { enabled: !reduce }),
     })
 
     let w = host.offsetWidth || 400
@@ -403,6 +413,7 @@ function VoidOctopusAmbient(props) {
     let lastSaveAt = lastStep
     let disposed = false
 
+    let facingOverride = null
     const apply = () => {
       // translate first, scale second: the element's centre lands at
       // (x + box/2, y + box/2) and the creature shrinks around that point, so a
@@ -411,10 +422,18 @@ function VoidOctopusAmbient(props) {
       // (box * scale, centred) is always inside the base box, so the existing
       // bounds stay correct.
       const scale = depthScale(motion, cfg)
-      host.style.transform = `translate3d(${motion.x.toFixed(2)}px, ${motion.y.toFixed(2)}px, 0) scale(${scale.toFixed(3)})`
+      const view = getDeparture(motion)
+      // The lift rides on the translate rather than the scale, so "moving away"
+      // also travels on screen instead of reading as someone resizing a picture.
+      const y = motion.y + view.lift
+      host.style.transform = `translate3d(${motion.x.toFixed(2)}px, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(3)})`
+      host.style.setProperty('--void-alpha', view.alpha.toFixed(3))
       const swim = getSwim(motion, cfg)
       const engine = engineRef.current
-      if (engine && typeof engine.setSwim === 'function') engine.setSwim(swim.x, swim.y, swim.amount)
+      if (engine) {
+        if (typeof engine.setSwim === 'function') engine.setSwim(swim.x, swim.y, swim.amount)
+        if (typeof engine.setFacing === 'function') engine.setFacing(facingOverride != null ? facingOverride : view.facing)
+      }
     }
 
     apply()
@@ -444,6 +463,31 @@ function VoidOctopusAmbient(props) {
     }
     raf = requestAnimationFrame(tick)
 
+    // Console affordances. A departure is deliberately rare (one every 1-3 min),
+    // so there has to be a way to see it on demand without waiting, and a way to
+    // pin a facing angle for a screenshot. Nothing in the plugin calls these.
+    try {
+      window.__dshVoidOctopus = {
+        depart() {
+          startDeparture(motion, cfg.depart, Math.random)
+          apply()
+        },
+        face(deg = 0) {
+          facingOverride = (Number(deg) || 0) * (Math.PI / 180)
+          apply()
+        },
+        release() {
+          facingOverride = null
+          apply()
+        },
+        state() {
+          return getDeparture(motion)
+        },
+      }
+    } catch (err) {
+      /* no window (SSR) */
+    }
+
     const onResize = () => {
       measure()
       clampBehavior(motion, bounds)
@@ -456,6 +500,11 @@ function VoidOctopusAmbient(props) {
       cancelAnimationFrame(raf)
       save()
       window.removeEventListener('resize', onResize)
+      try {
+        delete window.__dshVoidOctopus
+      } catch (err) {
+        /* nothing to clean up */
+      }
     }
   }, [])
 

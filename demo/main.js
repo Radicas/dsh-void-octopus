@@ -21,6 +21,18 @@ const octopus = createSdfOctopus({
   activity: initial,
 })
 
+// Static facing probe: `?facing=180` holds the body at that yaw, so the back /
+// profile views can be captured and judged without waiting for a departure.
+const facingRaw = params.get('facing')
+if (facingRaw != null && Number.isFinite(Number(facingRaw))) {
+  const facingRad = (Number(facingRaw) * Math.PI) / 180
+  const applyFacing = () => {
+    octopus.setFacing(facingRad)
+    requestAnimationFrame(applyFacing)
+  }
+  requestAnimationFrame(applyFacing)
+}
+
 let auto = params.get('auto') !== '0'
 let autoTimer = 0
 const order = ['idle', 'thinking', 'generating', 'tool']
@@ -91,6 +103,10 @@ window.__VOID__ = {
   setState,
   setAuto(value) {
     auto = Boolean(value)
+  },
+  /** Pin the facing angle in degrees (0 = front, 180 = back). */
+  setFacing(deg) {
+    octopus.setFacing((Number(deg) || 0) * (Math.PI / 180))
   },
   list: Object.keys(ACTIVITIES),
 }

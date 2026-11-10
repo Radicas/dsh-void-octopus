@@ -23,6 +23,16 @@
  *  - no DOM / three / timers: pure state in, pure state out.
  */
 
+import {
+  DEFAULTS as DEPART_DEFAULTS,
+  PHASE as DEPART_PHASE,
+  initDeparture,
+  restoreDeparture,
+  stepDeparture,
+} from './departure.js'
+
+export { getDeparture, startDeparture, PHASE as DEPARTURE_PHASE } from './departure.js'
+
 export const BEHAVIOR_VERSION = 1
 const TAU = Math.PI * 2
 const clamp = (v, lo, hi) => (v < lo ? lo : v > hi ? hi : v)
@@ -107,6 +117,11 @@ export const DEFAULTS = {
   speedScale: 1,
   restScale: 1,
   hoverScale: 1,
+  // --- departure -------------------------------------------------------
+  // The "turn its back and leave" choreography (see departure.js). It is passed
+  // through here so `prefers-reduced-motion` can switch it off without forking
+  // the state machine.
+  depart: DEPART_DEFAULTS,
 }
 
 /** @returns {number} uniform [0,1) and advances the seeded rng in `st` */
@@ -185,6 +200,14 @@ function pickBand(st, bands) {
  * @property {number} depthTarget
  * @property {number} depthTimer seconds until the depth target is re-rolled
  * @property {number} jet       1 for the step that starts a cruise (event flag)
+ * @property {string} dpPhase    departure phase, 'idle' when it is not leaving
+ * @property {number} dpTimer    seconds left in the current departure phase
+ * @property {number} dpDur      duration of the current departure phase
+ * @property {number} dpCooldown seconds until the next departure may start
+ * @property {number} dpFacing   body facing rad (0 = viewer, π = back turned)
+ * @property {number} dpAlpha    extra opacity multiplier (1 = normal)
+ * @property {number} dpLift     upward screen offset in px (0 = none)
+ * @property {number} dpFarDepth depth target used during RETREAT/FAR
  */
 
 /**
@@ -220,6 +243,7 @@ export function createBehaviorState({ x = 0, y = 0, seed = 1, cfg = DEFAULTS } =
   // soon after, instead of idling for 4-14 s right at the edge.
   st.timer = randRange(st, cfg.arrivalRestMin, cfg.arrivalRestMax)
   st.depthTimer = randRange(st, cfg.depthRetargetMin, cfg.depthRetargetMax)
+  initDeparture(st, () => rand(st), cfg.depart || DEPART_DEFAULTS)
   return st
 }
 
@@ -301,7 +325,11 @@ function stepRest(st, dt, bounds, cfg) {
   st.x = st.restX + st.driftX
   st.y = st.restY + st.driftY
 
-  if (st.timer <= 0 || rand(st) < cfg.leaveRestRate * dt) {
+  // A departure is a deliberate exit: the base wander must not "get bored" in
+  // the middle of it and start a cruise leg. (The timer is held by stepBehavior;
+  // this is the other half — the random early-leave roll.)
+  const holding = st.dpPhase !== DEPART_PHASE.IDLE
+  if (st.timer <= 0 || (!holding && rand(st) < cfg.leaveRestRate * dt)) {
     // Clamp before leaving: the hover offset can put the layer past a wall on
     // the exact frame a rest ends, and the cruise branch would only fix it one
     // frame later (one out-of-bounds sample).
@@ -361,10 +389,15 @@ function stepSettle(st, dt, cfg) {
  * "is it travelling".
  */
 function stepDepth(st, dt, cfg) {
-  st.depthTimer -= dt
-  if (st.depthTimer <= 0) {
-    st.depthTarget = pickBand(st, cfg.depthBands)
-    st.depthTimer = randRange(st, cfg.depthRetargetMin, cfg.depthRetargetMax)
+  // While a departure is active IT owns the depth target (freeze during the
+  // turn, far during the retreat, near on the way back); the band re-roll would
+  // fight it.
+  if (st.dpPhase === DEPART_PHASE.IDLE) {
+    st.depthTimer -= dt
+    if (st.depthTimer <= 0) {
+      st.depthTarget = pickBand(st, cfg.depthBands)
+      st.depthTimer = randRange(st, cfg.depthRetargetMin, cfg.depthRetargetMax)
+    }
   }
   // Exponential approach: no snap, and independent of the frame rate.
   st.depth += (st.depthTarget - st.depth) * (1 - Math.exp(-dt / cfg.depthTau))
@@ -384,6 +417,15 @@ export function stepBehavior(st, dt, bounds, cfg = DEFAULTS) {
   st.jet = 0
   const step = clamp(dt, 0, 0.1)
   if (!(step > 0)) return st
+
+  const departCfg = cfg.depart || DEPART_DEFAULTS
+  // The departure runs first: it owns the depth target while it is active, and
+  // it may raise `jet` this step (the push-off at the start of the retreat).
+  stepDeparture(st, step, departCfg, () => rand(st))
+  // While it is turned away and withdrawing, the base wander must not decide to
+  // set off. Holding the rest timer keeps it in REST — which is also what keeps
+  // the arms open at FAR, so the figure reads as floating rather than fleeing.
+  if (st.dpPhase !== DEPART_PHASE.IDLE && st.mode === 'rest') st.timer = Math.max(st.timer, 0.25)
 
   stepDepth(st, step, cfg)
 
@@ -410,6 +452,9 @@ export function stepBehavior(st, dt, bounds, cfg = DEFAULTS) {
 export function clampBehavior(st, bounds) {
   clampToBounds(st, bounds)
   st.depth = clamp01(Number.isFinite(st.depth) ? st.depth : DEFAULTS.depthStart)
+  st.dpFacing = clamp(Number.isFinite(st.dpFacing) ? st.dpFacing : 0, -Math.PI, Math.PI)
+  st.dpAlpha = clamp01(Number.isFinite(st.dpAlpha) ? st.dpAlpha : 1)
+  st.dpLift = clamp(Number.isFinite(st.dpLift) ? st.dpLift : 0, 0, DEPART_DEFAULTS.liftMax)
   if (st.mode === 'rest') {
     // Re-anchor at the position we just clamped to and drop the hover offset,
     // so the layer does not jump by driftX on the next frame.
@@ -488,6 +533,18 @@ export function serializeBehavior(st) {
     depth: r2(st.depth),
     depthTarget: r2(st.depthTarget),
     depthTimer: rTimer(st.depthTimer),
+    // Departure state is nested so a payload from before this feature simply
+    // lacks the key and restores as idle (see restoreDeparture).
+    dp: {
+      phase: st.dpPhase || 'idle',
+      timer: rTimer(st.dpTimer || 0),
+      dur: r2(st.dpDur || 0),
+      cooldown: r2(Math.max(0, st.dpCooldown || 0)),
+      facing: r2(st.dpFacing || 0),
+      alpha: r2(st.dpAlpha == null ? 1 : st.dpAlpha),
+      lift: r2(st.dpLift || 0),
+      farDepth: r2(st.dpFarDepth || 0),
+    },
   }
 }
 
@@ -552,6 +609,7 @@ export function restoreBehavior(raw, bounds, cfg = DEFAULTS) {
     depthTimer: hasDepth ? Math.max(0.05, src.depthTimer) : cfg.depthRetargetMin,
     jet: 0,
   }
+  restoreDeparture(st, src.dp, cfg.depart || DEPART_DEFAULTS)
   clampToBounds(st, bounds)
   return st
 }

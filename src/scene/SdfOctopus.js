@@ -203,6 +203,14 @@ export function createSdfOctopus({
   let jetImpulse = 0
   let jetSurge = 0
   let yaw = 0
+  // Body facing is a second, independent yaw channel: the sway below is what the
+  // creature does while it drifts (clamped to ±0.8 rad so the face stays
+  // readable), while `facing` is the deliberate "turn its back on you" rotation
+  // and must be able to reach π. They are summed after the sway clamp, never
+  // clamped together — that clamp living on the SUM is exactly what made a back
+  // view impossible in 0.9.24 and earlier.
+  let facing = 0
+  let facingTarget = 0
   let pitch = 0
   let roll = 0
   let lastYaw = 0
@@ -630,7 +638,14 @@ export function createSdfOctopus({
 
     // The body follows travel with a little inertia; banking comes from the
     // turn rate, not directly from velocity, so straight glides stay level.
-    const targetYaw = clamp(
+    // Facing is damped hard (λ=8): the ambient layer already hands over a smooth
+    // S-curve, and this only absorbs a dropped frame, so the turn keeps the
+    // shape the departure choreography designed instead of getting re-eased.
+    facing = damp(facing, facingTarget, 8, dt)
+    // At full turn the sway is mostly suppressed: a body that swings its hips
+    // while its back is toward you reads as "still presenting", not leaving.
+    const swayFade = 1 - 0.7 * Math.min(1, Math.abs(facing) / Math.PI)
+    const sway = clamp(
       Math.sin(time * 0.11) * 0.02 +
         pointer.x * 0.05 +
         look.x * 0.18 +
@@ -638,6 +653,7 @@ export function createSdfOctopus({
       -0.8,
       0.8,
     )
+    const targetYaw = sway * swayFade + facing
     const targetPitch = clamp(
       -0.02 - pointer.y * 0.04 + look.y * 0.1 + swim.y * (0.24 + jetSurge * 0.08) * swimAmount,
       -0.5,
@@ -854,6 +870,20 @@ export function createSdfOctopus({
       const len = Math.hypot(vx, vy)
       if (len > 0.0001) swimTarget.set(vx / len, vy / len)
       swimAmountTarget = clamp(amount, 0, 1)
+    },
+    /**
+     * Point the body away from the viewer. 0 faces the camera, π is fully turned
+     * around; the value is damped internally, so callers hand over a target and
+     * the engine does the smoothing.
+     * @param {number} rad
+     * @returns {number} the clamped target
+     */
+    setFacing(rad) {
+      facingTarget = clamp(Number.isFinite(rad) ? rad : 0, -Math.PI, Math.PI)
+      return facingTarget
+    },
+    getFacing() {
+      return facing
     },
     getJet() {
       return Math.min(1, pulse * 0.6 + jetImpulse * 0.5 + jetSurge * 0.55)

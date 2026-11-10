@@ -26,8 +26,15 @@ import {
   restoreBehavior,
 } from '../src/scene/behavior.js'
 import { computeArmTargets, ARM_COUNT, POINTS_PER_ARM } from '../src/scene/armPose.js'
+import { DEFAULTS as DEPART_DEFAULTS } from '../src/scene/departure.js'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+
+// These tests describe the WANDER: how it crosses the screen and how long it
+// rests. Departures (turn the back, recede) hold the rest timer on purpose, so
+// they would move every duty-cycle number here; they have their own suite in
+// departure.test.mjs. Keep this file about one mechanism at a time.
+const NO_DEPART = { ...DEFAULTS, depart: { ...DEPART_DEFAULTS, enabled: false } }
 
 // 1440x900 viewport with the 400 px layer inset by a 12 px margin.
 const BOX = { minX: 12, minY: 12, maxX: 1028, maxY: 488 }
@@ -53,7 +60,7 @@ const quad = (heading) => {
  * Run the real loop and collect enough statistics to assert on.
  * @param {{seed?:number, seconds?:number, dt?:number, box?:object, cfg?:object, start?:object}} opts
  */
-function simulate({ seed = 7, seconds = 300, dt = DT, box = BOX, cfg = DEFAULTS, start } = {}) {
+function simulate({ seed = 7, seconds = 300, dt = DT, box = BOX, cfg = NO_DEPART, start } = {}) {
   const st = createBehaviorState({ x: start?.x ?? 500, y: start?.y ?? 220, seed, cfg })
   const steps = Math.round(seconds / dt)
   let rest = 0
@@ -411,7 +418,7 @@ console.log('9) depth: it can drift away, and the scale follows it')
 console.log('')
 console.log('10) no phase is built as clock * state in the motion sources')
 {
-  const files = ['src/scene/behavior.js', 'src/client-entry.js', 'src/scene/armPose.js', 'src/scene/SdfOctopus.js']
+  const files = ['src/scene/behavior.js', 'src/scene/departure.js', 'src/client-entry.js', 'src/scene/armPose.js', 'src/scene/SdfOctopus.js']
   const offenders = []
   for (const rel of files) {
     const src = readFileSync(resolve(ROOT, rel), 'utf8')
